@@ -115,7 +115,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1111.1725';
+const BUILD='1111.1735';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -436,7 +436,7 @@ function render(){
   <div style="display:flex;gap:6px;margin-top:2px;flex-wrap:wrap;justify-content:center;position:relative">${chips}</div>
   <div style="display:flex;gap:8px;margin-top:6px;position:relative;flex-wrap:wrap;justify-content:center"><button class="mbtn alt" id="friendBtn" style="font-size:13px;padding:10px 16px">💛 ${L.friend}</button><button class="mbtn alt" id="calChip" style="font-size:13px;padding:10px 16px">${(S.calsub||ls('calsub'))?L.calsub_on:L.calsub_chip}</button></div>
   <div style="font-size:10px;opacity:.5;position:relative"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · v${BUILD}</div>
-  ${nextFoot('hero').replace('class="nx"','class="nx" style="padding-top:6px;margin-top:0"')}
+  ${nextFoot('hero').replace('class="nx"','class="nx" style="padding:14px 0 22px;margin-top:4px;opacity:1"')}
   <div class="sp" style="width:100%"></div>
    </section>`;
  for(const e of evs) h+=renderEvent(e);
