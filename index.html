@@ -8,16 +8,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Pinyon+Script&family=Bungee&family=Shrikhand&family=Anton&family=Luckiest+Guy&family=Great+Vibes&family=Cormorant+Garamond:wght@500;600&family=Playfair+Display:wght@700&family=Amatic+SC:wght@700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#F3E7D0;--ink:#16301F;--gold:#D9B56C;--navh:46px}
+:root{--cream:#F3E7D0;--ink:#16301F;--gold:#D9B56C;--navh:46px;--tabh:0px}
 *{box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 body{margin:0;background:#0E0E10;color:var(--cream);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
 #app{max-width:480px;margin:0 auto;height:100vh;height:100svh;overflow:hidden;background:#0E0E10;position:relative;box-shadow:0 0 60px rgba(0,0,0,.6);-webkit-overflow-scrolling:touch}
 #app>section{height:100vh;height:100svh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 section.ev{padding:36px 24px 0;display:flex;flex-direction:column;gap:14px;position:relative}
-.sp{flex:0 0 auto;height:calc(var(--navh,46px) + 28px + var(--barh,0px) + env(safe-area-inset-bottom))}
+.sp{flex:0 0 auto;height:calc(var(--navh,46px) + 28px + var(--barh,0px) + var(--tabh,0px) + env(safe-area-inset-bottom))}
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:52;display:flex;justify-content:center;pointer-events:none}
+#tabs>div{pointer-events:auto;width:100%;max-width:480px;height:calc(64px + env(safe-area-inset-bottom));background:#0B1A12;border-top:1px solid var(--gold);display:flex;justify-content:space-around;align-items:flex-start;padding:9px 6px calc(0px + env(safe-area-inset-bottom))}
+#tabs button{background:none;border:0;color:var(--cream);opacity:.55;font-family:inherit;font-size:9.5px;letter-spacing:1.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;width:76px;cursor:pointer;padding:0}
+#tabs button.on{opacity:1;color:var(--gold)}
+#tabs button svg{width:22px;height:22px}
+.tabpage{height:100svh;overflow-y:auto;overflow-x:hidden;padding:clamp(40px,7vh,70px) 22px 0;display:flex;flex-direction:column;gap:10px;background:#16301F;color:var(--cream)}
+.tabpage .r{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid rgba(243,231,208,.15);font-size:14px}
+.tabpage .r .h2{font-size:11px;opacity:.65;margin-top:2px}
 #app>section>*{flex-shrink:0}
-#nav{position:fixed;left:0;right:0;bottom:calc(var(--barh,0px) + env(safe-area-inset-bottom));z-index:45;display:flex;justify-content:center;height:var(--navh,46px);background:rgba(8,8,10,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);transition:bottom .25s,opacity .2s}
+#nav{position:fixed;left:0;right:0;bottom:calc(var(--barh,0px) + var(--tabh,0px) + env(safe-area-inset-bottom));z-index:45;display:flex;justify-content:center;height:var(--navh,46px);background:rgba(8,8,10,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);transition:bottom .25s,opacity .2s}
 #nav.scrolling{opacity:0;pointer-events:none}
 #nav button{background:none;color:#fff;border:0;height:100%;padding:0 24px;font-family:inherit;font-size:11px;letter-spacing:2.5px;font-weight:700;display:flex;align-items:center;gap:10px;cursor:pointer;width:100%;justify-content:center}
 #nav svg{animation:bob 1.1s ease-in-out 3;animation-play-state:paused}
@@ -53,7 +61,7 @@ a{color:inherit}
 .cal{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid currentColor;border-radius:999px;padding:10px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;background:transparent;color:inherit;font-family:inherit;width:100%}
 .hidden{display:none !important}
 .pill{font-size:10px;font-weight:700;letter-spacing:2px;border:1px solid currentColor;border-radius:999px;padding:4px 10px}
-#bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justify-content:center;pointer-events:none}
+#bar{position:fixed;left:0;right:0;bottom:var(--tabh,0px);z-index:50;display:flex;justify-content:center;pointer-events:none}
 #bar>div{pointer-events:auto;width:100%;max-width:480px;background:var(--ink);color:var(--cream);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--gold);box-shadow:0 -8px 30px rgba(0,0,0,.5)}
 #bar b{font-size:14px}
 #bar small{font-size:11px;opacity:.8;display:block}
@@ -94,6 +102,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 <div id="lang"><button data-l="en">EN</button><button data-l="es">ES</button></div>
 <div id="app"></div>
 <div id="nav"><button data-next aria-label="Next"><span id="navLbl"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button></div>
+<div id="tabs" class="hidden"><div><button data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span></span></button><button data-tab="memories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg><span></span></button><button data-tab="framily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="10" r="2.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6M15 20c0-2.5 2-4.5 4.5-4.5 1 0 2 .3 2.5.8"/></svg><span></span></button><button data-tab="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg><span></span></button></div></div>
 <div id="bar" class="hidden"><div><div><b id="barTxt"></b><small id="barSub"></small></div><button id="barBtn"></button></div></div>
 <div id="toast" class="toast"></div>
 <div id="admin" class="hidden"></div>
@@ -103,7 +112,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1111.1500';
+const BUILD='1111.1550';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -130,7 +139,7 @@ en:{
  calsub_t:"Put these on your calendar, automatically?",calsub_sub:"One tap adds a FRamily calendar to your phone. Every night you say I'm in to shows up on its own, with a reminder the morning of. Change an RSVP and it updates itself.",calsub_yes:"Yes, add it",calsub_later:"Maybe later",calsub_chip:"📅 FRamily calendar",calsub_on:"📅 Calendar added",calsub_android:"On Android: Google Calendar → Settings → Add calendar → From URL, and paste the link we copied.",cal_note:"Calendar events include the address, time, cost and dress theme, with a reminder the morning of.",
  gate_h:"Welcome to the FRamily.",gate_sub:"One place for the gatherings, all year. Tell us who you are once and we'll show you what you're invited to. Your cell is how we keep your RSVP, and it stays with us.",gate_btn:"Come on in →",gate_foot:"Expecting an invite you don't see? Text Jared · 954.376.0188",gate_tag:"Faith · Family · Friends · Fun",hey:"HEY, $NAME 👋",your_invites:"YOUR INVITES",
  coming:"We're coming ✓",bring_h:"BRINGING A DISH?",bring_ask:"would love:",bring_add:"+ I'll bring…",bring_save:"Add",bring_others:"ALSO COMING TO THE TABLE",bring_none:"Or just bring yourselves. Nobody's checking.",bring_taken:"Someone grabbed that one.",bring_what:"What are you bringing?",
- via_h:"{host} INVITED YOU TO",via_circle:"{host} keep you in their {circle} circle — names only, numbers stay private.",link_h:"Your invite links",link_sub:"Make a link for a group chat or a friend. Whoever opens it is invited to this night and shows up below — you can remove anyone.",link_new:"+ New link",link_copy:"Share",link_copied:"Copied — paste it anywhere",link_uses:"opened",link_any:"Link",link_via:"Came through your link",link_remove:"Remove",link_remove_q:"Remove them from this night?",link_circle_q:"How do you know them? (Family, Church, Friends, Work… or leave blank)",link_cohost_q:"Make whoever joins a CO-HOST of this night? (OK = yes)",link_grant_q:"Let them host their OWN nights later? (OK = yes)",who_k:"HI, {name} 👋",who_h:"Who are you with?",who_sub:"RSVPs are per household, so one person can answer for everyone at home. Pick yours, or start a new one.",who_sug:"LOOKS LIKE YOU MIGHT BE",who_me:"Just me",who_new:"Start a new household",who_hh:"Household name",who_hh_ph:"The Espinals",who_members:"WHO'S AT HOME (OPTIONAL)",who_member:"Name",who_cell_opt:"Cell (optional)",who_members_sub:"Add cells so they can log in themselves later. They won't get texts unless they say yes on their own phone.",who_back:"Back",settings:"SETTINGS",me_h:"ME",me_rsvps:"My RSVPs",me_sms:"Text reminders",me_on:"On",me_off:"Off",me_cal:"FRamily calendar",me_lang:"Language",me_host:"Host a night",me_host_sub:"Want to host something for the FRamily? Text Jared and he'll set it up.",me_hosting:"You're hosting",me_none:"No RSVPs yet — tap I'm in on a night above.",host_h:"YOU'RE HOSTING",host_in:"in",host_maybe:"maybe",host_none:"no answer",host_add:"+ Add a guest",host_copy:"Copy phones",host_req:"Requests",host_req_add:"+ Request a dish",host_need:"need",
+ via_h:"{host} INVITED YOU TO",via_circle:"{host} keep you in their {circle} circle — names only, numbers stay private.",link_h:"Your invite links",link_sub:"Make a link for a group chat or a friend. Whoever opens it is invited to this night and shows up below — you can remove anyone.",link_new:"+ New link",link_copy:"Share",link_copied:"Copied — paste it anywhere",link_uses:"opened",link_any:"Link",link_via:"Came through your link",link_remove:"Remove",link_remove_q:"Remove them from this night?",link_circle_q:"How do you know them? (Family, Church, Friends, Work… or leave blank)",link_cohost_q:"Make whoever joins a CO-HOST of this night? (OK = yes)",link_grant_q:"Let them host their OWN nights later? (OK = yes)",who_k:"HI, {name} 👋",who_h:"Who are you with?",who_sub:"RSVPs are per household, so one person can answer for everyone at home. Pick yours, or start a new one.",who_sug:"LOOKS LIKE YOU MIGHT BE",who_me:"Just me",who_new:"Start a new household",who_hh:"Household name",who_hh_ph:"The Espinals",who_members:"WHO'S AT HOME (OPTIONAL)",who_member:"Name",who_cell_opt:"Cell (optional)",who_members_sub:"Add cells so they can log in themselves later. They won't get texts unless they say yes on their own phone.",who_back:"Back",settings:"SETTINGS",tab_home:"HOME",tab_mem:"MEMORIES",tab_fr:"FRAMILY",tab_me:"ME",fr_h:"Your people",fr_sub:"The households you share nights and circles with. Names only — numbers stay private.",fr_hosts:"WHO'S HOSTING",fr_open:"Open",fr_circle:"YOUR CIRCLE",fr_nights:"nights together",fr_hosting:"hosting this season",fr_same:"same nights as you",fr_empty:"Say I'm in on a few nights and your circle fills in on its own.",fr_note:"Only the households you've shared a night or a circle with — never the whole FRamily.",mem_h:"Every night, in one place.",mem_soon_k:"COMING SOON",mem_soon_h:"Photos from each night, for the people who were there.",mem_soon_sub:"After each night, a text will ask everyone who came to add their photos. Hosts approve, then the album goes live for the invited — and only the invited.",mem_past:"FROM PAST SEASONS",mem_open:"Open",mem_soon_s:"link coming",me_hh:"OUR HOUSEHOLD",me_edit:"+ Add someone",me_add_name:"Who else is at home? (name)",me_add_cell:"Their cell (optional — lets them log in themselves)",me_h:"ME",me_rsvps:"My RSVPs",me_sms:"Text reminders",me_on:"On",me_off:"Off",me_cal:"FRamily calendar",me_lang:"Language",me_host:"Host a night",me_host_sub:"Want to host something for the FRamily? Text Jared and he'll set it up.",me_hosting:"You're hosting",me_none:"No RSVPs yet — tap I'm in on a night above.",host_h:"YOU'RE HOSTING",host_in:"in",host_maybe:"maybe",host_none:"no answer",host_add:"+ Add a guest",host_copy:"Copy phones",host_req:"Requests",host_req_add:"+ Request a dish",host_need:"need",
  map:"Map",tap_dir:"Tap the address for directions",parking:"View parking map",parking_t:"Parking at our place",parking_b:["Park in the numbered spots, 1 to 30 first, then 31 to 38 on the street if those fill up.","Keep the yellow \"don't block\" lanes clear. Neighbors need to get out.","Carpool if you can. Pinch to zoom."],close:"Close",
  ev:{
   thanksgiving:{k:"THURSDAY 11/26 · 7:00 PM",sup:"YOU'RE INVITED TO OUR",sub:"CELEBRATION",lead:"Good food, great company and so much to be thankful for. We would love for you to join us!",day:"THURSDAY",date:"November 26",close:"We look forward to celebrating with you!",hosted:"HOSTED BY THE ESPINAL FAMILY",det:[]},
@@ -169,7 +178,7 @@ es:{
  calsub_t:"¿Ponemos esto en tu calendario, automáticamente?",calsub_sub:"Un toque agrega un calendario FRamily a tu teléfono. Cada noche a la que digas Me apunto aparece sola, con recordatorio esa mañana. Si cambias tu RSVP, se actualiza solo.",calsub_yes:"Sí, agrégalo",calsub_later:"Después",calsub_chip:"📅 Calendario FRamily",calsub_on:"📅 Calendario agregado",calsub_android:"En Android: Google Calendar → Ajustes → Agregar calendario → Desde URL, y pega el enlace que copiamos.",cal_note:"Los eventos del calendario incluyen dirección, hora, costo y vestimenta, con recordatorio esa mañana.",
  gate_h:"Bienvenidos a la FRamily.",gate_sub:"Un solo lugar para las reuniones, todo el año. Dinos quién eres una vez y te mostramos a qué estás invitado. Tu celular es cómo guardamos tu RSVP, y se queda con nosotros.",gate_btn:"Adelante →",gate_foot:"¿Esperabas una invitación que no ves? Escríbele a Jared · 954.376.0188",gate_tag:"Fe · Familia · Amigos · Diversión",hey:"HOLA, $NAME 👋",your_invites:"TUS INVITACIONES",
  coming:"Ahí estaremos ✓",bring_h:"¿TRAES UN PLATO?",bring_ask:"agradecerían:",bring_add:"+ Yo traigo…",bring_save:"Agregar",bring_others:"TAMBIÉN LLEGA A LA MESA",bring_none:"O solo vengan ustedes. Nadie está revisando.",bring_taken:"Alguien ya tomó ese.",bring_what:"¿Qué vas a traer?",
- via_h:"{host} TE INVITA A",via_circle:"{host} te tienen en su círculo {circle} — solo nombres, los números quedan privados.",link_h:"Tus enlaces de invitación",link_sub:"Crea un enlace para un chat de grupo o un amigo. Quien lo abra queda invitado a esta noche y aparece abajo — puedes quitar a quien sea.",link_new:"+ Nuevo enlace",link_copy:"Compartir",link_copied:"Copiado — pégalo donde quieras",link_uses:"abierto",link_any:"Enlace",link_via:"Llegaron por tu enlace",link_remove:"Quitar",link_remove_q:"¿Quitarlos de esta noche?",link_circle_q:"¿De dónde los conoces? (Familia, Iglesia, Amigos, Trabajo… o déjalo vacío)",link_cohost_q:"¿Hacer CO-ANFITRIÓN de esta noche a quien entre? (OK = sí)",link_grant_q:"¿Permitirles organizar SUS PROPIAS noches después? (OK = sí)",who_k:"HOLA, {name} 👋",who_h:"¿Con quién estás?",who_sub:"Los RSVPs son por hogar, así que una persona puede responder por todos en casa. Elige el tuyo o crea uno nuevo.",who_sug:"PARECE QUE PODRÍAS SER",who_me:"Solo yo",who_new:"Crear un hogar nuevo",who_hh:"Nombre del hogar",who_hh_ph:"Los Espinal",who_members:"QUIÉN VIVE EN CASA (OPCIONAL)",who_member:"Nombre",who_cell_opt:"Celular (opcional)",who_members_sub:"Agrega celulares para que puedan entrar solos después. No recibirán textos a menos que digan que sí en su propio teléfono.",who_back:"Atrás",settings:"AJUSTES",me_h:"YO",me_rsvps:"Mis RSVPs",me_sms:"Recordatorios por texto",me_on:"Sí",me_off:"No",me_cal:"Calendario FRamily",me_lang:"Idioma",me_host:"Organiza una noche",me_host_sub:"¿Quieres organizar algo para la FRamily? Escríbele a Jared y lo configura.",me_hosting:"Eres anfitrión",me_none:"Aún sin RSVPs — toca Me apunto en alguna noche arriba.",host_h:"TÚ ERES ANFITRIÓN",host_in:"vienen",host_maybe:"quizás",host_none:"sin respuesta",host_add:"+ Agregar invitado",host_copy:"Copiar celulares",host_req:"Pedidos",host_req_add:"+ Pedir un plato",host_need:"faltan",
+ via_h:"{host} TE INVITA A",via_circle:"{host} te tienen en su círculo {circle} — solo nombres, los números quedan privados.",link_h:"Tus enlaces de invitación",link_sub:"Crea un enlace para un chat de grupo o un amigo. Quien lo abra queda invitado a esta noche y aparece abajo — puedes quitar a quien sea.",link_new:"+ Nuevo enlace",link_copy:"Compartir",link_copied:"Copiado — pégalo donde quieras",link_uses:"abierto",link_any:"Enlace",link_via:"Llegaron por tu enlace",link_remove:"Quitar",link_remove_q:"¿Quitarlos de esta noche?",link_circle_q:"¿De dónde los conoces? (Familia, Iglesia, Amigos, Trabajo… o déjalo vacío)",link_cohost_q:"¿Hacer CO-ANFITRIÓN de esta noche a quien entre? (OK = sí)",link_grant_q:"¿Permitirles organizar SUS PROPIAS noches después? (OK = sí)",who_k:"HOLA, {name} 👋",who_h:"¿Con quién estás?",who_sub:"Los RSVPs son por hogar, así que una persona puede responder por todos en casa. Elige el tuyo o crea uno nuevo.",who_sug:"PARECE QUE PODRÍAS SER",who_me:"Solo yo",who_new:"Crear un hogar nuevo",who_hh:"Nombre del hogar",who_hh_ph:"Los Espinal",who_members:"QUIÉN VIVE EN CASA (OPCIONAL)",who_member:"Nombre",who_cell_opt:"Celular (opcional)",who_members_sub:"Agrega celulares para que puedan entrar solos después. No recibirán textos a menos que digan que sí en su propio teléfono.",who_back:"Atrás",settings:"AJUSTES",tab_home:"INICIO",tab_mem:"RECUERDOS",tab_fr:"FRAMILY",tab_me:"YO",fr_h:"Tu gente",fr_sub:"Los hogares con los que compartes noches y círculos. Solo nombres — los números quedan privados.",fr_hosts:"QUIÉN ORGANIZA",fr_open:"Abrir",fr_circle:"TU CÍRCULO",fr_nights:"noches juntos",fr_hosting:"organiza esta temporada",fr_same:"mismas noches que tú",fr_empty:"Di Me apunto en algunas noches y tu círculo se llena solo.",fr_note:"Solo los hogares con los que has compartido una noche o un círculo — nunca toda la FRamily.",mem_h:"Cada noche, en un solo lugar.",mem_soon_k:"MUY PRONTO",mem_soon_h:"Fotos de cada noche, para quienes estuvieron.",mem_soon_sub:"Después de cada noche, un texto pedirá a los que fueron que agreguen sus fotos. Los anfitriones aprueban y el álbum queda para los invitados — y solo los invitados.",mem_past:"DE TEMPORADAS PASADAS",mem_open:"Abrir",mem_soon_s:"enlace pronto",me_hh:"NUESTRO HOGAR",me_edit:"+ Agregar a alguien",me_add_name:"¿Quién más vive en casa? (nombre)",me_add_cell:"Su celular (opcional — le permite entrar por su cuenta)",me_h:"YO",me_rsvps:"Mis RSVPs",me_sms:"Recordatorios por texto",me_on:"Sí",me_off:"No",me_cal:"Calendario FRamily",me_lang:"Idioma",me_host:"Organiza una noche",me_host_sub:"¿Quieres organizar algo para la FRamily? Escríbele a Jared y lo configura.",me_hosting:"Eres anfitrión",me_none:"Aún sin RSVPs — toca Me apunto en alguna noche arriba.",host_h:"TÚ ERES ANFITRIÓN",host_in:"vienen",host_maybe:"quizás",host_none:"sin respuesta",host_add:"+ Agregar invitado",host_copy:"Copiar celulares",host_req:"Pedidos",host_req_add:"+ Pedir un plato",host_need:"faltan",
  map:"Mapa",tap_dir:"Toca la dirección para llegar",parking:"Ver mapa de estacionamiento",parking_t:"Estacionamiento en casa",parking_b:["Usa los espacios numerados, primero del 1 al 30, y del 31 al 38 en la calle si se llenan.","Deja libres las zonas amarillas de \"no bloquear\". Los vecinos necesitan salir.","Compartan carro si pueden. Haz zoom con dos dedos."],close:"Cerrar",
  ev:{
   thanksgiving:{k:"JUEVES 11/26 · 7:00 PM",sup:"ESTÁN INVITADOS A NUESTRA",sub:"CELEBRACIÓN",lead:"Buena comida, buena compañía y mucho que agradecer. ¡Nos encantaría que nos acompañen!",day:"JUEVES",date:"26 de noviembre",close:"¡Esperamos celebrar con ustedes!",hosted:"ANFITRIONES: LA FAMILIA ESPINAL",det:[]},
@@ -190,7 +199,7 @@ es:{
 }};
 
 /* ---------- state ---------- */
-const S={lang:'en',token:null,name:'',phone:'',sms:false,events:[],counts:{},rs:{},sentClaim:false,done:false,invites:null,hosts:[],bring:{},host:{},links:{}};
+const S={tab:'home',lang:'en',token:null,name:'',phone:'',sms:false,events:[],counts:{},rs:{},sentClaim:false,done:false,invites:null,hosts:[],bring:{},host:{},links:{}};
 const EV_THEME={
  thanksgiving:{bg:'#E6D7C0',fg:'#5A3A1E',ac:'#8A5A2B',ac2:'#8A5A2B',card:'rgba(255,250,242,.85)',font:"'Great Vibes',cursive"},
  laras:{bg:'#F4ECDC',fg:'#2B1A12',ac:'#8E1B1B',ac2:'#1E6B3A',card:'#fff',font:"'Playfair Display',serif"},
@@ -311,7 +320,7 @@ function bindGate(){
    if(error)throw error;
    if(r.status==='new'){ S.gate={step:'who',name,phone:digits,sms,suggestions:r.suggestions||[]}; render(); return; }
    if(S.via){ls('via','');S.via=null;S.viaInfo=null}
-   const f=r.family; S.person=r.person; applyFamily(f); ls('token',S.token); persistLocal(); await loadBring(); for(const id of (S.hosts||[])) await loadHost(id); render(); P.i=0; $('#app').scrollTop=0; jumpDeep();
+   const f=r.family; S.person=r.person; applyFamily(f); ls('token',S.token); loadFramily(); persistLocal(); await loadBring(); for(const id of (S.hosts||[])) await loadHost(id); render(); P.i=0; $('#app').scrollTop=0; jumpDeep();
   }catch(e){console.error(e);toast("Hmm, that didn't work. Try again or text Jared.");b.disabled=false;b.textContent=L.gate_btn}
  };
  $('#gPhone').onkeydown=e=>{if(e.key==='Enter')$('#gBtn').click()};
@@ -322,6 +331,39 @@ function applyFamily(f){
  S.rs=Object.assign({},S.rs,srv); S.done=(f.rsvps||[]).length>0;
 }
 
+/* ---------- tabs ---------- */
+function updateTabs(){ const T=$('#tabs'); const on=!!S.invites&&!S.admin; T.classList.toggle('hidden',!on); document.documentElement.style.setProperty('--tabh',on?'64px':'0px'); const L=t(); const lbl={home:L.tab_home,memories:L.tab_mem,framily:L.tab_fr,me:L.tab_me}; T.querySelectorAll('button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===S.tab); b.querySelector('span').textContent=lbl[b.dataset.tab]}); }
+function setTab(tb){ if(S.tab===tb&&tb==='home'){P.i=0;$('#app').scrollTop=0;updateBar();return} if(S.tab==='home'){P.homeI=P.i} S.tab=tb; render(); if(tb==='home'){P.i=P.homeI||0; const ps=pages(); if(ps[P.i])$('#app').scrollTop=ps[P.i].offsetTop; updateBar()} if(tb==='framily'&&!S.framily) loadFramily(); }
+async function loadFramily(){ if(!S.token)return; const {data}=await sb.rpc('framily_get',{p_token:S.token}); if(data){S.framily=data; if(S.tab==='framily')render()} }
+function renderFramily(){
+ const L=t(); const d=S.framily; const es=S.lang==='es';
+ const hosting=(d?.hosting||[]).filter(h=>h.host&&h.host!=='FRamily');
+ const hostRows=hosting.map(h=>`<div class="r"><span><b>${esc(h.host)}</b><div class="h2">${esc(es?h.name_es:h.name_en)} · ${esc(chipLabel(h.event_id).split(' ')[0])}</div></span><button class="pill" data-jump-tab="${h.event_id}" style="font-family:inherit;cursor:pointer;color:var(--gold);background:transparent;padding:6px 12px">${L.fr_open}</button></div>`).join('');
+ const circle=(d?.circle||[]);
+ const circRows=circle.map(c=>`<div class="r"><span><b>${esc(famLabel(c.name))}</b><div class="h2">${[c.circle?esc(c.circle):'',c.nights?`${c.nights} ${L.fr_nights}`:'',(c.hosting||[]).length?L.fr_hosting:''].filter(Boolean).join(' · ')||L.fr_same}</div></span></div>`).join('');
+ return `<section id="tab-framily" class="tabpage">
+  <div class="kicker" style="color:var(--gold)">${L.tab_fr}</div>
+  <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1">${L.fr_h}</div>
+  <div style="font-size:13px;opacity:.75;line-height:1.45">${L.fr_sub}</div>
+  ${hostRows?`<div class="kicker" style="font-size:10px;opacity:.7;margin-top:12px">${L.fr_hosts}</div>${hostRows}`:''}
+  <div class="kicker" style="font-size:10px;opacity:.7;margin-top:12px">${L.fr_circle} · ${circle.length}</div>
+  ${d?(circRows||`<div style="font-size:13px;opacity:.7;padding:8px 0">${L.fr_empty}</div>`):`<div style="font-size:13px;opacity:.7;padding:8px 0">…</div>`}
+  <div style="font-size:11px;opacity:.6;line-height:1.45;margin-top:14px">${L.fr_note}</div>
+  <div class="sp"></div></section>`;
+}
+function bindFramily(){ document.querySelectorAll('[data-jump-tab]').forEach(b=>b.onclick=()=>{S.deep=b.dataset.jumpTab; setTab('home'); jumpDeep()}); }
+function renderMemories(){
+ const L=t(); const albums=(S.framily?.albums||[]);
+ const rows=albums.map(a=>`<div class="r"><span><b>${esc(a.title)}</b>${a.sub?`<div class="h2">${esc(a.sub)}</div>`:''}</span>${a.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:700;font-size:13px;text-decoration:none">${L.mem_open} ↗</a>`:`<span style="font-size:11px;opacity:.5">${L.mem_soon_s}</span>`}</div>`).join('');
+ return `<section id="tab-memories" class="tabpage">
+  <div class="kicker" style="color:var(--gold)">${L.tab_mem}</div>
+  <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1">${L.mem_h}</div>
+  <div style="background:linear-gradient(135deg,#1D9E75,#123D2C);border-radius:14px;padding:16px;margin-top:8px"><div class="kicker" style="font-size:10px;opacity:.8">${L.mem_soon_k}</div><div style="font-family:'Fraunces',serif;font-weight:700;font-size:18px;margin-top:4px">${L.mem_soon_h}</div><div style="font-size:13px;line-height:1.45;opacity:.9;margin-top:6px">${L.mem_soon_sub}</div></div>
+  <div class="kicker" style="font-size:10px;opacity:.7;margin-top:12px">${L.mem_past}</div>
+  ${rows||`<div style="font-size:13px;opacity:.7;padding:8px 0">…</div>`}
+  <div class="sp"></div></section>`;
+}
+
 /* ---------- me page ---------- */
 function renderMe(){
  const L=t(); const evs=visibleEvents(); const mine=evs.filter(e=>rs(e.id).status&&rs(e.id).status!=='out');
@@ -329,10 +371,13 @@ function renderMe(){
  const chip=(txt,on,attr)=>`<button ${attr} class="pill" style="font-family:inherit;cursor:pointer;padding:6px 12px;${on?'background:var(--gold);color:#16301F;border-color:var(--gold)':'color:var(--gold);background:transparent'}">${txt}</button>`;
  const rsv=mine.length?mine.map(e=>{const r=rs(e.id);const nm=S.lang==='es'?e.name_es:e.name_en;const cnt=e.id==='topgolf'?r.players:r.headcount;const tot=evTotal(e.id);
    return row(`<b>${esc(nm)}</b><div style="font-size:11px;opacity:.65">${esc(chipLabel(e.id))}${isHost(e.id)?' · '+L.me_hosting:''}</div>`,`${r.status==='in'?`${cnt} ${L.host_in}`:L.host_maybe}${tot?` · ${money(tot)}${r.paid_confirmed?' ✓':''}`:''}`)}).join(''):`<div style="font-size:13px;opacity:.7;padding:8px 0">${L.me_none}</div>`;
- return `<section id="ev-me" style="background:#16301F;color:#F3E7D0;padding:clamp(48px,8vh,80px) 24px 0;display:flex;flex-direction:column;gap:10px;position:relative">
+ const hh=(S.people||[]).map(p=>`${esc(p.name||'?')}${p.primary?' ★':''}`).join(' · ');
+ return `<section id="ev-me" class="tabpage" style="position:relative">
   <div class="kicker" style="color:var(--gold)">${L.me_h}</div>
   <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1">${esc(S.name||'')}</div>
   <div style="font-size:13px;opacity:.7">${esc(fmtPhone(S.phone))}</div>
+  <div class="kicker" style="font-size:10px;opacity:.7;margin-top:10px">${L.me_hh}</div>
+  <div class="r"><span><b>${esc(S.household||famLabel(S.name))}</b><div class="h2">${hh||'—'}</div></span><button class="pill" id="meHH" style="font-family:inherit;cursor:pointer;color:var(--gold);background:transparent;padding:6px 12px">${L.me_edit}</button></div>
   <div class="kicker" style="font-size:10px;opacity:.7;margin-top:10px">${L.me_rsvps}</div>
   <div>${rsv}</div>
   <div class="kicker" style="font-size:10px;opacity:.7;margin-top:10px">${L.settings||'SETTINGS'}</div>
@@ -346,6 +391,7 @@ function renderMe(){
 function bindMe(){
  const b=$('#meSms'); if(b) b.onclick=async()=>{S.sms=!S.sms; if(S.token) await sb.rpc('family_update',{p_token:S.token,p_name:null,p_lang:null,p_sms_optin:S.sms,p_invited_xmas:null}); persistLocal(); rerenderMe()};
  const c=$('#meCal'); if(c) c.onclick=()=>subscribeCal();
+ const hb=$('#meHH'); if(hb) hb.onclick=async()=>{const L=t(); const n=(prompt(L.me_add_name)||'').trim(); if(!n)return; const ph=(prompt(L.me_add_cell)||'').trim(); const {data}=await sb.rpc('household_set',{p_token:S.token,p_household:null,p_members:[{name:n,phone:ph||null}]}); if(data){applyFamily(data); render()}};
  document.querySelectorAll('[data-melang]').forEach(x=>x.onclick=async()=>{S.lang=x.dataset.melang;ls('lang',S.lang); if(S.token) sb.rpc('family_update',{p_token:S.token,p_name:null,p_lang:S.lang,p_sms_optin:null,p_invited_xmas:null}); const i=P.i; render(); P.i=i; const ps=pages(); if(ps[i])$('#app').scrollTop=ps[i].offsetTop;});
 }
 function rerenderMe(){ const el=$('#ev-me'); if(!el)return; const tmp=document.createElement('div'); tmp.innerHTML=renderMe(); const n=tmp.firstElementChild; el.replaceWith(n); n.addEventListener('scroll',onInnerScroll,{passive:true}); bindMe(); }
@@ -356,15 +402,17 @@ function render(){
  const L=t(); const app=$('#app');
  document.documentElement.lang=S.lang;
  document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.lang));
- if(!S.invites){ app.innerHTML=renderGate(); if(S.gate&&S.gate.step==='who')bindWho(); else bindGate(); $('#nav').classList.add('hidden'); $('#bar').classList.add('hidden'); return }
+ if(!S.invites){ app.innerHTML=renderGate(); if(S.gate&&S.gate.step==='who')bindWho(); else bindGate(); $('#nav').classList.add('hidden'); $('#bar').classList.add('hidden'); $('#tabs').classList.add('hidden'); document.documentElement.style.setProperty('--tabh','0px'); return }
  document.documentElement.lang=S.lang;
  document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.lang));
+ updateTabs();
+ if(S.tab!=='home'){ app.innerHTML=(S.tab==='me'?renderMe():S.tab==='framily'?renderFramily():renderMemories()); if(S.tab==='me')bindMe(); if(S.tab==='framily')bindFramily(); $('#nav').classList.add('hidden'); $('#bar').classList.add('hidden'); document.documentElement.style.setProperty('--barh','0px'); app.scrollTop=0; return }
  const evs=visibleEvents();
  const chips=evs.map(e=>`<button class="pill" data-jump="${e.id}" style="color:var(--gold);background:transparent;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 12px">${CHIP_ICON[e.id]||''}${esc(chipLabel(e.id))}</button>`).join('');
  let h=`
- <section id="ev-hero" style="background:#16301F;padding:clamp(48px,8vh,90px) 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:clamp(8px,1.6vh,22px);position:relative">
+ <section id="ev-hero" style="background:#16301F;padding:clamp(30px,5vh,70px) 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:clamp(8px,1.6vh,22px);position:relative">
   <svg aria-hidden="true" width="480" height="60" viewBox="0 0 430 60" style="position:absolute;left:0;top:-4px;width:100%" fill="none"><path d="M-10 6 Q110 60 215 18 T440 6" stroke="#2F5A3C" stroke-width="14" stroke-linecap="round"/><g><circle cx="50" cy="26" r="7" fill="#C8302E"/><circle cx="120" cy="40" r="7" fill="#D9B56C"/><circle cx="215" cy="22" r="7" fill="#F3E7D0"/><circle cx="300" cy="14" r="7" fill="#C8302E"/><circle cx="380" cy="18" r="7" fill="#D9B56C"/></g></svg>
-  <div style="font-family:'Pinyon Script',cursive;font-size:clamp(44px,6.5vh,60px);line-height:.9;color:var(--gold);margin-top:10px;margin-bottom:-8px;position:relative">FRamily</div>
+  <div style="font-family:'Pinyon Script',cursive;font-size:clamp(40px,6vh,60px);line-height:.9;color:var(--gold);margin-top:6px;margin-bottom:-8px;position:relative">FRamily</div>
   <div style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(42px,6vh,56px);line-height:.95;position:relative">HOLIDAY FUN</div>
   <div style="font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--gold);position:relative">${S.name?esc(famGreet(S.name)):''}</div>
   <div class="kicker" style="letter-spacing:4px;position:relative">DECEMBER 2026</div>
@@ -382,8 +430,7 @@ function render(){
    </section>`;
  for(const e of evs) h+=renderEvent(e);
  if(owed()>0) h+=renderLock();
- h+=renderMe();
- app.innerHTML=h; bindMe();
+ app.innerHTML=h;
  bindEvents();
  pages().forEach(p=>p.addEventListener('scroll',onInnerScroll,{passive:true}));
  const ps=pages(); if(ps[P.i]) app.scrollTop=ps[P.i].offsetTop;
@@ -399,7 +446,7 @@ const CHIP_ICON={
  christmas:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l5 7h-3l4 5h-4l3 5H7l3-5H6l4-5H7z"/><path d="M12 19v3"/></svg>',
  lillie:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>'
 };
-function nextLabel(id){const evs=visibleEvents();const k=evs.findIndex(e=>e.id===id);const n=evs[k+1];return n?chipLabel(n.id):(owed()>0?t().lock.toUpperCase():t().me_h)}
+function nextLabel(id){const evs=visibleEvents();const k=evs.findIndex(e=>e.id===id);const n=evs[k+1];return n?chipLabel(n.id):t().lock.toUpperCase()}
 function chipLabel(id){return {thanksgiving:'11/26 THANKS',laras:"12/24 LARA'S",bowling:'12/8 BOWL',topgolf:'12/15 GOLF',movie:'12/22 MOVIE',crossway:'12/24 CROSSWAY',christmas:'12/25 XMAS',lillie:'12/29 LILLIE'}[id]}
 
 function rsvpButtons(id,th,labels,inLabel){
@@ -794,6 +841,7 @@ async function renderAdmin(){
  if(!pass){A.innerHTML=`<div style="max-width:360px;margin:80px auto;display:flex;flex-direction:column;gap:10px"><h2 style="font-family:'Fraunces',serif;margin:0">Admin</h2><input id="ap" type="password" placeholder="Passphrase" style="padding:12px;font-size:16px"><button class="mbtn" id="apb">Open</button></div>`;
   $('#apb').onclick=async()=>{const p=$('#ap').value;const {data}=await sb.rpc('admin_ok',{p_pass:p});if(data){ls('adminpass',p);renderAdmin()}else toast('Nope.')}; $('#ap').onkeydown=e=>{if(e.key==='Enter')$('#apb').click()}; return}
  if(S.adminTab==='guests'){return renderGuestList(pass)}
+ if(S.adminTab==='texts'){return renderTexts(pass)}
  const {data,error}=await sb.rpc('admin_overview',{p_pass:pass}); if(error){ls('adminpass','');renderAdmin();return}
  const evs=S.events; const fams=data.families||[]; const filt=S.adminFilter||'all';
  const stat={}; for(const e of evs){stat[e.id]={in:0,maybe:0,players:0,watchers:0,owed:0,paid:0,fams:0}}
@@ -811,7 +859,7 @@ async function renderAdmin(){
    return `<td><b>${cnt}</b> ${pay}</td>`}).join('');
   return `<tr><td><b>${esc(f.name||'')}</b><br><span style="font-size:11px;opacity:.7">${(f.labels||[]).join(', ')}${f.sms_optin?' · 📱':''} · ${f.lang}</span></td><td>${fmtPhone(f.phone)}</td>${cells}</tr>`}).join('');
  A.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px"><div><div style="font-size:11px;letter-spacing:3px;font-weight:700;color:#5A1521">FRAMILY HOLIDAY FUN · ADMIN</div><div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px">RSVPs &amp; payments</div></div>
-  <div><button class="tb on">RSVPs &amp; payments</button><button class="tb" id="tabG">Guest List</button><span style="display:inline-block;width:1px;height:24px;background:#16301F;opacity:.3;margin:0 8px;vertical-align:middle"></span><button class="tb" id="copyPh">Copy phone list</button><button class="tb" id="csv">Download CSV</button><button class="tb" id="out">Log out</button></div></div>
+  <div><button class="tb on">RSVPs &amp; payments</button><button class="tb" id="tabG">Guest List</button><button class="tb" id="tabT">Texts</button><span style="display:inline-block;width:1px;height:24px;background:#16301F;opacity:.3;margin:0 8px;vertical-align:middle"></span><button class="tb" id="copyPh">Copy phone list</button><button class="tb" id="csv">Download CSV</button><button class="tb" id="out">Log out</button></div></div>
   <div class="k">${kpi}</div>
   <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin:8px 0"><button class="tb ${filt==='all'?'on':''}" data-f="all">All</button>${evs.map(e=>`<button class="tb ${filt===e.id?'on':''}" data-f="${e.id}">${esc(chipLabel(e.id).split(' ')[1])}</button>`).join('')}<span style="margin-left:auto;font-weight:700;color:#C8302E">Unpaid: $${unpaidTotal/100}</span></div>
   <table><thead><tr><th>Family</th><th>Cell</th>${evs.map(e=>`<th>${esc(chipLabel(e.id).split(' ')[1])}</th>`).join('')}</tr></thead><tbody>${rows||'<tr><td colspan="8" style="opacity:.6;padding:20px">No RSVPs yet.</td></tr>'}</tbody></table>
@@ -820,10 +868,32 @@ async function renderAdmin(){
  A.querySelectorAll('[data-pay]').forEach(b=>b.onclick=async()=>{const [fid,eid]=b.dataset.pay.split('|');await sb.rpc('admin_set_paid',{p_pass:pass,p_family:fid,p_event:eid,p_paid:true});renderAdmin()});
  $('#out').onclick=()=>{ls('adminpass','');renderAdmin()};
  $('#tabG').onclick=()=>{S.adminTab='guests';renderAdmin()};
+ $('#tabT').onclick=()=>{S.adminTab='texts';renderAdmin()};
  $('#copyPh').onclick=()=>{const list=fams.filter(f=>filt==='all'||f.rsvps.some(r=>r.event_id===filt&&r.status==='in')).map(f=>fmtPhone(f.phone)).join(', ');navigator.clipboard?.writeText(list).then(()=>toast('Copied '+list.split(', ').length+' numbers'))};
  $('#csv').onclick=()=>{const h=['family','cell','tier','lillie','sms','lang',...evs.flatMap(e=>[e.id+'_status',e.id+'_count',e.id+'_paid'])];const r=fams.map(f=>[f.name,f.phone,f.tier,f.lillie,f.sms_optin,f.lang,...evs.flatMap(e=>{const x=f.rsvps.find(y=>y.event_id===e.id)||{};return [x.status||'',x.status==='in'?(e.id==='topgolf'?`${x.players}+${x.watchers}`:x.headcount):'',x.paid_confirmed?'paid':(x.paid_claimed?'claimed':'')]})]);const csv=[h,...r].map(a=>a.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='framily-rsvps.csv';a.click()};
 }
 
+
+/* ---------- admin: texts ---------- */
+async function renderTexts(pass){
+ const A=$('#admin'); const {data:d,error}=await sb.rpc('admin_sms',{p_pass:pass}); if(error){toast('Hmm');return}
+ const live=d.live==='1', paused=d.paused==='1';
+ const row=r=>`<tr><td style="white-space:nowrap;font-size:11px;opacity:.7">${new Date(r.at).toLocaleString('en-US',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit'})}</td><td style="font-size:11px">${esc(r.kind||'')}</td><td style="white-space:nowrap">${fmtPhone(r.to||r.from)}</td><td style="font-size:12px">${esc(r.body||'')}${r.error?`<div style="color:#C8302E;font-size:11px">${esc(r.error)}</div>`:''}</td><td style="font-size:11px">${esc(r.status||'')}</td></tr>`;
+ A.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px"><div><div style="font-size:11px;letter-spacing:3px;font-weight:700;color:#5A1521">FRAMILY HOLIDAY FUN · ADMIN</div><div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px">Texts</div></div>
+  <div><button class="tb" id="tabR">RSVPs &amp; payments</button><button class="tb" id="tabG">Guest List</button><button class="tb on">Texts</button><span style="display:inline-block;width:1px;height:24px;background:#16301F;opacity:.3;margin:0 8px;vertical-align:middle"></span><button class="tb" id="out">Log out</button></div></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0">
+   <div style="background:${live?'#DFF2E4':'#FFF1D6'};border-radius:12px;padding:12px 16px;min-width:200px"><div style="font-size:10px;letter-spacing:2px;font-weight:700;opacity:.7">ENGINE</div><b style="font-size:18px">${live?'Live':'Dormant'}</b><div style="font-size:11px;opacity:.75">${live?'Texts go out on schedule.':'Nothing sends. Flip on once Twilio is approved.'}</div><button class="tb" id="tLive" style="margin-top:8px">${live?'Turn off':'Turn on'}</button></div>
+   <div style="background:${paused?'#FBE3E1':'#F3E7D0'};border-radius:12px;padding:12px 16px;min-width:200px"><div style="font-size:10px;letter-spacing:2px;font-weight:700;opacity:.7">PAUSE SWITCH</div><b style="font-size:18px">${paused?'Paused':'Running'}</b><div style="font-size:11px;opacity:.75">Stops everything instantly, keeps the queue.</div><button class="tb" id="tPause" style="margin-top:8px">${paused?'Resume':'Pause all texts'}</button></div>
+   <div style="background:#F3E7D0;border-radius:12px;padding:12px 16px;min-width:200px"><div style="font-size:10px;letter-spacing:2px;font-weight:700;opacity:.7">COUNTS</div><b style="font-size:18px">${d.sent} sent</b><div style="font-size:11px;opacity:.75">${d.optin} opted in · ${d.errors} errors</div></div>
+  </div>
+  <div style="font-size:11px;letter-spacing:2px;font-weight:700;opacity:.7;margin:10px 0 4px">OUTBOX · LAST 40</div>
+  <table><thead><tr><th>When</th><th>Kind</th><th>To</th><th>Message</th><th>Status</th></tr></thead><tbody>${(d.recent||[]).map(row).join('')||'<tr><td colspan="5" style="opacity:.6;padding:16px">Nothing sent yet.</td></tr>'}</tbody></table>
+  <div style="font-size:11px;letter-spacing:2px;font-weight:700;opacity:.7;margin:18px 0 4px">REPLIES · LAST 20</div>
+  <table><thead><tr><th>When</th><th></th><th>From</th><th>Message</th><th></th></tr></thead><tbody>${(d.inbound||[]).map(row).join('')||'<tr><td colspan="5" style="opacity:.6;padding:16px">No replies yet.</td></tr>'}</tbody></table>`;
+ $('#tabR').onclick=()=>{S.adminTab=null;renderAdmin()}; $('#tabG').onclick=()=>{S.adminTab='guests';renderAdmin()}; $('#out').onclick=()=>{ls('adminpass','');renderAdmin()};
+ $('#tLive').onclick=async()=>{if(!live&&!confirm('Turn the text engine ON? Opted-in guests will start getting texts on schedule.'))return; await sb.rpc('admin_set_setting',{p_pass:pass,p_key:'sms_live',p_value:live?'0':'1'}); renderAdmin()};
+ $('#tPause').onclick=async()=>{await sb.rpc('admin_set_setting',{p_pass:pass,p_key:'sms_paused',p_value:paused?'0':'1'}); renderAdmin()};
+}
 
 /* ---------- admin: guest list ---------- */
 async function renderGuestList(pass){
@@ -837,7 +907,7 @@ async function renderGuestList(pass){
   const hostOf=hosts.filter(h=>h.phone===f.phone).map(h=>chipLabel(h.event_id).split(' ').slice(1).join(' '));
   return `<tr style="${f.source==='web'?'background:#FFF8EA':''}"><td><b data-edit="${f.id}" style="cursor:text">${esc(f.name||'(no name)')}</b> ${(f.labels||[]).map(l=>`<span class="chip" style="background:#EADBC3;color:#5A1521;font-size:10px">${esc(l)}</span>`).join(' ')}${f.source==='web'?' <span class="chip" style="background:#FFF1D6;color:#9A6B00;font-size:10px">NEW</span>':''}${hostOf.length?` <span class="chip" style="background:#DFF2E4;color:#2F7A48;font-size:10px">host: ${esc(hostOf.join(', '))}</span>`:''}<br><span style="font-size:11px;opacity:.7">${fmtPhone(f.phone)}${f.sms?' · 📱':''}</span></td>${cells}<td style="font-size:11px;white-space:nowrap">${rsv?`<span style="color:#2F7A48;font-weight:700">RSVP'd · ${rsv}</span>`:'<span style="opacity:.5">Not yet</span>'}</td><td><button data-del="${f.id}" style="border:0;background:none;color:#C8302E;font-weight:700;cursor:pointer">×</button></td></tr>`}).join('');
  A.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px"><div><div style="font-size:11px;letter-spacing:3px;font-weight:700;color:#5A1521">FRAMILY HOLIDAY FUN · ADMIN</div><div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px">Guest List</div></div>
-  <div><button class="tb" id="tabR">RSVPs &amp; payments</button><button class="tb on">Guest List</button><span style="display:inline-block;width:1px;height:24px;background:#16301F;opacity:.3;margin:0 8px;vertical-align:middle"></span><label class="tb" style="border-style:dashed;cursor:pointer">⬆ Import Google Contacts CSV<input type="file" id="csvIn" accept=".csv,text/csv" style="display:none"></label><button class="tb" id="addG">+ Add guest</button><button class="tb" id="hosts">Hosts</button><button class="tb" id="out">Log out</button></div></div>
+  <div><button class="tb" id="tabR">RSVPs &amp; payments</button><button class="tb on">Guest List</button><button class="tb" id="tabT2">Texts</button><span style="display:inline-block;width:1px;height:24px;background:#16301F;opacity:.3;margin:0 8px;vertical-align:middle"></span><label class="tb" style="border-style:dashed;cursor:pointer">⬆ Import Google Contacts CSV<input type="file" id="csvIn" accept=".csv,text/csv" style="display:none"></label><button class="tb" id="addG">+ Add guest</button><button class="tb" id="hosts">Hosts</button><button class="tb" id="out">Log out</button></div></div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0">
    <input id="gq" placeholder="Search name, number or label…" value="${esc(S.gq||'')}" style="border-radius:999px;padding:9px 14px;width:260px">
    <span style="font-size:10px;font-weight:700;letter-spacing:2px;opacity:.7;margin-left:6px">BULK BY LABEL</span>
@@ -851,7 +921,7 @@ async function renderGuestList(pass){
    <div style="background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #EADBC3"><b>Grey checks = defaults.</b> Bowling, Topgolf, Movie and Crossway are on for everyone automatically. Dark boxes are the ones you control.</div>
    <div style="background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #EADBC3"><b>Tap a box → it saves.</b> Uninviting also clears that guest's RSVP for that event.</div>
    <div style="background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #EADBC3"><b>Import = merge, never overwrite.</b> Google Contacts → Export → CSV. Matched by phone; contact labels become the bulk buttons.</div></div>`;
- $('#tabR').onclick=()=>{S.adminTab=null;renderAdmin()};
+ $('#tabR').onclick=()=>{S.adminTab=null;renderAdmin()}; const t2=$('#tabT2'); if(t2)t2.onclick=()=>{S.adminTab='texts';renderAdmin()};
  $('#out').onclick=()=>{ls('adminpass','');S.adminTab=null;renderAdmin()};
  $('#gq').oninput=e=>{S.gq=e.target.value;clearTimeout(S.gqT);S.gqT=setTimeout(()=>renderGuestList(pass),250)};
  A.querySelectorAll('[data-inv]').forEach(b=>b.onclick=async()=>{const [fid,eid,on]=b.dataset.inv.split('|');await sb.rpc('admin_invite_set',{p_pass:pass,p_family:fid,p_event:eid,p_on:on==='1'});renderGuestList(pass)});
@@ -916,6 +986,7 @@ async function boot(){
  loadLocal(); await loadVia(); await loadFamily();
  render(); jumpDeep();
  initPager(); $('#app').addEventListener('scroll',updateNav,{passive:true});
+ document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab)); if(S.invites) loadFramily();
  $('#barBtn').onclick=()=>{const lk=$('#lock');if(lk)goTo(pages().indexOf(lk))};
 }
 boot();
