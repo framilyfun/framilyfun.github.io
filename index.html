@@ -120,7 +120,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1115.1045';
+const BUILD='1115.1130';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -379,7 +379,7 @@ async function bringFriend(id){ const L=t(); const {data:code,error}=await sb.rp
 
 function offerFriend(id){ if(!shareable(id)||ls('bf_'+id))return; ls('bf_'+id,'1');
  const L=t(); const e=S.events.find(x=>x.id===id); const nm=S.lang==='es'?e.name_es:e.name_en; const who=S.household||(S.name?famLabel(S.name):'');
- const preview=S.lang==='es'?`¡Hola! ${who} te invita a ${nm}. Di que vienes → framilyfun.github.io/#${id}?via=…`:`Hey! ${who} would love to have you at ${nm}. Say you're in → framilyfun.github.io/#${id}?via=…`;
+ const preview=S.lang==='es'?`¡Hola! ${who} te invita a ${nm}. Di que vienes → framilyfun.github.io/g/${id}…`:`Hey! ${who} would love to have you at ${nm}. Say you're in → framilyfun.github.io/g/${id}…`;
  const m=document.createElement('div'); m.className='modal';
  m.innerHTML=`<div><div class="handle"></div><div style="font-size:11px;letter-spacing:3px;font-weight:700;color:#1D9E75">${L.bf_pop_k}</div><h3>${L.bf_pop_t.replace('{name}',esc(nm))}</h3><div style="font-size:13px;line-height:1.45;opacity:.85">${L.bf_pop_sub}</div>
   <div style="background:#fff;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.45;border-bottom-left-radius:4px">${esc(preview)}</div>
@@ -618,7 +618,7 @@ async function newLink(id){
   m.remove(); for(const e of evs) await loadHost(e); for(const e of evs) rerenderEvent(e); copyLink(evs.includes(id)?id:evs[0],code,evs);
  };
 }
-function copyLink(id,code,evs){ const L=t(); const ids=(evs&&evs.length)?evs:[id]; const names=ids.map(x=>{const e=S.events.find(y=>y.id===x);return S.lang==='es'?(e.name_es||e.name_en):e.name_en}); const url=`${siteUrl()}#${id}?via=${code}`; const who=S.household||(S.name?famLabel(S.name):'FRamily');
+function copyLink(id,code,evs){ const L=t(); const ids=(evs&&evs.length)?evs:[id]; const names=ids.map(x=>{const e=S.events.find(y=>y.id===x);return S.lang==='es'?(e.name_es||e.name_en):e.name_en}); const url=`${siteUrl()}g/${id}?via=${code}`; const who=S.household||(S.name?famLabel(S.name):'FRamily');
  const list=names.length===1?names[0]:names.slice(0,-1).join(', ')+(S.lang==='es'?' y ':' and ')+names.slice(-1);
  const msg=S.lang==='es'?`¡Hola! ${who} te invita a ${list}. Di que vienes → ${url}`:`Hey! ${who} would love to have you at ${list}. Say you're in → ${url}`;
  if(navigator.share){navigator.share({text:msg}).catch(()=>{})} else {navigator.clipboard?.writeText(msg).then(()=>toast(L.link_copied)).catch(()=>prompt('',msg))} }
@@ -1035,7 +1035,7 @@ async function renderGuestList(pass){
  $('#out').onclick=()=>{ls('adminpass','');S.adminTab=null;renderAdmin()};
  $('#gq').oninput=e=>{S.gq=e.target.value;clearTimeout(S.gqT);S.gqT=setTimeout(()=>renderGuestList(pass),250)};
  const meMap={}; try{const r=await sb.rpc('admin_me_links',{p_pass:pass});(r.data||[]).forEach(x=>meMap[x.family_id]=x)}catch(e){}
- A.querySelectorAll('[data-melink]').forEach(b=>b.onclick=()=>{const x=meMap[b.dataset.melink];if(!x){toast('No link yet');return}const url=`${siteUrl()}#${x.first_event||'bowling'}?me=${x.me_code}`;navigator.clipboard?.writeText(url).then(()=>toast('Personal link copied for '+(x.name||''))).catch(()=>prompt('',url))});
+ A.querySelectorAll('[data-melink]').forEach(b=>b.onclick=()=>{const x=meMap[b.dataset.melink];if(!x){toast('No link yet');return}const url=`${siteUrl()}g/${x.first_event||'bowling'}?me=${x.me_code}`;navigator.clipboard?.writeText(url).then(()=>toast('Personal link copied for '+(x.name||''))).catch(()=>prompt('',url))});
  A.querySelectorAll('[data-inv]').forEach(b=>b.onclick=async()=>{const [fid,eid,on]=b.dataset.inv.split('|');await sb.rpc('admin_invite_set',{p_pass:pass,p_family:fid,p_event:eid,p_on:on==='1'});renderGuestList(pass)});
  A.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Remove this guest and their RSVPs?'))return;await sb.rpc('admin_family_set',{p_pass:pass,p_family:b.dataset.del,p_delete:true});renderGuestList(pass)});
  A.querySelectorAll('[data-edit]').forEach(b=>b.onclick=async()=>{const f=fams.find(x=>x.id===b.dataset.edit);const n=prompt('Name',f.name||'');if(n===null)return;const l=prompt('Labels (comma separated)',(f.labels||[]).join(', '));if(l===null)return;await sb.rpc('admin_family_set',{p_pass:pass,p_family:f.id,p_name:n,p_labels:l.split(',').map(x=>x.trim()).filter(Boolean)});renderGuestList(pass)});
