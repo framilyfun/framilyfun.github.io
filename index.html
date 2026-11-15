@@ -124,7 +124,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1115.2200';
+const BUILD='1115.2220';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -137,7 +137,7 @@ en:{
  howmany:"How many coming?",bowlers:"How many bowling?",players:"Players",watching:"Watching",tickets:"Tickets",seats:"How many seats?",
  total:"Your total",payend:"pay at the end",dress:"Dress theme",details:"THE DETAILS",cal:"Add to my calendar",
  lock:"Pay with Zelle",lock_sub:"Your RSVPs are saved. The only thing left is the gatherings that have a cost. One Zelle covers it all.",saved_live:"Saved ✓",
- s1:"1 · WHO'S COMING",s2:"2 · YOUR GATHERINGS",s3:"3 · PAY WITH ZELLE",fam:"YOUR NAME",cell:"CELL (FOR REMINDERS)",
+ s1:"1 · WHO'S COMING",s2:"2 · YOUR GATHERINGS",s3:"3 · PAY WITH ZELLE",fam:"FIRST NAME",last:"LAST NAME",first_ph:"Jared",last_ph:"Rivera",me_name_q:"Your name (first and last)?",cell:"CELL (FOR REMINDERS)",
  sms_h:"Yes, text me the details",sms:"Text me RSVP confirmations and reminders from <b>FRamily</b> (our family's gatherings hub) for the events I choose. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. See <a href='privacy.html'>Privacy</a> and <a href='terms.html'>Terms</a>.",
  owed:"Still owed",zelle_to:"ZELLE $AMT TO",memo:"Jared Dunson · put your family name in the memo",copy:"Copy #",copied:"Copied",
  sent:"I sent my Zelle. (Jared confirms on his end.)",send:"Send my RSVP",saved:"Saved! We'll see you there.",update:"Update my RSVP",
@@ -176,7 +176,7 @@ es:{
  howmany:"¿Cuántos vienen?",bowlers:"¿Cuántos juegan boliche?",players:"Jugadores",watching:"Acompañan",tickets:"Boletos",seats:"¿Cuántos asientos?",
  total:"Tu total",payend:"se paga al final",dress:"Vestimenta",details:"LOS DETALLES",cal:"Agregar a mi calendario",
  lock:"Paga con Zelle",lock_sub:"Tus RSVPs ya están guardados. Solo falta lo de las reuniones con costo. Un solo Zelle lo cubre todo.",saved_live:"Guardado ✓",
- s1:"1 · QUIÉNES VIENEN",s2:"2 · TUS REUNIONES",s3:"3 · PAGA CON ZELLE",fam:"TU NOMBRE",cell:"CELULAR (PARA RECORDATORIOS)",
+ s1:"1 · QUIÉNES VIENEN",s2:"2 · TUS REUNIONES",s3:"3 · PAGA CON ZELLE",fam:"NOMBRE",last:"APELLIDO",first_ph:"Jared",last_ph:"Rivera",me_name_q:"¿Tu nombre (nombre y apellido)?",cell:"CELULAR (PARA RECORDATORIOS)",
  sms_h:"Sí, mándenme los detalles por texto",sms:"Envíenme por texto confirmaciones y recordatorios de <b>FRamily</b> (el hub de reuniones de nuestra familia) para los eventos que elija. La frecuencia varía. Pueden aplicar tarifas de mensajes y datos. Responde STOP para cancelar, HELP para ayuda. Ver <a href='privacy.html'>Privacidad</a> y <a href='terms.html'>Términos</a>.",
  owed:"Pendiente",zelle_to:"ZELLE $AMT A",memo:"Jared Dunson · pon el nombre de tu familia en la nota",copy:"Copiar #",copied:"Copiado",
  sent:"Ya envié mi Zelle. (Jared lo confirma de su lado.)",send:"Enviar mi RSVP",saved:"¡Listo! Nos vemos allá.",update:"Actualizar mi RSVP",
@@ -345,7 +345,7 @@ function renderGate(){
   <div style="font-family:'Fraunces',serif;font-weight:700;font-size:26px;line-height:1.1;margin-top:18px;position:relative">${L.gate_h}</div>
   <div style="font-size:14px;line-height:1.5;opacity:.9;position:relative">${L.gate_sub}</div>
   ${viaCard()}
-  <label class="f" style="position:relative">${L.fam}<input class="t" id="gName" value="${esc(S.name)}" autocomplete="name" placeholder="${L.fam_ph||''}" style="border-color:#D9B56C"></label>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;position:relative"><label class="f">${L.fam}<input class="t" id="gFirst" value="${esc(firstName(S.name))}" autocomplete="given-name" placeholder="${L.first_ph}" style="border-color:#D9B56C;min-width:0"></label><label class="f">${L.last}<input class="t" id="gLast" value="${esc((S.name||'').trim().split(/\s+/).slice(1).join(' '))}" autocomplete="family-name" placeholder="${L.last_ph}" style="border-color:#D9B56C;min-width:0"></label></div>
   <label class="f" style="position:relative">${L.cell}<input class="t" id="gPhone" type="tel" value="${esc(fmtPhone(S.phone))}" autocomplete="tel" inputmode="tel" style="border-color:#D9B56C"></label>
   <label style="display:flex;align-items:flex-start;gap:10px;background:#F3E7D0;color:#16301F;border:2px solid #D9B56C;border-radius:10px;padding:12px;font-size:12px;line-height:1.4;position:relative"><input type="checkbox" id="gSms" ${S.sms?'checked':''} style="width:22px;height:22px;flex:0 0 auto;accent-color:#16301F"><span><b style="display:block;font-size:13px;margin-bottom:2px">${L.sms_h}</b>${L.sms}</span></label>
   <label style="display:flex;align-items:center;gap:10px;background:rgba(243,231,208,.08);border:1px solid rgba(217,181,108,.4);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.4;position:relative"><input type="checkbox" id="gCal" ${ls('calsub')?'':'checked'} style="width:22px;height:22px;flex:0 0 auto;accent-color:#D9B56C"><span><b style="display:block;font-size:13px;margin-bottom:1px">${L.gcal_h}</b>${L.gcal}</span></label>
@@ -356,7 +356,7 @@ function renderGate(){
 }
 function bindGate(){
  $('#gBtn').onclick=async()=>{
-  const L=t(); const name=($('#gName').value||'').trim(); const digits=($('#gPhone').value||'').replace(/\D/g,'').slice(-10); const sms=$('#gSms').checked;
+  const L=t(); const name=`${($('#gFirst').value||'').trim()} ${($('#gLast').value||'').trim()}`.trim(); const digits=($('#gPhone').value||'').replace(/\D/g,'').slice(-10); const sms=$('#gSms').checked;
   if(!name||digits.length!==10){toast(!name?L.need_name:L.bad_phone);return}
   const b=$('#gBtn'); b.disabled=true; b.textContent='…';
   try{
@@ -380,16 +380,16 @@ function openClaim(id){
  if(document.querySelector('.modal'))return;
  const L=t(); const m=document.createElement('div'); m.className='modal';
  m.innerHTML=`<div><div class="handle"></div><h3>${L.claim_t}</h3><div style="font-size:13px;line-height:1.45;opacity:.85">${L.claim_sub.replace('{host}',esc(S.viaInfo?.host||'FRamily'))}</div>
-  <input class="t" id="cName" placeholder="${L.fam_ph||''}" value="${esc(S.name||'')}" style="border-color:var(--ink);background:#fff">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input class="t" id="cFirst" placeholder="${L.fam.charAt(0)+L.fam.slice(1).toLowerCase()}" value="${esc(firstName(S.name))}" autocomplete="given-name" style="border-color:var(--ink);background:#fff;min-width:0"><input class="t" id="cLast" placeholder="${L.last.charAt(0)+L.last.slice(1).toLowerCase()}" value="${esc((S.name||'').trim().split(/\s+/).slice(1).join(' '))}" autocomplete="family-name" style="border-color:var(--ink);background:#fff;min-width:0"></div>
   <input class="t" id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(954) 555-0123" value="${esc(S.phone||'')}" style="border-color:var(--ink);background:#fff">
   <label class="c"><input type="checkbox" id="cSms" checked><span>${L.sms}</span></label>
   <label style="display:flex;align-items:center;gap:10px;background:rgba(243,231,208,.08);border:1px solid rgba(217,181,108,.4);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.4;position:relative"><input type="checkbox" id="gCal" ${ls('calsub')?'':'checked'} style="width:22px;height:22px;flex:0 0 auto;accent-color:#D9B56C"><span><b style="display:block;font-size:13px;margin-bottom:1px">${L.gcal_h}</b>${L.gcal}</span></label>
   <button class="mbtn" id="cGo" style="background:var(--ink);color:var(--cream)">${L.claim_go}</button>
   <button class="mbtn alt" id="cCancel">${L.cancel||'Cancel'}</button></div>`;
- m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m); setTimeout(()=>$('#cName').focus(),50);
+ m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m); setTimeout(()=>$('#cFirst')?.focus(),50);
  $('#cCancel').onclick=()=>m.remove();
  $('#cGo').onclick=async()=>{
-  const name=($('#cName').value||'').trim(); const digits=($('#cPhone').value||'').replace(/\D/g,'').slice(-10); const sms=$('#cSms').checked;
+  const name=`${($('#cFirst').value||'').trim()} ${($('#cLast').value||'').trim()}`.trim(); const digits=($('#cPhone').value||'').replace(/\D/g,'').slice(-10); const sms=$('#cSms').checked;
   if(!name){toast(L.need_name||'Your name?');return} if(digits.length!==10){toast(L.need_phone||'A 10-digit cell, please');return}
   $('#cGo').disabled=true;
   try{
@@ -479,8 +479,9 @@ function renderMe(){
  const anniv=`<button id="meAnniv" class="pill" style="font-family:inherit;cursor:pointer;padding:5px 10px;font-size:11px;color:var(--gold);background:transparent">💍 ${L.me_anniv}${S.anniversary?` · ${md(S.anniversary)}`:` · ${L.me_set}`}</button>`;
  return `<section id="ev-me" class="tabpage" style="position:relative">
   <div class="kicker" style="color:var(--gold)">${L.me_h}</div>
-  <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1">${esc(S.name||'')}</div>
+  <div id="meName" style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1;cursor:pointer">${esc(S.name||'')} <span style="font-size:12px;opacity:.5;font-family:'Hanken Grotesk',sans-serif;font-weight:400">✎</span></div>
   <div style="font-size:13px;opacity:.7">${esc(fmtPhone(S.phone))}</div>
+  ${(S.canHost||S.isAdmin||(S.hostsReal||[]).length)?`<button id="meHostNew" style="margin-top:12px;text-align:left;background:var(--gold);color:#16301F;border:0;border-radius:12px;padding:14px;font-family:inherit;cursor:pointer;display:flex;justify-content:space-between;align-items:center"><span><div style="font-weight:800;font-size:15px">✨ ${L.hc_t}</div><div style="font-size:12px;opacity:.85;margin-top:2px">${L.hc_s1}</div></span><span style="font-size:20px">→</span></button>`:`<div style="margin-top:10px;background:rgba(243,231,208,.08);border:1px solid rgba(217,181,108,.4);border-radius:12px;padding:12px 14px"><div style="font-weight:700">✨ ${L.me_host}</div><div style="font-size:12px;opacity:.8;line-height:1.4;margin-top:3px">${L.me_host_sub}</div></div>`}
   <div class="kicker" style="font-size:10px;opacity:.7;margin-top:10px">${L.me_hh}</div>
   <div class="r"><span id="meHHName" style="cursor:pointer"><b>${esc(S.household||famLabel(S.name))}</b> <span style="font-size:11px;opacity:.5">✎</span><div class="h2">${hh||'—'}</div></span><button class="pill" id="meHH" style="font-family:inherit;cursor:pointer;color:var(--gold);background:transparent;padding:6px 12px">${L.me_edit}</button></div>
   <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${bdays}${anniv}</div>
@@ -492,7 +493,6 @@ function renderMe(){
   ${row(`📱 ${L.me_sms}`,chip(S.sms?L.me_on:L.me_off,S.sms,'id="meSms"'))}
   ${row(`📅 ${L.me_cal}`,chip((S.calsub||ls('calsub'))?L.calsub_on.replace('📅 ',''):'+',!!(S.calsub||ls('calsub')),'id="meCal"'))}
   ${row(`🌐 ${L.me_lang}`,`<span style="display:inline-flex;gap:4px">${chip('EN',S.lang==='en','data-melang="en"')}${chip('ES',S.lang==='es','data-melang="es"')}</span>`)}
-  ${(S.canHost||S.isAdmin||(S.hostsReal||[]).length)?`<button id="meHostNew" style="margin-top:10px;text-align:left;background:var(--gold);color:#16301F;border:0;border-radius:12px;padding:14px;font-family:inherit;cursor:pointer;display:flex;justify-content:space-between;align-items:center"><span><div style="font-weight:800;font-size:15px">✨ ${L.hc_t}</div><div style="font-size:12px;opacity:.85;margin-top:2px">${L.hc_s1}</div></span><span style="font-size:20px">→</span></button>`:`<div style="margin-top:10px;background:rgba(243,231,208,.08);border:1px solid rgba(217,181,108,.4);border-radius:12px;padding:12px 14px"><div style="font-weight:700">✨ ${L.me_host}</div><div style="font-size:12px;opacity:.8;line-height:1.4;margin-top:3px">${L.me_host_sub}</div></div>`}
   <div style="font-size:10px;opacity:.5;margin-top:auto;text-align:center"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · v${BUILD}</div>
   <div class="sp"></div></section>`;
 }
@@ -505,6 +505,7 @@ function bindMe(){
  const parseMD=v=>{v=(v||'').trim(); if(!v)return null; let m=v.match(/^(\d{1,2})[\/\-.](\d{1,2})(?:[\/\-.](\d{2,4}))?$/); if(!m)return false; const mm=String(+m[1]).padStart(2,'0'), dd=String(+m[2]).padStart(2,'0'); if(+mm<1||+mm>12||+dd<1||+dd>31)return false; let y=m[3]; if(y&&y.length===2) y='19'+y; return (y?y+'-':'')+mm+'-'+dd};
  document.querySelectorAll('[data-bday]').forEach(b=>b.onclick=async()=>{const L=t(); const p=(S.people||[]).find(x=>x.id===b.dataset.bday); const v=prompt(L.me_bday_q.replace('{name}',(p?.name||'').split(' ')[0]),''); if(v===null)return; const md=parseMD(v); if(md===false){toast(L.me_date_bad);return} const {data,error}=await sb.rpc('profile_set',{p_token:S.token,p_person:p.id,p_birthday:md,p_clear_birthday:md===null}); if(error){toast('Hmm');return} applyFamily(data); render()});
  const an=$('#meAnniv'); if(an) an.onclick=async()=>{const L=t(); const v=prompt(L.me_anniv_q,''); if(v===null)return; const md=parseMD(v); if(md===false){toast(L.me_date_bad);return} const {data,error}=await sb.rpc('profile_set',{p_token:S.token,p_anniversary:md,p_clear_anniversary:md===null}); if(error){toast('Hmm');return} applyFamily(data); render()};
+ const mn=$('#meName'); if(mn) mn.onclick=async()=>{const v=(prompt(t().me_name_q,S.name||'')||'').trim(); if(!v)return; await sb.rpc('family_update',{p_token:S.token,p_name:v,p_lang:null,p_sms_optin:null,p_invited_xmas:null}); S.name=v; const me=(S.people||[]).find(p=>p.primary); if(me) me.name=v; persistLocal(); render()};
  const hn=$('#meHHName'); if(hn) hn.onclick=async()=>{const n=(prompt(t().me_hh_q,S.household||'')||'').trim(); if(!n)return; const {data}=await sb.rpc('household_set',{p_token:S.token,p_household:n,p_members:null}); if(data){applyFamily(data); render()}};
  const hb=$('#meHH'); if(hb) hb.onclick=async()=>{const L=t(); const n=(prompt(L.me_add_name)||'').trim(); if(!n)return; const kid=confirm(L.me_kid_q); let age=null; if(kid){age=(prompt(L.me_age_q)||'').trim()||null} const ph=kid?'':(prompt(L.me_add_cell)||'').trim(); const {data}=await sb.rpc('household_set',{p_token:S.token,p_household:null,p_members:[{name:n,phone:ph||null,kind:kid?'kid':'adult',age}]}); if(data){applyFamily(data); render()}};
  document.querySelectorAll('[data-melang]').forEach(x=>x.onclick=async()=>{S.lang=x.dataset.melang;ls('lang',S.lang); if(S.token) sb.rpc('family_update',{p_token:S.token,p_name:null,p_lang:S.lang,p_sms_optin:null,p_invited_xmas:null}); const i=P.i; render(); P.i=i; const ps=pages(); if(ps[i])$('#app').scrollTop=ps[i].offsetTop;});
