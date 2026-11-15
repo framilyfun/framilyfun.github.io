@@ -120,7 +120,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1115.1030';
+const BUILD='1115.1045';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -388,6 +388,9 @@ function offerFriend(id){ if(!shareable(id)||ls('bf_'+id))return; ls('bf_'+id,'1
  $('#bfLater').onclick=()=>m.remove(); $('#bfSend').onclick=()=>{m.remove(); bringFriend(id)};
 }
 
+function legalFoot(id){ const evs=visibleEvents(); const last=evs.length?evs[evs.length-1].id:null; if(id!=='lock'&&(id!==last||owed()>0)) return ''; return `<div style="font-size:10px;opacity:.5;text-align:center;position:relative;margin-top:14px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · v${BUILD}</div>`; }
+function openZoom(src){ const m=document.createElement('div'); m.className='modal'; m.style.alignItems='center'; m.style.padding='16px'; m.innerHTML=`<img src="${src}" alt="" style="max-width:100%;max-height:88vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.6);background:#F3E7D0;padding:8px 8px 22px">`; m.onclick=()=>m.remove(); document.body.appendChild(m); }
+
 /* ---------- quick jump ---------- */
 function openJump(){
  const L=t(); const m=document.createElement('div'); m.className='modal';
@@ -487,22 +490,22 @@ function render(){
  const evs=visibleEvents();
  const chips=evs.map(e=>`<button class="pill" data-jump="${e.id}" style="color:var(--gold);background:transparent;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 10px;font-size:9.5px;letter-spacing:1.5px;white-space:nowrap;justify-content:flex-start">${CHIP_ICON[e.id]||''}${esc(chipLabel(e.id))}</button>`).join('');
  let h=`
- <section id="ev-hero" style="background:#16301F;padding:clamp(24px,4vh,56px) 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(12px,2.1vh,26px);position:relative">
+ <section id="ev-hero" style="background:#16301F;padding:clamp(24px,4vh,56px) 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(10px,2.4vh,30px);position:relative">
   <svg aria-hidden="true" width="480" height="60" viewBox="0 0 430 60" style="position:absolute;left:0;top:-4px;width:100%" fill="none"><path d="M-10 6 Q110 60 215 18 T440 6" stroke="#2F5A3C" stroke-width="14" stroke-linecap="round"/><g><circle cx="50" cy="26" r="7" fill="#C8302E"/><circle cx="120" cy="40" r="7" fill="#D9B56C"/><circle cx="215" cy="22" r="7" fill="#F3E7D0"/><circle cx="300" cy="14" r="7" fill="#C8302E"/><circle cx="380" cy="18" r="7" fill="#D9B56C"/></g></svg>
   <div style="font-family:'Pinyon Script',cursive;font-size:clamp(36px,5.2vh,54px);line-height:.9;color:var(--gold);margin-top:4px;margin-bottom:-6px;position:relative">FRamily</div>
   <div style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(42px,6vh,56px);line-height:.95;position:relative">HOLIDAY FUN</div>
   <div style="font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--gold);position:relative">${S.provisional?esc(L.via_hey.replace('{host}',S.viaInfo?.host||'FRamily')):S.name?esc(famGreet(S.name)):''}</div>
   ${S.confirmMe?`<div style="display:inline-flex;align-items:center;gap:8px;background:var(--cream);color:var(--ink);border:1.5px solid var(--gold);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;position:relative">${L.me_q.replace('{name}',esc((S.name||'').split(' ')[0]))} <button id="meYes" style="background:var(--gold);border:0;border-radius:999px;padding:3px 10px;font-family:inherit;font-weight:700;cursor:pointer">✓ ${L.me_yes}</button><button id="meNo" style="background:none;border:0;opacity:.6;font-family:inherit;cursor:pointer">${L.me_no}</button></div>`:''}
-  <div style="display:flex;gap:8px;margin-top:8px;position:relative">
-   <div style="background:#F3E7D0;padding:6px;border-radius:3px;transform:rotate(-5deg);box-shadow:0 6px 14px rgba(0,0,0,.4)"><img src="img/bowling-2025.jpg" alt="Bowling 2025" style="width:clamp(62px,16vw,86px);aspect-ratio:100/72;object-fit:cover;object-position:50% 45%;display:block"></div>
-   <div style="background:#F3E7D0;padding:6px;border-radius:3px;transform:rotate(2deg) translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,.45)"><img src="img/topgolf-2025.jpg" alt="Topgolf 2025" style="width:clamp(70px,18vw,96px);aspect-ratio:110/78;object-fit:cover;object-position:50% 60%;display:block"></div>
-   <div style="background:#F3E7D0;padding:6px;border-radius:3px;transform:rotate(5deg);box-shadow:0 6px 14px rgba(0,0,0,.4)"><img src="img/movie-2025.jpg" alt="Movie 2025" style="width:clamp(62px,16vw,86px);aspect-ratio:100/72;object-fit:cover;object-position:50% 55%;display:block"></div>
+  <div style="display:flex;gap:10px;margin-top:8px;position:relative;width:100%;max-width:400px;padding:0 4px">
+   <div data-zoom="img/bowling-2025.jpg" style="flex:1;background:#F3E7D0;padding:6px 6px 14px;border-radius:3px;transform:rotate(-4deg);box-shadow:0 6px 14px rgba(0,0,0,.4);cursor:zoom-in"><img src="img/bowling-2025.jpg" alt="Bowling 2025" style="width:100%;aspect-ratio:110/84;object-fit:cover;object-position:50% 45%;display:block"></div>
+   <div data-zoom="img/topgolf-2025.jpg" style="flex:1;background:#F3E7D0;padding:6px 6px 14px;border-radius:3px;transform:rotate(2deg) translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,.45);cursor:zoom-in"><img src="img/topgolf-2025.jpg" alt="Topgolf 2025" style="width:100%;aspect-ratio:110/84;object-fit:cover;object-position:50% 60%;display:block"></div>
+   <div data-zoom="img/movie-2025.jpg" style="flex:1;background:#F3E7D0;padding:6px 6px 14px;border-radius:3px;transform:rotate(4deg);box-shadow:0 6px 14px rgba(0,0,0,.4);cursor:zoom-in"><img src="img/movie-2025.jpg" alt="Movie 2025" style="width:100%;aspect-ratio:110/84;object-fit:cover;object-position:50% 55%;display:block"></div>
   </div>
   <div class="lead" style="margin-top:2px;max-width:340px;position:relative;font-size:14px;line-height:1.4">${L.hero_sub}</div>
   <div class="kicker" style="font-size:10px;opacity:.7;position:relative">${L.your_invites}</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:2px;position:relative;width:100%;max-width:360px">${chips}</div>
   <div style="font-size:10.5px;opacity:.55;position:relative;margin-top:-4px">${L.hero_hint}</div>
-  <div class="sp" style="width:100%;position:relative;display:flex;align-items:flex-start;justify-content:center;padding-top:2px"><span style="font-size:9.5px;opacity:.4"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · v${BUILD}</span></div>
+  <div class="sp" style="width:100%"></div>
    </section>`;
  for(const e of evs) h+=renderEvent(e);
  if(owed()>0) h+=renderLock();
@@ -666,7 +669,7 @@ function renderEvent(e){
    <div style="position:relative">${bringBoard(id,th)}</div>
   </div>
   <div style="position:relative;background:#F4ECDC;border-radius:14px;padding:4px">${hostPanel(id,th)}</div>`;
-  return `<section class="ev" id="ev-${id}" style="background:#8E1B1B;color:${th.fg}">${inner}${shareRow(id,th)}${nextFoot(id)}<div class="sp"></div></section>`;
+  return `<section class="ev" id="ev-${id}" style="background:#8E1B1B;color:${th.fg}">${inner}${shareRow(id,th)}${legalFoot(id)}<div class="sp"></div></section>`;
  } else if(id==='bowling'){
   inner=`<div class="kicker" style="color:${th.ac};margin-top:28px">${d.k}</div>
   <div style="display:flex;gap:12px;align-items:flex-end;justify-content:space-between"><div style="font-family:${th.font};font-size:44px;line-height:.95">STRIKE<br><span style="color:${th.ac}">UP THE</span><br>HOLIDAYS</div>
@@ -757,7 +760,7 @@ function renderEvent(e){
   <div class="${hidden}" data-when="${id}">${stepper(id,'headcount',L.howmany,th)}${totalLine(id,th)}</div>`;
  }
  const bgx=id==='bowling'?`background:url("${LANE}") center/100% 100% no-repeat ${th.bg};background-attachment:local;`:`background:${th.bg};`;
- return `<section class="ev" id="ev-${id}" style="${bgx}color:${th.fg}">${inner}${shareRow(id,th)}${hostPanel(id,th)}${nextFoot(id)}<div class="sp"></div></section>`;
+ return `<section class="ev" id="ev-${id}" style="${bgx}color:${th.fg}">${inner}${shareRow(id,th)}${hostPanel(id,th)}${legalFoot(id)}<div class="sp"></div></section>`;
 }
 
 function renderLock(){
@@ -774,7 +777,7 @@ function renderLock(){
   <label style="display:flex;align-items:center;gap:10px;font-size:13px;background:#fff;border-radius:10px;padding:12px;border:2px solid var(--gold)"><input type="checkbox" id="fSent" ${claimed?'checked':''} style="width:22px;height:22px;accent-color:#16301F"><span><b>${L.sent}</b></span></label>`:`<div style="font-size:13px;opacity:.8">${L.none_owed}</div>`}
   <div style="font-size:11px;text-align:center;opacity:.75">${L.cal_note}</div>
   <div style="font-size:12px;text-align:center;opacity:.75">${L.q}</div>
-  <div class="sp"></div>
+  ${legalFoot('lock')}<div class="sp"></div>
  </section>`;
 }
 
@@ -839,7 +842,7 @@ function bindEvents(){
  document.querySelectorAll('[data-hbrm]').forEach(b=>b.onclick=async()=>{const [id,item]=b.dataset.hbrm.split('|');await sb.rpc('host_bring_set',{p_token:S.token,p_event:id,p_label:'',p_item:item,p_remove:true});await loadHost(id);const {data}=await sb.rpc('bring_get',{p_token:S.token,p_event:id});S.bring[id]=data||[];rerenderEvent(id)});
  document.querySelectorAll('[data-cal]').forEach(b=>b.onclick=()=>downloadIcs(b.dataset.cal));
  document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{const el=$('#ev-'+b.dataset.jump);if(el)goTo(pages().indexOf(el))});
- $('#nav .go').onclick=()=>goTo(curPage()+1); $('#navJump').onclick=openJump; $('#app').addEventListener('click',e=>{const b=e.target.closest('[data-bf1]'); if(b) bringFriend(b.dataset.bf1)});
+ $('#nav .go').onclick=()=>goTo(curPage()+1); $('#navJump').onclick=openJump; $('#app').addEventListener('click',e=>{const b=e.target.closest('[data-bf1]'); if(b) bringFriend(b.dataset.bf1); const z=e.target.closest('[data-zoom]'); if(z) openZoom(z.dataset.zoom)});
  document.querySelectorAll('[data-parking]').forEach(b=>b.onclick=showParking);
  const cz=$('#copyZ'); if(cz) cz.onclick=()=>{navigator.clipboard?.writeText(ZELLE.replace(/-/g,'')).then(()=>toast(t().copied)).catch(()=>toast(ZELLE))};
  const fb=$('#friendBtn'); if(fb) fb.onclick=showShare;
