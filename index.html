@@ -124,7 +124,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1116.1420';
+const BUILD='1116.1210';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -145,7 +145,7 @@ en:{
  share_t:"Show some love",share_sub:"Know someone who could use a gathering out this season? Pick the gatherings to share.",share_x:"Welcome someone to the FRamily fun.",
  write:"Write the text",copy_msg:"Copy message",lillie_lock:"Lillie's · invite only",
  bar_fin:"Pay ↓",bar_n:"events",event_1:"event",total_cost:"Total Cost",need_name:"Add your family name and cell first.",bad_phone:"That cell number doesn't look right.",
- full:"This one's full. Ask the host.",nothing:"Tap I'm in on at least one gathering.",
+ full:"This one's full. Ask the host.",cap_line:"{n} of {cap} spots taken",cap_full:"Full — {cap} spots. Tap Maybe and the host will tell you if one opens.",rsvp_by:"RSVP by {date}",rsvp_closed:"RSVPs closed {date} — text the host if plans change.",host_cap:"Cap",host_cap_q:"Guest cap? (number, blank = no cap)",host_rsvp:"RSVP deadline",host_rsvp_q:"How many days before the gathering do RSVPs close? (blank = no deadline)",host_days:"{n}d before",bf_all_k:"ALL SET 🎉",bf_all_t:"Know someone who'd love one of these?",bf_all_sub:"Pick a gathering and send them your own link. They'll see that one only, and we'll note they came through you.",nothing:"Tap I'm in on at least one gathering.",
  msg_hi:"Hey! The FRamily is gathering again this season and you're invited 🎄",msg_link:"Details + RSVP:",
  paid:"paid",unpaid:"unpaid",pay_now:"Still need to pay",none_owed:"Nothing owed. You're set.",
  calsub_t:"Put these on your calendar, automatically?",calsub_sub:"One tap adds a FRamily calendar to your phone. Every gathering you say I'm in to shows up on its own, with a reminder the morning of. Change an RSVP and it updates itself.",calsub_yes:"Yes, add it",calsub_later:"Maybe later",calsub_chip:"📅 FRamily calendar",calsub_on:"📅 Calendar added",calsub_android:"On Android: Google Calendar → Settings → Add calendar → From URL, and paste the link we copied.",cal_note:"Calendar events include the address, time, cost and dress theme, with a reminder the morning of.",
@@ -166,7 +166,7 @@ en:{
   crossway:{k:"THURSDAY 12/24 · CHRISTMAS EVE",lead:"Before the gifts and the games, the real gift. Come celebrate the birth of Jesus with us. Two services, we'll be at the <b>5:30</b>. Everyone's welcome.",t1:"SERVICE 1",t2:"WE'LL BE HERE",ask:"Want us to save you a seat with us at 5:30?",site:"crossway.church",url:"https://crossway.church"},
   christmas:{k:"FRIDAY 12/25 · BEGINS @ 4:00 PM",sub:"Faith, Family, Friends &amp; Fun",cap:"Nutcracker Games Champions - 2025",host:"Our place · 500 Bonaventure Blvd, Weston",t:"THE SIMPLE STUFF",
    det:["Come at 4, stay as long as you want. Food's handled.","Street parking. Carpool if you can.","Kids, grandparents, everybody. Games after dinner.","Dress theme is \"Moody.\" Inspo pics coming."],btn:"We'll be there ✓"},
-  lillie:{k:"TUESDAY 12/29 · 7:30 PM",sup:"TONIGHT'S CONTESTANTS: YOU!",h:"COME ON|DOWN!",sub:"It's Lillie's Birthday Game Show Night",t1:"$38",t1b:"per person",t2:"60 min",t2b:"of competitions",t3:"Boys vs Girls",t3b:"kids & adults",dress:"a little sparkle · waiver link coming by text",
+  lillie:{k:"TUESDAY 12/29 · 7:30 PM",sup:"TONIGHT'S CONTESTANTS: YOU!",h:"COME ON|DOWN!",sub:"It's Lillie's Birthday Game Show",t1:"$38",t1b:"per person",t2:"60 min",t2b:"of competitions",t3:"Boys vs Girls",t3b:"kids & adults",dress:"a little sparkle · waiver link coming by text",
    det:["Doors 7:30, show starts 8:00 sharp. 60 minutes of live game-show rounds, Boys vs. Girls.","Every player signs a quick online waiver. The host texts the link the week of.","Ages 6+. Kids and adults play together on the same teams.","Free parking in the Way Pointe Garage, Dania Pointe."],site:"Great Big Game Show",url:"https://greatbiggameshow.com/",pill:"INVITE ONLY",full:"This one's full. Text Jared."}
  }
 },
@@ -184,7 +184,7 @@ es:{
  share_t:"Comparte el amor",share_sub:"¿Conoces a alguien que necesita una salida esta temporada? Elige las reuniones para compartir.",share_x:"Dale la bienvenida a alguien a la diversión FRamily.",
  write:"Escribir el mensaje",copy_msg:"Copiar mensaje",lillie_lock:"Lillie · solo con invitación",
  bar_fin:"Pagar ↓",bar_n:"eventos",event_1:"evento",total_cost:"Costo total",need_name:"Primero pon el nombre de tu familia y tu celular.",bad_phone:"Ese número de celular no parece correcto.",
- full:"Ya está lleno. Pregúntale al anfitrión.",nothing:"Toca Me apunto en al menos una reunión.",
+ full:"Ya está lleno. Pregúntale al anfitrión.",cap_line:"{n} de {cap} lugares ocupados",cap_full:"Lleno — {cap} lugares. Toca Quizás y el anfitrión te avisa si se abre uno.",rsvp_by:"RSVP hasta el {date}",rsvp_closed:"RSVPs cerrados el {date} — escríbele al anfitrión si cambian tus planes.",host_cap:"Cupo",host_cap_q:"¿Cupo de invitados? (número, vacío = sin cupo)",host_rsvp:"Cierre de RSVP",host_rsvp_q:"¿Cuántos días antes de la reunión se cierran los RSVPs? (vacío = sin cierre)",host_days:"{n}d antes",bf_all_k:"¡LISTO! 🎉",bf_all_sub:"Elige una reunión y envíales tu propio enlace. Verán solo esa, y anotaremos que llegaron por ti.",bf_all_t:"¿Conoces a alguien que le encantaría una de estas?",nothing:"Toca Me apunto en al menos una reunión.",
  msg_hi:"¡Hola! La FRamily se reúne otra vez esta temporada y estás invitado 🎄",msg_link:"Detalles + RSVP:",
  paid:"pagado",unpaid:"pendiente",pay_now:"Falta pagar",none_owed:"No debes nada. Todo listo.",
  calsub_t:"¿Ponemos esto en tu calendario, automáticamente?",calsub_sub:"Un toque agrega un calendario FRamily a tu teléfono. Cada reunión a la que digas Me apunto aparece sola, con recordatorio esa mañana. Si cambias tu RSVP, se actualiza solo.",calsub_yes:"Sí, agrégalo",calsub_later:"Después",calsub_chip:"📅 Calendario FRamily",calsub_on:"📅 Calendario agregado",calsub_android:"En Android: Google Calendar → Ajustes → Agregar calendario → Desde URL, y pega el enlace que copiamos.",cal_note:"Los eventos del calendario incluyen dirección, hora, costo y vestimenta, con recordatorio esa mañana.",
@@ -205,7 +205,7 @@ es:{
   crossway:{k:"JUEVES 12/24 · NOCHEBUENA",lead:"Antes de los regalos y los juegos, el verdadero regalo. Ven a celebrar el nacimiento de Jesús con nosotros. Dos servicios, estaremos en el de las <b>5:30</b>. Todos son bienvenidos.",t1:"SERVICIO 1",t2:"AQUÍ ESTAREMOS",ask:"¿Quieres que te guardemos asiento con nosotros a las 5:30?",site:"crossway.church",url:"https://crossway.church"},
   christmas:{k:"VIERNES 12/25 · EMPIEZA @ 4:00 PM",sub:"Fe, Familia, Amigos y Diversión",cap:"Campeones de los Nutcracker Games - 2025",host:"Nuestra casa · 500 Bonaventure Blvd, Weston",t:"LO BÁSICO",
    det:["Llega a las 4 y quédate lo que quieras. La comida está resuelta.","Estacionamiento en la calle. Compartan carro si pueden.","Niños, abuelos, todos. Juegos después de la cena.","Vestimenta: \"Moody\". Pronto mandamos fotos de inspiración."],btn:"Ahí estaremos ✓"},
-  lillie:{k:"MARTES 12/29 · 7:30 PM",sup:"LOS CONCURSANTES DE HOY: ¡USTEDES!",h:"COME ON|DOWN!",sub:"Noche de Game Show por el cumple de Lillie",t1:"$38",t1b:"por persona",t2:"60 min",t2b:"de competencias",t3:"Niños vs Niñas",t3b:"chicos y adultos",dress:"un poco de brillo · el enlace del waiver llega por texto",
+  lillie:{k:"MARTES 12/29 · 7:30 PM",sup:"LOS CONCURSANTES DE HOY: ¡USTEDES!",h:"COME ON|DOWN!",sub:"El Game Show por el cumple de Lillie",t1:"$38",t1b:"por persona",t2:"60 min",t2b:"de competencias",t3:"Niños vs Niñas",t3b:"chicos y adultos",dress:"un poco de brillo · el enlace del waiver llega por texto",
    det:["Puertas 7:30, el show empieza 8:00 en punto. 60 minutos de rondas de game show en vivo, Niños vs. Niñas.","Cada jugador firma un waiver rápido en línea. Jared manda el enlace esa semana.","Edad 6+. Niños y adultos juegan juntos en los mismos equipos.","Estacionamiento gratis en el Way Pointe Garage, Dania Pointe."],site:"Great Big Game Show",url:"https://greatbiggameshow.com/",pill:"SOLO CON INVITACIÓN",full:"Ya está lleno. Escríbele a Jared."}
  }
 }};
@@ -436,6 +436,15 @@ function offerFriend(id){ if(!shareable(id)||ls('bf_'+id))return; ls('bf_'+id,'1
  $('#bfLater').onclick=()=>m.remove(); $('#bfSend').onclick=()=>{m.remove(); bringFriend(id)};
 }
 
+function allActed(){ const ev=visibleEvents(); return ev.length>0&&ev.every(e=>!!rs(e.id).status); }
+function offerFriendAll(){ if(ls('bf_all')||document.querySelector('.modal'))return; if(!S.token||S.provisional||!allActed())return; const ids=visibleEvents().filter(e=>shareable(e.id)&&rs(e.id).status==='in').map(e=>e.id); if(!ids.length){ls('bf_all','1');return} ls('bf_all','1');
+ const L=t(); const m=document.createElement('div'); m.className='modal';
+ m.innerHTML=`<div><div class="handle"></div><div style="font-size:11px;letter-spacing:3px;font-weight:700;color:#1D9E75">${L.bf_all_k}</div><h3>${L.bf_all_t}</h3><div style="font-size:13px;line-height:1.45;opacity:.85">${L.bf_all_sub}</div>
+  <div style="display:flex;flex-direction:column;gap:8px">${ids.map(id=>{const e=S.events.find(x=>x.id===id);return `<button class="mbtn" data-bfall="${id}" style="background:var(--ink);color:var(--cream)">💛 ${esc(S.lang==='es'?e.name_es:e.name_en)}</button>`}).join('')}</div>
+  <button class="mbtn alt" id="bfLater">${L.bf_pop_later}</button></div>`;
+ m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m);
+ $('#bfLater').onclick=()=>m.remove(); m.querySelectorAll('[data-bfall]').forEach(b=>b.onclick=()=>{m.remove(); bringFriend(b.dataset.bfall)});
+}
 function askRow(id,th){ const L=t(); if(!S.token) return ''; return `<div style="display:flex;justify-content:space-between;align-items:center;position:relative;margin-top:2px"><span style="font-size:12px;opacity:.8">💬 ${L.q}</span><button data-ask="${id}" style="border:1px solid ${th.ac};background:transparent;color:${th.ac};border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer">${L.ask}</button></div>`; }
 async function openAsk(id){
  const L=t(); const e=S.events.find(x=>x.id===id); const nm=e?(S.lang==='es'?e.name_es:e.name_en):'';
@@ -603,7 +612,7 @@ const CHIP_ICON={ _:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"
  lillie:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>'
 };
 function nextLabel(id){const evs=visibleEvents();const k=evs.findIndex(e=>e.id===id);const n=evs[k+1];return n?chipLabel(n.id):t().lock.toUpperCase()}
-function chipLabel(id){const k={thanksgiving:'11/26 THANKSGIVING',laras:'12/24 CHRISTMAS EVE',bowling:'12/8 BOWLING',topgolf:'12/15 TOPGOLF',movie:'12/22 MOVIE NIGHT',crossway:'12/24 CROSSWAY',christmas:'12/25 CHRISTMAS',lillie:"12/29 LILLIE'S"}[id]; if(k)return k; const e=S.events.find(x=>x.id===id); if(!e)return id.toUpperCase(); const d=new Date(e.starts_at); const md=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',timeZone:'America/New_York'}); const nm=(S.lang==='es'?e.name_es:e.name_en)||e.id; return `${md} ${nm.toUpperCase().slice(0,16)}`}
+function chipLabel(id){const k={thanksgiving:'11/26 THANKSGIVING',laras:'12/24 CHRISTMAS EVE',bowling:'12/8 BOWLING',topgolf:'12/15 TOPGOLF',movie:'12/22 MOVIE',crossway:'12/24 CROSSWAY',christmas:'12/25 CHRISTMAS',lillie:"12/29 LILLIE'S"}[id]; if(k)return k; const e=S.events.find(x=>x.id===id); if(!e)return id.toUpperCase(); const d=new Date(e.starts_at); const md=d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',timeZone:'America/New_York'}); const nm=(S.lang==='es'?e.name_es:e.name_en)||e.id; return `${md} ${nm.toUpperCase().slice(0,16)}`}
 function fmtWhen(e,lang){const d=new Date(e.starts_at); const loc=lang==='es'?'es-US':'en-US'; return {day:d.toLocaleDateString(loc,{weekday:'long',timeZone:'America/New_York'}),date:d.toLocaleDateString(loc,{month:'long',day:'numeric',timeZone:'America/New_York'}),time:d.toLocaleTimeString(loc,{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}),arrive:e.arrive_at&&e.arrive_at!==e.starts_at?new Date(e.arrive_at).toLocaleTimeString(loc,{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):null}}
 function gUrl(id){const e=S.events.find(x=>x.id===id); return e&&e.custom?`${SUPA_URL}/functions/v1/og/${id}`:`${siteUrl()}g/${id}`}
 function pollCard(id,th){
@@ -645,11 +654,17 @@ function renderGenericEvent(e){
  return `<section class="ev" id="ev-${id}" style="background:${th.bg};color:${th.fg}">${inner}${shareRow(id,th)}${askRow(id,th)}${hostPanel(id,th)}${legalFoot(id)}<div class="sp"></div></section>`;
 }
 
+function capInfo(id){ const e=S.events.find(x=>x.id===id)||{}; const c=S.counts[id]||{}; const cap=c.cap||e.cap||null; const n=c.in||0; const by=c.rsvp_by?new Date(c.rsvp_by):(e.rsvp_days_before&&e.starts_at?new Date(new Date(e.starts_at).getTime()-e.rsvp_days_before*864e5):null); const closed=!!by&&Date.now()>by.getTime()&&!isHostOf(id); return {cap,n,by,closed,full:!!cap&&n>=cap}; }
+function isHostOf(id){ return !!(S.hosts||[]).includes(id)||!!S.isAdmin; }
+function capLine(id,th){ const L=t(); const r=rs(id); const ci=capInfo(id); if(!ci.cap&&!ci.by) return ''; const dt=ci.by?ci.by.toLocaleDateString(S.lang==='es'?'es-US':'en-US',{weekday:'short',month:'short',day:'numeric'}):''; const parts=[];
+ if(ci.cap) parts.push(ci.full&&r.status!=='in'?L.cap_full.replace('{cap}',ci.cap):L.cap_line.replace('{n}',ci.n).replace('{cap}',ci.cap));
+ if(ci.by) parts.push(ci.closed?L.rsvp_closed.replace('{date}',dt):L.rsvp_by.replace('{date}',dt));
+ return `<div style="font-size:11.5px;line-height:1.4;opacity:.85;text-align:center;padding:2px 4px">${parts.join(' · ')}</div>`; }
 function rsvpButtons(id,th,labels,inLabel){
- const r=rs(id); const L=t();
- const b=(st,txt,cls)=>`<button class="btn ${cls} ${r.status===st?'sel':''}" data-rsvp="${id}" data-st="${st}" style="${cls?'':`background:${th.ac};color:${th.bg}`}">${txt}</button>`;
- if(labels) return `<div class="btns">${b('in',labels[0],'')}${b('out',labels[1],'o')}</div>${friendRow(id,th)}`;
- return `<div class="btns">${b('in',inLabel||L.in,'')}${b('maybe',L.maybe,'o')}${b('out',L.out,'o dim')}</div>${friendRow(id,th)}`;
+ const r=rs(id); const L=t(); const ci=capInfo(id); const lockIn=(ci.full&&r.status!=='in')||ci.closed;
+ const b=(st,txt,cls)=>{ const off=lockIn&&st==='in'&&r.status!=='in'||(ci.closed&&st==='maybe'&&r.status!=='maybe'); return `<button class="btn ${cls} ${r.status===st?'sel':''}" ${off?'disabled':''} data-rsvp="${id}" data-st="${st}" style="${cls?'':`background:${th.ac};color:${th.bg}`}${off?';opacity:.4;cursor:not-allowed':''}">${txt}</button>`; };
+ if(labels) return `${capLine(id,th)}<div class="btns">${b('in',labels[0],'')}${b('out',labels[1],'o')}</div>${friendRow(id,th)}`;
+ return `${capLine(id,th)}<div class="btns">${b('in',inLabel||L.in,'')}${b('maybe',L.maybe,'o')}${b('out',L.out,'o dim')}</div>${friendRow(id,th)}`;
 }
 function stepper(id,field,label,th,small){
  const r=rs(id); const v=r[field]||0;
@@ -708,6 +723,7 @@ function hostMeta(id,th,h){
   ${e.surprise?`<div style="font-size:11px;background:#F2C02B;color:#16301F;border-radius:8px;padding:6px 10px;font-weight:700">${L.sp_banner.replace('{name}',esc(e.surprise_name||''))}</div>`:''}
   <div class="kicker" style="font-size:10px;opacity:.8;margin-top:4px">${L.host_set_h}</div>
   <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">${chip(L.aud_all,(e.audience||'all')==='all',`data-haud="${id}|all"`)}${chip(L.aud_adults,e.audience==='adults',`data-haud="${id}|adults"`)}${chip(L.aud_kids,e.audience==='kids',`data-haud="${id}|kids"`)}<span style="width:6px"></span>${chip(`${L.host_bring_on} ${e.bring_enabled?'✓':'·'}`,!!e.bring_enabled,`data-hbring="${id}|${e.bring_enabled?0:1}"`)}</div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">${chip(`${L.host_cap}: ${e.cap||'—'}`,!!e.cap,`data-hcap="${id}"`)}${chip(`${L.host_rsvp}: ${e.rsvp_days_before?L.host_days.replace('{n}',e.rsvp_days_before):'—'}`,!!e.rsvp_days_before,`data-hdead="${id}"`)}</div>
  </div>`;
 }
 function hostInspo(id,th){
@@ -946,7 +962,7 @@ function renderEvent(e){
   </div>
   ${detailsBlock(id,th)}
   <div style="font-size:12px;font-style:italic;opacity:.85">${L.dress}: ${d.dress}</div>
-  ${full?`<div class="row" style="background:${th.card};justify-content:center;font-weight:700">${d.full}</div>`:rsvpButtons(id,th)}
+  ${rsvpButtons(id,th)}
   <div class="${hidden}" data-when="${id}">${stepper(id,'headcount',L.howmany,th)}${totalLine(id,th)}</div>`;
  }
  const bgx=id==='bowling'?`background:url("${LANE}") center/100% 100% no-repeat ${th.bg};background-attachment:local;`:`background:${th.bg};`;
@@ -974,7 +990,7 @@ function renderLock(){
 }
 
 function onInnerScroll(e){updateBar()}
-function updateNav(){const ps=pages();const i=curPage();const nav=$('#nav');if(!nav)return;const show=S.tab==='home'&&!S.admin&&!!S.invites;nav.classList.toggle('hidden',!show);document.documentElement.style.setProperty('--navh',show?'44px':'0px');if(!show)return;const nxt=ps[i+1];const L=t();if(nxt){const id=(nxt.id||'').replace('ev-','');$('#navK').textContent=L.nav_next;$('#navLbl').textContent=nxt.id==='lock'?L.lock.toUpperCase():chipLabel(id)}else{$('#navK').textContent=L.nav_end;$('#navLbl').textContent=L.jump_t.toUpperCase()}$('#nav .go').style.visibility=nxt?'visible':'hidden';if(P.navFor!==i){P.navFor=i;nav.classList.remove('wake');void nav.offsetWidth;nav.classList.add('wake')}}
+function updateNav(){const ps=pages();const i=curPage();const nav=$('#nav');if(!nav)return;const show=S.tab==='home'&&!S.admin&&!!S.invites;nav.classList.toggle('hidden',!show);document.documentElement.style.setProperty('--navh',show?'44px':'0px');if(!show)return;const nxt=ps[i+1];const L=t();if(nxt){const id=(nxt.id||'').replace('ev-','');$('#navK').textContent=L.nav_next;$('#navLbl').textContent=nxt.id==='lock'?L.lock.toUpperCase():chipLabel(id)}else{$('#navK').textContent=L.nav_end;$('#navLbl').textContent=L.jump_t.toUpperCase()}if(!nxt){setTimeout(offerFriendAll,900)}$('#nav .go').style.visibility=nxt?'visible':'hidden';if(P.navFor!==i){P.navFor=i;nav.classList.remove('wake');void nav.offsetWidth;nav.classList.add('wake')}}
 function updateBar(){
  updateNav();
  const L=t(); const n=inCount(); const bar=$('#bar');
@@ -993,8 +1009,8 @@ function saveRsvp(id){
   const r=rs(id); if(!r.status)return;
   if(!S.token){ if(S.provisional) openClaim(id); return }
   const {error}=await sb.rpc('rsvp_set',{p_token:S.token,p_event:id,p_status:r.status,p_headcount:r.headcount|0,p_players:r.players|0,p_watchers:r.watchers|0,p_paid_claimed:null});
-  if(error){ if((error.message||'').includes('full')){r.status='maybe';toast(t().full);rerenderEvent(id)} else toast("Hmm, that didn't save. Try again."); return }
-  toast(t().saved_live); S.done=true; ensurePayPage(); updateBar(); if(r.status==='in'){ setTimeout(()=>{ if(!document.querySelector('.modal')) offerFriend(id); },700); setTimeout(maybeOfferCal,2600); }
+  if(error){ const m=error.message||''; if(m.includes('full')){r.status='maybe';toast(t().full);rerenderEvent(id)} else if(m.includes('closed')){r.status=null;toast(t().rsvp_closed.replace('{date}','').replace(' — ','').replace(' —','').trim());rerenderEvent(id)} else toast("Hmm, that didn't save. Try again."); return }
+  toast(t().saved_live); S.done=true; ensurePayPage(); updateBar(); sb.rpc('event_counts').then(({data})=>{ if(data){S.counts=data; const el=document.querySelector(`#ev-${id} .btns`); if(el) rerenderEvent(id);} }); if(r.status==='in'){ setTimeout(maybeOfferCal,2600); }
  },350);
 }
 function ensurePayPage(){
@@ -1016,7 +1032,7 @@ function bindEvents(){
  document.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>{
   const id=b.dataset.step,f=b.dataset.f,d=+b.dataset.d,r=rs(id);
   r[f]=Math.max(0,(r[f]||0)+d);
-  const c=S.counts[id]; if(c&&c.cap&&f==='headcount'&&r[f]>c.cap){r[f]=c.cap}
+  const c=S.counts[id]; if(c&&c.cap&&(f==='headcount'||f==='players')){const others=Math.max(0,(c.in||0)-(rs(id).status==='in'?(id==='topgolf'?rs(id).players:rs(id).headcount)||0:0)); const room=Math.max(0,c.cap-others); if(r[f]>room){r[f]=room;toast(t().full)}}
   rerenderEvent(id); persistLocal(); updateBar(); saveRsvp(id);
  });
 
@@ -1047,6 +1063,8 @@ function bindEvents(){
  document.querySelectorAll('[data-hcadd]').forEach(b=>b.onclick=async()=>{const id=b.dataset.hcadd;const L=t();const n=(prompt(L.host_cohost_name)||'').trim();if(!n)return;const ph=(prompt(L.host_cohost_cell)||'').trim();if(!ph)return;const {error}=await sb.rpc('host_cohost_set',{p_token:S.token,p_event:id,p_phone:ph,p_name:n});if(error){toast(L.bad_phone||'Hmm');return}await loadHost(id);rerenderEvent(id)});
  document.querySelectorAll('[data-hcrm]').forEach(b=>b.onclick=async()=>{const [id,ph]=b.dataset.hcrm.split('|');if(!confirm(t().link_remove||'Remove?'))return;const {error}=await sb.rpc('host_cohost_set',{p_token:S.token,p_event:id,p_phone:ph,p_remove:true});if(error){toast((error.message||'').includes('last_host')?t().host_cohost_last:'Hmm');return}await loadHost(id);rerenderEvent(id)});
  document.querySelectorAll('[data-haud]').forEach(b=>b.onclick=async()=>{const [id,a]=b.dataset.haud.split('|');const {error}=await sb.rpc('host_event_set',{p_token:S.token,p_event:id,p_audience:a});if(error){toast('Hmm');return}const ev=S.events.find(e=>e.id===id);if(ev)ev.audience=a;rerenderEvent(id)});
+ document.querySelectorAll('[data-hcap]').forEach(b=>b.onclick=async()=>{const id=b.dataset.hcap;const ev=S.events.find(e=>e.id===id);const v=prompt(t().host_cap_q,ev.cap||'');if(v===null)return;const n=parseInt(v,10);const {error}=await sb.rpc('host_event_set',{p_token:S.token,p_event:id,p_cap:n>0?n:null,p_clear_cap:!(n>0)});if(error){toast('Hmm');return}ev.cap=n>0?n:null;const {data}=await sb.rpc('event_counts');if(data)S.counts=data;rerenderEvent(id)});
+ document.querySelectorAll('[data-hdead]').forEach(b=>b.onclick=async()=>{const id=b.dataset.hdead;const ev=S.events.find(e=>e.id===id);const v=prompt(t().host_rsvp_q,ev.rsvp_days_before||'');if(v===null)return;const n=parseInt(v,10);const {error}=await sb.rpc('host_event_set',{p_token:S.token,p_event:id,p_rsvp_days:n>0?n:null,p_clear_rsvp_days:!(n>0)});if(error){toast('Hmm');return}ev.rsvp_days_before=n>0?n:null;const {data}=await sb.rpc('event_counts');if(data)S.counts=data;rerenderEvent(id)});
  document.querySelectorAll('[data-hbring]').forEach(b=>b.onclick=async()=>{const [id,on]=b.dataset.hbring.split('|');const {error}=await sb.rpc('host_event_set',{p_token:S.token,p_event:id,p_bring:on==='1'});if(error){toast('Hmm');return}const ev=S.events.find(e=>e.id===id);if(ev)ev.bring_enabled=on==='1';if(on==='1'){const r=await sb.rpc('bring_get',{p_token:S.token,p_event:id});S.bring[id]=r.data||[]}rerenderEvent(id)});
  document.querySelectorAll('[data-hiadd]').forEach(b=>b.onclick=()=>{if((S.inspo[b.dataset.hiadd]||[]).length>=8){toast(t().host_inspo_full);return}document.querySelector(`[data-hifile="${b.dataset.hiadd}"]`).click()});
  document.querySelectorAll('[data-hifile]').forEach(inp=>inp.onchange=()=>uploadInspo(inp.dataset.hifile,[...inp.files]));
