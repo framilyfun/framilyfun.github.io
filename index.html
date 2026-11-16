@@ -124,7 +124,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1116.1250';
+const BUILD='1116.1300';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -142,7 +142,7 @@ en:{
  owed:"Still owed",zelle_to:"ZELLE $AMT TO",memo:"Jared Dunson · put your family name in the memo",copy:"Copy #",copied:"Copied",
  sent:"I sent my Zelle. (The host confirms on their end.)",send:"Send my RSVP",saved:"Saved! We'll see you there.",update:"Update my RSVP",
  q:"Have a question?",ask:"Ask →",ask_h:"Have a question?",ask_sub:"Text or call whoever's hosting. They'll see it's about {ev}.",ask_text:"Text",ask_call:"Call",ask_none:"No host contact listed yet — try again closer to the date.",ask_body:"Hi {name}! Quick question about {ev} (from the FRamily hub): ",friend:"Show some love · bring a friend",friend_sub:"Know someone who could use a gathering out? Bring them.",
- share_t:"Show some love",share_sub:"Know someone who could use a gathering out this season? Pick the gatherings to share.",share_x:"Welcome someone to the FRamily fun.",
+ share_t:"Show some love",shc_h:"Your invite text",shc_sub:"Edit anything — your name, a personal line, whatever. The link stays.",shc_share:"Share it →",shc_copy:"Copy text",shc_cta:"Say you're in 👉",shc_from:"from {who}",share_sub:"Know someone who could use a gathering out this season? Pick the gatherings to share.",share_x:"Welcome someone to the FRamily fun.",
  write:"Write the text",copy_msg:"Copy message",lillie_lock:"Lillie's · invite only",
  bar_fin:"Pay ↓",bar_n:"events",event_1:"event",total_cost:"Total Cost",need_name:"Add your family name and cell first.",bad_phone:"That cell number doesn't look right.",
  full:"This one's full. Ask the host.",tick_cap:"<b>{n} of {cap}</b> confirmed",tick_n:"<b>{n}</b> confirmed so far",tick_low:"Only {n} spots left — say I'm in soon.",share_grant:"Let them invite",share_grant_q:"How many guests can {name}'s link bring to this gathering? (0 = turn off)",share_granted:"can bring {n}",bf_granted:"the host gave you {n} invites",bf_used:"{u} of {n} used",cap_full:"Full — {cap} spots. Tap Maybe and the host will tell you if one opens.",rsvp_by:"RSVP by {date}",rsvp_closed:"RSVPs closed {date} — text the host if plans change.",host_cap:"Cap",host_cap_q:"Guest cap? (number, blank = no cap)",host_rsvp:"RSVP deadline",host_rsvp_q:"How many days before the gathering do RSVPs close? (blank = no deadline)",host_days:"{n}d before",bf_all_k:"ALL SET 🎉",bf_all_t:"Know someone who'd love one of these?",bf_all_sub:"Pick a gathering and send them your own link. They'll see that one only, and we'll note they came through you.",nothing:"Tap I'm in on at least one gathering.",
@@ -181,7 +181,7 @@ es:{
  owed:"Pendiente",zelle_to:"ZELLE $AMT A",memo:"Jared Dunson · pon el nombre de tu familia en la nota",copy:"Copiar #",copied:"Copiado",
  sent:"Ya envié mi Zelle. (El anfitrión lo confirma de su lado.)",send:"Enviar mi RSVP",saved:"¡Listo! Nos vemos allá.",update:"Actualizar mi RSVP",
  q:"¿Tienes una pregunta?",ask:"Pregunta →",ask_h:"¿Tienes una pregunta?",ask_sub:"Escribe o llama a quien organiza. Verán que es sobre {ev}.",ask_text:"Texto",ask_call:"Llamar",ask_none:"Aún no hay contacto del anfitrión — intenta más cerca de la fecha.",ask_body:"¡Hola {name}! Una pregunta rápida sobre {ev} (del hub FRamily): ",friend:"Comparte el amor · trae a un amigo",friend_sub:"¿Conoces a alguien que necesita una reunión fuera? Tráelo.",
- share_t:"Comparte el amor",share_sub:"¿Conoces a alguien que necesita una salida esta temporada? Elige las reuniones para compartir.",share_x:"Dale la bienvenida a alguien a la diversión FRamily.",
+ share_t:"Comparte el amor",shc_h:"Tu texto de invitación",shc_sub:"Edita lo que quieras — tu nombre, una línea personal. El enlace se queda.",shc_share:"Compartir →",shc_copy:"Copiar texto",shc_cta:"Di que vienes 👉",shc_from:"de parte de {who}",share_sub:"¿Conoces a alguien que necesita una salida esta temporada? Elige las reuniones para compartir.",share_x:"Dale la bienvenida a alguien a la diversión FRamily.",
  write:"Escribir el mensaje",copy_msg:"Copiar mensaje",lillie_lock:"Lillie · solo con invitación",
  bar_fin:"Pagar ↓",bar_n:"eventos",event_1:"evento",total_cost:"Costo total",need_name:"Primero pon el nombre de tu familia y tu celular.",bad_phone:"Ese número de celular no parece correcto.",
  full:"Ya está lleno. Pregúntale al anfitrión.",tick_cap:"<b>{n} de {cap}</b> confirmados",tick_n:"<b>{n}</b> confirmados hasta ahora",tick_low:"Solo quedan {n} lugares — di Me apunto pronto.",share_grant:"Dejar que inviten",share_grant_q:"¿Cuántos invitados puede traer el enlace de {name} a esta reunión? (0 = apagar)",share_granted:"puede traer {n}",bf_granted:"el anfitrión te dio {n} invitaciones",bf_used:"{u} de {n} usadas",cap_full:"Lleno — {cap} lugares. Toca Quizás y el anfitrión te avisa si se abre uno.",rsvp_by:"RSVP hasta el {date}",rsvp_closed:"RSVPs cerrados el {date} — escríbele al anfitrión si cambian tus planes.",host_cap:"Cupo",host_cap_q:"¿Cupo de invitados? (número, vacío = sin cupo)",host_rsvp:"Cierre de RSVP",host_rsvp_q:"¿Cuántos días antes de la reunión se cierran los RSVPs? (vacío = sin cierre)",host_days:"{n}d antes",bf_all_k:"¡LISTO! 🎉",bf_all_sub:"Elige una reunión y envíales tu propio enlace. Verán solo esa, y anotaremos que llegaron por ti.",bf_all_t:"¿Conoces a alguien que le encantaría una de estas?",nothing:"Toca Me apunto en al menos una reunión.",
@@ -823,10 +823,22 @@ async function newLink(id){
   m.remove(); for(const e of evs) await loadHost(e); for(const e of evs) rerenderEvent(e); copyLink(evs.includes(id)?id:evs[0],code,evs);
  };
 }
-function copyLink(id,code,evs){ const L=t(); const ids=(evs&&evs.length)?evs:[id]; const names=ids.map(x=>{const e=S.events.find(y=>y.id===x);return S.lang==='es'?(e.name_es||e.name_en):e.name_en}); const url=`${gUrl(id)}?via=${code}`; const who=S.household||(S.name?famLabel(S.name):'FRamily');
- const list=names.length===1?names[0]:names.slice(0,-1).join(', ')+(S.lang==='es'?' y ':' and ')+names.slice(-1);
- const msg=S.lang==='es'?`¡Hola! ${who} te invita a ${list}. Di que vienes → ${url}`:`Hey! ${who} would love to have you at ${list}. Say you're in → ${url}`;
- if(navigator.share){navigator.share({text:msg}).catch(()=>{})} else {navigator.clipboard?.writeText(msg).then(()=>toast(L.link_copied)).catch(()=>prompt('',msg))} }
+const EV_EMOJI={thanksgiving:'🦃',bowling:'🎳',topgolf:'⛳',movie:'🍿',crossway:'🕯️',laras:'🎄',christmas:'🎁',lillie:'🎂'};
+function shareText(ids,url){ const L=t(); const es=S.lang==='es'; const who=S.household||(S.name?famLabel(S.name):'FRamily');
+ const lines=ids.map(x=>{ const e=S.events.find(y=>y.id===x); if(!e)return ''; const w=fmtWhen(e,S.lang); const em=EV_EMOJI[e.id]||'🎉'; const nm=es?(e.name_es||e.name_en):e.name_en;
+  let l=`${em} ${nm}\n📅 ${w.day}, ${w.date} · ${w.time}`; if(e.venue) l+=`\n📍 ${e.venue}`; if(e.price_cents>0) l+=`\n💵 $${Math.round(e.price_cents/100)} ${es?'por persona':'per person'}`; const lead=es?(e.lead_es||e.lead_en):e.lead_en; if(lead&&ids.length===1) l+=`\n${lead.replace(/<[^>]+>/g,'')}`; return l; }).filter(Boolean);
+ const hi=es?`¡Hola! ${who} te invita 💛`:`Hey! ${who} would love to have you 💛`;
+ return `${hi}\n\n${lines.join('\n\n')}\n\n${L.shc_cta} ${url}`; }
+function copyLink(id,code,evs){ const L=t(); const ids=(evs&&evs.length)?evs:[id]; const url=`${gUrl(id)}?via=${code}`; const msg=shareText(ids,url);
+ const m=document.createElement('div'); m.className='modal';
+ m.innerHTML=`<div><div class="handle"></div><h3>${L.shc_h}</h3><div style="font-size:13px;line-height:1.45;opacity:.85">${L.shc_sub}</div>
+  <textarea id="shcT" class="t" style="font-family:'Hanken Grotesk',system-ui,sans-serif;min-height:220px;font-size:14px;line-height:1.5;white-space:pre-wrap">${esc(msg)}</textarea>
+  <button class="mbtn" id="shcGo">💛 ${L.shc_share}</button><button class="mbtn alt" id="shcCopy">${L.shc_copy}</button></div>`;
+ m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m);
+ const get=()=>{ let v=$('#shcT').value; if(!v.includes(url)) v=v.trim()+'\n'+url; return v; };
+ const copy=v=>navigator.clipboard?.writeText(v).then(()=>toast(L.link_copied)).catch(()=>prompt('',v));
+ $('#shcCopy').onclick=()=>{copy(get())};
+ $('#shcGo').onclick=()=>{ const v=get(); m.remove(); if(navigator.share){navigator.share({text:v}).catch(()=>{})} else copy(v); }; }
 
 function renderEvent(e){
  if(e.custom||!EV_THEME[e.id]) return renderGenericEvent(e);
