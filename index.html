@@ -51,11 +51,11 @@ section.ev>*{position:relative}
 .tile{border-radius:10px;padding:12px;text-align:center}
 .tile .big{font-size:22px;line-height:1}
 .tile .sm{font-size:11px;line-height:1.3;margin-top:4px}
-.btns{display:flex;gap:8px}
+.btns{display:flex;gap:8px}.btns .btn:first-child{flex:1.35}
 .btn{border:0;border-radius:999px;padding:14px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;flex:1;transition:transform .1s}
 .btn:active{transform:scale(.97)}
-.btn.o{background:transparent;border:2px solid currentColor;flex:0 0 auto;padding:12px 14px;font-size:14px}
-.btn.o.dim{opacity:.7}
+.btn.o{background:transparent;border:2px solid currentColor;color:inherit;flex:1;padding:12px 8px;font-size:13px;white-space:nowrap}
+.btn.o.dim{opacity:.85}
 .btn.sel{outline:3px solid #fff;outline-offset:2px}
 .row{display:flex;align-items:center;justify-content:space-between;border-radius:10px;padding:10px 14px}
 .step{display:flex;align-items:center;gap:12px}
@@ -124,7 +124,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1116.1230';
+const BUILD='1116.1320';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -133,7 +133,7 @@ const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
 const T={
 en:{
  hero_sub:"Family, friends and a few gatherings of holiday fun. Tap <b>I'm in</b> on the ones you'll join.",hero_sub_any:"Family, friends and the gatherings coming up. Tap <b>I'm in</b> on the ones you'll join.",
- in:"I'm in ✓",maybe:"Maybe",out:"Out",yes_seats:"Yes, save us seats",not_time:"Not this time",
+ in:"I'm in ✓",maybe:"Maybe",out:"Can't make it",yes_seats:"Yes, save us seats",not_time:"Not this time",
  howmany:"How many coming?",bowlers:"How many bowling?",players:"Players",watching:"Watching",tickets:"Tickets",seats:"How many seats?",
  total:"Your total",payend:"pay at the end",dress:"Dress theme",details:"THE DETAILS",cal:"Add to my calendar",
  lock:"Pay with Zelle",lock_sub:"Your RSVPs are saved. The only thing left is the gatherings that have a cost. One Zelle covers it all.",saved_live:"Saved ✓",
@@ -159,8 +159,8 @@ en:{
    det:["Doors 6:00. Dinner, cocoa, and a '90s playlist you'll know every word to.","Kids, grandparents, everybody. Street parking, carpool if you can.","Hosted by the Lara family. Questions? Text Jared."]},
   bowling:{k:"TUESDAY 12/8 · 7:30 PM",h:"STRIKE|UP THE|HOLIDAYS",lead:"",t1:"NIGHT STRIKE",t1b:"per bowler · unlimited games, shoes included",t2:"LANES RESERVED",t2b:"6 per lane, side by side. Be on time.",dress:"ugly sweaters",
    det:["Night Strike runs 8 PM to close. We arrive 7:30 to settle in before lanes start.","Shoes included. Bring socks!","Park free in the Way Pointe Garage, walk to the Lucky Strike entrance on the plaza level.","Food and drinks available at the lanes. Kids welcome."],site:"Lucky Strike Dania Beach",url:"https://www.luckystrikeent.com/"},
-  topgolf:{k:"TUESDAY 12/15 · 6:30 PM",h:"Tee'd Up|for the|Holidays",t1:"2 hrs",t1b:"6 per bay, side by side",t2:"$12",t2b:"per player",t3:"Free",t3b:"non-players",dress:"Santa hats · full menu at the bay",
-   det:["Bays are reserved under FRamily (Dunson). We check in together at 6:30, play 7 to 9.","Clubs provided. No golf experience needed, the targets do the work.","Non-players hang in the bay, order from the full menu, and heckle.","Heated bays, so it works rain or shine. Free parking on site."],site:"Topgolf Pompano Beach",url:"https://topgolf.com/us/pompano-beach/"},
+  topgolf:{k:"TUESDAY 12/15 · 6:30 PM",h:"Tee'd Up|for the|Holidays",t1:"2 hrs",t1b:"6 per bay, side by side",t2:"~$25",t2b:"per person · final # coming",t3:"🍹🍟",t3b:"drinks + apps included",dress:"Santa hats · festive & comfy",
+   det:["Bays are reserved under FRamily (Dunson). We check in together at 6:30, play 7 to 9.","One price for everyone — the bays, a round of drinks and shared apps are part of the package, so there's no player/spectator split.","About $25 a person. Topgolf is finalizing the package; we'll text the exact number before you pay.","Clubs provided. No golf experience needed, the targets do the work.","Heated bays, so it works rain or shine. Free parking on site."],site:"Topgolf Pompano Beach",url:"https://topgolf.com/us/pompano-beach/"},
   movie:{k:"TUESDAY 12/22 · 7:30 PM",h:"AVENGERS:|DOOMSDAY",sup:"5TH ANNUAL AMC TAKEOVER",sub:"A PRIVATE SHOWING OF",lead:"AMC Weston · $18 a seat",lead2:"Our block is first come, first seated, so be on time. Nobody has to sit in the front row. 99 tickets total.",dress:"pajamas",
    det:["Showtime 8:00 PM. Meet at the lobby at 7:30 so we sit as a group.","Tickets are already purchased, so your $18 is a reimbursement. Jared hands them out at the door.","Rated PG-13, about 3 hours. Good for ages 10+.","Reserved recliners. Concessions are on you. Park in the Weston Town Center lot."],site:"AMC Weston 8",url:"https://www.amctheatres.com/movie-theatres/miami/amc-weston-8",trailer:"Watch the trailer",catchup:"New to Marvel? Catch up"},
   crossway:{k:"THURSDAY 12/24 · CHRISTMAS EVE",lead:"Before the gifts and the games, the real gift. Come celebrate the birth of Jesus with us. Two services, we'll be at the <b>5:30</b>. Everyone's welcome.",t1:"SERVICE 1",t2:"WE'LL BE HERE",ask:"Want us to save you a seat with us at 5:30?",site:"crossway.church",url:"https://crossway.church"},
@@ -172,7 +172,7 @@ en:{
 },
 es:{
  hero_sub:"Familia, amigos y unas reuniones de diversión navideña. Toca <b>Me apunto</b> en las que vendrás.",hero_sub_any:"Familia, amigos y las reuniones que vienen. Toca <b>Me apunto</b> en las que vendrás.",
- in:"Me apunto ✓",maybe:"Quizás",out:"No",yes_seats:"Sí, guárdenos asientos",not_time:"Esta vez no",
+ in:"Me apunto ✓",maybe:"Quizás",out:"No puedo",yes_seats:"Sí, guárdenos asientos",not_time:"Esta vez no",
  howmany:"¿Cuántos vienen?",bowlers:"¿Cuántos juegan boliche?",players:"Jugadores",watching:"Acompañan",tickets:"Boletos",seats:"¿Cuántos asientos?",
  total:"Tu total",payend:"se paga al final",dress:"Vestimenta",details:"LOS DETALLES",cal:"Agregar a mi calendario",
  lock:"Paga con Zelle",lock_sub:"Tus RSVPs ya están guardados. Solo falta lo de las reuniones con costo. Un solo Zelle lo cubre todo.",saved_live:"Guardado ✓",
@@ -198,8 +198,8 @@ es:{
    det:["Puertas 6:00. Cena, chocolate caliente y una playlist de los 90 que te sabes completa.","Niños, abuelos, todos. Estacionamiento en la calle, compartan carro.","Anfitriones: la familia Lara. ¿Preguntas? Escríbele a Jared."]},
   bowling:{k:"MARTES 12/8 · 7:30 PM",h:"STRIKE|UP THE|HOLIDAYS",t1:"NIGHT STRIKE",t1b:"por jugador · juegos ilimitados, zapatos incluidos",t2:"CARRILES RESERVADOS",t2b:"6 por carril, uno al lado del otro. Llega a tiempo.",dress:"suéteres feos",
    det:["Night Strike va de 8 PM al cierre. Llegamos 7:30 para acomodarnos antes de empezar.","Zapatos incluidos. ¡Trae calcetines!","Estaciona gratis en el Way Pointe Garage y camina a la entrada de Lucky Strike en la plaza.","Comida y bebidas en los carriles. Niños bienvenidos."],site:"Lucky Strike Dania Beach",url:"https://www.luckystrikeent.com/"},
-  topgolf:{k:"MARTES 12/15 · 6:30 PM",h:"Tee'd Up|for the|Holidays",t1:"2 hrs",t1b:"6 por bay, uno al lado del otro",t2:"$12",t2b:"por jugador",t3:"Gratis",t3b:"acompañantes",dress:"gorros de Santa · menú completo en el bay",
-   det:["Los bays están reservados a nombre de FRamily (Dunson). Entramos juntos a las 6:30, jugamos de 7 a 9.","Palos incluidos. No hace falta saber golf, los blancos hacen el trabajo.","Los acompañantes se quedan en el bay, piden del menú y animan.","Bays con calefacción, llueva o no. Estacionamiento gratis."],site:"Topgolf Pompano Beach",url:"https://topgolf.com/us/pompano-beach/"},
+  topgolf:{k:"MARTES 12/15 · 6:30 PM",h:"Tee'd Up|for the|Holidays",t1:"2 hrs",t1b:"6 por bay, uno al lado del otro",t2:"~$25",t2b:"por persona · cifra final pronto",t3:"🍹🍟",t3b:"bebidas y aperitivos incluidos",dress:"gorros de Santa · festivo y cómodo",
+   det:["Los bays están reservados a nombre de FRamily (Dunson). Entramos juntos a las 6:30, jugamos de 7 a 9.","Un solo precio para todos — los bays, una ronda de bebidas y aperitivos compartidos van en el paquete, así que no hay división jugador/acompañante.","Unos $25 por persona. Topgolf está cerrando el paquete; te mandamos la cifra exacta antes de pagar.","Palos incluidos. No hace falta saber golf, los blancos hacen el trabajo.","Bays con calefacción, llueva o no. Estacionamiento gratis."],site:"Topgolf Pompano Beach",url:"https://topgolf.com/us/pompano-beach/"},
   movie:{k:"MARTES 12/22 · 7:30 PM",h:"AVENGERS:|DOOMSDAY",sup:"5TO AMC TAKEOVER ANUAL",sub:"FUNCIÓN PRIVADA DE",lead:"AMC Weston · $18 por asiento",lead2:"Nuestro bloque es por orden de llegada, así que llega a tiempo. Nadie tiene que sentarse en primera fila. 99 boletos en total.",dress:"pijamas",
    det:["La función empieza 8:00 PM. Nos vemos en el lobby a las 7:30 para sentarnos juntos.","Los boletos ya están comprados; tus $18 son un reembolso. Jared los entrega en la puerta.","Clasificación PG-13, unas 3 horas. Apta para 10+.","Butacas reclinables reservadas. Las palomitas van por tu cuenta. Estaciona en Weston Town Center."],site:"AMC Weston 8",url:"https://www.amctheatres.com/movie-theatres/miami/amc-weston-8",trailer:"Ver el tráiler",catchup:"¿Nuevo en Marvel? Ponte al día"},
   crossway:{k:"JUEVES 12/24 · NOCHEBUENA",lead:"Antes de los regalos y los juegos, el verdadero regalo. Ven a celebrar el nacimiento de Jesús con nosotros. Dos servicios, estaremos en el de las <b>5:30</b>. Todos son bienvenidos.",t1:"SERVICIO 1",t2:"AQUÍ ESTAREMOS",ask:"¿Quieres que te guardemos asiento con nosotros a las 5:30?",site:"crossway.church",url:"https://crossway.church"},
@@ -244,7 +244,7 @@ const EV_THEME={
  topgolf:{bg:'#123D2C',fg:'#F4EFE3',ac:'#F07167',ac2:'#E9B949',card:'#0A2A1E',font:"'Shrikhand',serif"},
  movie:{bg:'#0D0C12',fg:'#F5EEDC',ac:'#F2C14E',ac2:'#F2C14E',card:'#1E1A2A',font:"'Anton',sans-serif"},
  crossway:{bg:'#7A2E22',fg:'#F1DCC8',ac:'#F1DCC8',ac2:'#C86A4A',card:'#5E2119',font:"'Fraunces',serif"},
- christmas:{bg:'#16301F',fg:'#F3E7D0',ac:'#D9B56C',ac2:'#D9B56C',card:'#0F2217',font:"'Fraunces',serif"},
+ christmas:{bg:'#5A1521',fg:'#F3E7D0',ac:'#D9B56C',ac2:'#D9B56C',card:'#0F2217',font:"'Fraunces',serif"},
  lillie:{bg:'#0B0B0E',fg:'#F3EBDD',ac:'#D4AF37',ac2:'#C9CBD1',card:'#17150F',font:"'Luckiest Guy',cursive"}
 };
 const t=()=>T[S.lang];
@@ -876,7 +876,7 @@ function renderEvent(e){
   ${detailsBlock(id,th)}
   <div style="font-size:12px;font-style:italic;opacity:.85">${L.dress}: ${d.dress}</div>
   ${rsvpButtons(id,th)}
-  <div class="${hidden}" data-when="${id}"><div class="tiles" style="grid-template-columns:1fr 1fr">${stepper(id,'players',L.players,th,true)}${stepper(id,'watchers',L.watching,th,true)}</div>${totalLine(id,th)}</div>`;
+  <div class="${hidden}" data-when="${id}">${stepper(id,'players',L.howmany,th)}${totalLine(id,th)}</div>`;
  } else if(id==='movie'){
   inner=`<div style="display:flex;justify-content:space-between;align-items:flex-end"><div class="kicker" style="color:${th.ac}">${d.k}</div>
   <svg aria-hidden="true" width="56" height="60" viewBox="0 0 120 130" fill="none"><g fill="#F5EEDC"><circle cx="40" cy="52" r="12"/><circle cx="62" cy="44" r="13"/><circle cx="84" cy="54" r="12"/><circle cx="50" cy="38" r="10"/><circle cx="74" cy="34" r="10"/></g><path d="M30 60 L38 126 H86 L94 60 Z" fill="#F5EEDC"/><path d="M44 60 L48 126 M60 60 L62 126 M76 60 L76 126" stroke="#7A1222" stroke-width="7"/><path d="M26 8 Q60 -14 100 18 Q104 28 96 34 Q62 10 36 38 Q24 30 26 8 Z" fill="#D9473A"/><path d="M22 32 Q62 10 102 34 Q104 46 94 48 Q62 28 30 50 Q18 46 22 32 Z" fill="#F5EEDC"/><circle cx="104" cy="20" r="9" fill="#F5EEDC"/></svg></div>
@@ -906,7 +906,7 @@ function renderEvent(e){
   ${rsvpButtons(id,th,[L.yes_seats,L.not_time])}
   <div class="${hidden}" data-when="${id}">${stepper(id,'headcount',L.seats,th)}</div>`;
  } else if(id==='christmas'){
-  inner=`<div style="background:#5A1521;margin:-36px -24px -28px;padding:12px;display:flex"><div style="flex:1;background:#16301F;border:2px solid #D9B56C;border-radius:14px;padding:28px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+  inner=`<div style="background:#16301F;border:2px solid #D9B56C;border-radius:14px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;margin:0 -8px">
    <div class="kicker" style="color:${th.ac}">${d.k}</div>
    <div style="font-family:'Pinyon Script',cursive;font-size:40px;line-height:.9;color:${th.ac};margin-bottom:-10px">2026 FRamily</div>
    <div style="font-family:'Fraunces',serif;font-weight:900;font-size:52px;line-height:.95">CHRISTMAS</div>
@@ -916,7 +916,8 @@ function renderEvent(e){
    <div style="width:100%;text-align:left">${detailsBlock(id,th,d.t,`<button class="cal" data-parking="1" style="margin-top:10px;border-color:${th.ac}">${L.parking}</button>`)}</div>
    <div style="width:100%">${rsvpButtons(id,th,[d.btn,L.not_time])}</div>
    <div class="${hidden}" data-when="${id}" style="width:100%">${stepper(id,'headcount',L.howmany,th)}</div>
-  </div></div>`;
+   <div style="width:100%;text-align:left;display:flex;flex-direction:column;gap:10px">${extrasBlock(id,th)}${bringBoard(id,th)}</div>
+  </div>`;
  } else if(id==='lillie'){
   const c=S.counts[id]||{}; const full=c.cap&&c.in>=c.cap&&r.status!=='in';
   inner=`<svg aria-hidden="true" viewBox="0 0 430 520" preserveAspectRatio="xMidYMin slice" style="position:absolute;left:0;top:0;width:100%;height:100%;max-height:100%;pointer-events:none" fill="none"><defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3E2A8" stop-opacity=".5"/><stop offset="1" stop-color="#D4AF37" stop-opacity=".02"/></linearGradient></defs><path d="M60 -10 L40 -10 L300 520 L430 520 L430 470 Z" fill="url(#gb)"/><path d="M370 -10 L390 -10 L130 520 L0 520 L0 470 Z" fill="url(#gb)"/></svg>
@@ -947,13 +948,15 @@ function renderLock(){
  const lines=evs.map(e=>{const r=rs(e.id);const nm=S.lang==='es'?e.name_es:e.name_en;const cnt=e.id==='topgolf'?`${r.players}`:r.headcount;
   return `<div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:8px"><span>${esc(chipLabel(e.id).slice(0,5))} ${esc(nm)} · ${cnt}</span><span style="white-space:nowrap"><b>${money(evTotal(e.id))}</b> · <span style="color:${r.paid_confirmed?'#2F7A48':'#C8302E'}">${r.paid_confirmed?L.paid:L.unpaid}</span></span></div>`}).join('');
  const claimed=evs.some(e=>rs(e.id).paid_claimed);
- return `<section id="lock" style="background:var(--cream);color:var(--ink);padding:36px 24px 0;display:flex;flex-direction:column;gap:14px">
-  <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1">${L.lock}</div>
-  <div class="lead" style="font-size:13px;opacity:.85">${L.lock_sub}</div>
-  <div style="background:#fff;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--gold)">${lines}
-   <div style="border-top:1px dashed var(--ink);padding-top:8px;display:flex;justify-content:space-between;font-size:14px;font-weight:700"><span>${L.owed}</span><span>${money(o)}</span></div></div>
+ return `<section id="lock" style="background:var(--bg);color:var(--cream);padding:clamp(28px,5vh,48px) 24px 0;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden">
+  ${seasonGarland()}
+  <div class="kicker" style="color:var(--gold);position:relative">${SEASONS[SEASON].word[S.lang]||SEASONS[SEASON].word.en}</div>
+  <div style="font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1;position:relative">${L.lock}</div>
+  <div class="lead" style="font-size:13px;opacity:.85;position:relative">${L.lock_sub}</div>
+  <div style="background:rgba(243,231,208,.08);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--gold);position:relative">${lines.replace(/#2F7A48/g,'#8FD3A0').replace(/#C8302E/g,'#F2A7A1')}
+   <div style="border-top:1px dashed var(--gold);padding-top:8px;display:flex;justify-content:space-between;font-size:14px;font-weight:700"><span>${L.owed}</span><span>${money(o)}</span></div></div>
   ${o>0?`<div style="background:#6D1ED4;color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px"><div><div class="kicker" style="font-size:10px;letter-spacing:2px;opacity:.85">${L.zelle_to.replace('$AMT',money(o))}</div><div style="font-size:20px;font-weight:700">${ZELLE}</div><div style="font-size:11px;opacity:.85">${L.memo}</div></div><button class="mbtn" id="copyZ" style="background:#fff;color:#6D1ED4;padding:10px 14px;font-size:13px;white-space:nowrap">${L.copy}</button></div>
-  <label style="display:flex;align-items:center;gap:10px;font-size:13px;background:#fff;border-radius:10px;padding:12px;border:2px solid var(--gold)"><input type="checkbox" id="fSent" ${claimed?'checked':''} style="width:22px;height:22px;accent-color:#16301F"><span><b>${L.sent}</b></span></label>`:`<div style="font-size:13px;opacity:.8">${L.none_owed}</div>`}
+  <label style="display:flex;align-items:center;gap:10px;font-size:13px;background:rgba(243,231,208,.08);border-radius:10px;padding:12px;border:2px solid var(--gold);position:relative"><input type="checkbox" id="fSent" ${claimed?'checked':''} style="width:22px;height:22px;accent-color:var(--gold)"><span><b>${L.sent}</b></span></label>`:`<div style="font-size:13px;opacity:.8">${L.none_owed}</div>`}
   <div style="font-size:11px;text-align:center;opacity:.75">${L.cal_note}</div>
   <div style="font-size:12px;text-align:center;opacity:.75">${L.q}</div>
   ${legalFoot('lock')}<div class="sp"></div>
