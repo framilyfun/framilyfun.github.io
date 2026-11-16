@@ -124,7 +124,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1116.1415';
+const BUILD='1116.1420';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -677,7 +677,7 @@ function renderGenericEvent(e){
   ${e.status==='poll'?`<div style="position:relative;color:${th.ac2};font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase">🗳️ ${L.poll_tbd}</div>`:`<div style="display:flex;align-items:center;gap:12px;position:relative;color:${th.ac2};font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase"><span>${esc(w.day)}</span><span style="width:1px;height:22px;background:${th.ac2};opacity:.6"></span><span>${esc(w.date)}</span><span style="width:1px;height:22px;background:${th.ac2};opacity:.6"></span><span>${esc(w.time)}</span></div>`}
   ${lead?`<div class="lead" style="position:relative;font-size:15px;line-height:1.45">${esc(lead)}</div>`:''}
   <div style="font-size:15px;font-weight:600;position:relative">${esc(e.venue)}</div>${mapA}
-  ${e.status==='poll'?pollCard(id,th):`<details open style="background:${th.card};position:relative"><summary style="color:${th.ac2};pointer-events:none">${L.details}</summary><ul>${det.map(x=>`<li>${x}</li>`).join('')}</ul></details>`}
+  ${e.status==='poll'?pollCard(id,th):`<details open style="background:${th.card};position:relative"><summary style="color:${th.ac2};pointer-events:none">${L.details}</summary><ul>${det.map(x=>`<li>${x}</li>`).join('')}</ul>${evButtons(id,th)}</details>`}
   ${e.dress?`<div style="font-size:12px;font-style:italic;opacity:.85;position:relative">${L.dress}: ${esc(e.dress)}</div>`:''}
   ${e.status==='poll'?'':`<div style="position:relative">${rsvpButtons(id,th,null,L.coming)}</div>
   <div class="${hidden}" data-when="${id}" style="position:relative">${stepper(id,'headcount',L.howmany,th)}${e.price_cents?totalLine(id,th):''}</div>`}
@@ -708,7 +708,7 @@ function totalLine(id,th,label){
 }
 function detailsBlock(ev,th,title,extra){
  const L=t(); const d=L.ev[ev]||{det:[]};
- return `<details open style="background:${th.card}"><summary style="color:${th.ac2};pointer-events:none">${title||L.details}</summary><ul>${d.det.map(x=>`<li>${x}</li>`).join('')}</ul>${extra||''}${d.url?`<a href="${d.url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:13px;color:${th.ac2}">${esc(d.site)} ↗</a>`:''}</details>`;
+ return `<details open style="background:${th.card}"><summary style="color:${th.ac2};pointer-events:none">${title||L.details}</summary><ul>${d.det.map(x=>`<li>${x}</li>`).join('')}</ul>${evButtons(ev,th)}${extra||''}${d.url?`<a href="${d.url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:13px;color:${th.ac2}">${esc(d.site)} ↗</a>`:''}</details>`;
 }
 function calBtn(id){const L=t();return `<button class="cal" data-cal="${id}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>${L.cal}</button>`}
 
@@ -769,12 +769,12 @@ function hostInspo(id,th){
  </div>`;
 }
 function surpriseBanner(id,th){ const e=S.events.find(x=>x.id===id); if(!e||!e.surprise) return ''; const L=t(); return `<div style="background:#F2C02B;color:#16301F;border-radius:10px;padding:10px 12px;position:relative"><div style="font-size:11px;font-weight:800;letter-spacing:1.5px">${L.sp_banner.replace('{name}',esc(e.surprise_name||''))}</div><div style="font-size:11px;opacity:.85;margin-top:2px;line-height:1.35">${L.sp_banner_sub}</div></div>`; }
+function evButtons(id,th){ const L=t(); const e=S.events.find(x=>x.id===id)||{}; const list=S.inspo[id]||[]; const btn=(attr,txt)=>`<button class="cal" ${attr} style="border-color:${th.ac};color:inherit;width:100%;justify-content:center;margin-top:10px">${txt}</button>`; let out='';
+ if(list.length) out+=btn(`data-inspo="${id}"`,`🖼️ ${L.inspo_btn.replace('{n}',list.length)}`); if(e.custom&&e.parking) out+=btn(`data-park="${id}"`,`🅿️ ${L.park_btn}`); return out; }
 function extrasBlock(id,th){
  const L=t(); const e=S.events.find(x=>x.id===id)||{}; const list=S.inspo[id]||[]; let out=surpriseBanner(id,th);
  if(e.audience==='adults'||e.audience==='kids') out+=`<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.75;margin:2px 0 2px">${e.audience==='adults'?'🥂 '+L.aud_badge_adults:'🎈 '+L.aud_badge_kids}</div>`;
- const btn=(attr,txt)=>`<button class="cal" ${attr} style="border-color:${th.ac};color:inherit;width:100%;justify-content:center">${txt}</button>`;
- const btns=[]; if(list.length) btns.push(btn(`data-inspo="${id}"`,`🖼️ ${L.inspo_btn.replace('{n}',list.length)}`)); if(e.custom&&e.parking) btns.push(btn(`data-park="${id}"`,`🅿️ ${L.park_btn}`));
- if(btns.length) out+=`<div style="display:flex;gap:8px">${btns.join('')}</div>`;
+
  return out;
 }
 function hostBring(id,th){
@@ -986,7 +986,7 @@ function renderEvent(e){
    <div style="font-family:'Fraunces',serif;font-style:italic;font-size:14px">${d.sub}</div>
    <div style="background:#F3E7D0;padding:8px;border-radius:4px;transform:rotate(-1.5deg);box-shadow:0 8px 20px rgba(0,0,0,.35)"><div style="width:280px;max-width:72vw;aspect-ratio:300/190;overflow:hidden;border-radius:2px"><img src="img/nutcracker-2025.jpg" alt="${esc(d.cap)}" style="width:173%;height:auto;display:block;margin-top:-33%;margin-left:-30%"></div><div style="font-family:'Pinyon Script',cursive;font-size:16px;color:#5A1521;margin-top:4px">${d.cap}</div></div>
    <div style="font-size:13px;font-weight:700">${d.host}</div>
-   <div style="width:100%;text-align:left">${detailsBlock(id,th,d.t,`<button class="cal" data-parking="1" style="margin-top:10px;border-color:${th.ac}">${L.parking}</button>`)}</div>
+   <div style="width:100%;text-align:left">${detailsBlock(id,th,d.t,`<button class="cal" data-parking="1" style="margin-top:10px;border-color:${th.ac};width:100%;justify-content:center">${L.parking}</button>`)}</div>
    <div style="width:100%">${rsvpButtons(id,th,null,d.btn)}</div>
    <div class="${hidden}" data-when="${id}" style="width:100%">${stepper(id,'headcount',L.howmany,th)}</div>
    <div style="width:100%;text-align:left;display:flex;flex-direction:column;gap:10px">${extrasBlock(id,th)}${bringBoard(id,th)}</div>
