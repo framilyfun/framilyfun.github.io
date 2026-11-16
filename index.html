@@ -124,7 +124,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1116.1450';
+const BUILD='1116.1505';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -777,14 +777,15 @@ function extrasBlock(id,th){
 
  return out;
 }
+function hbIsOpen(id){ S.hbOpen=S.hbOpen||{}; return S.hbOpen[id]===undefined?true:!!S.hbOpen[id]; }
 function hostBring(id,th){
  const L=t(); const items=S.bring[id]||[]; const real=items.filter(i=>!i.custom); const claimed=real.filter(i=>i.claimed>=i.needed).length;
  const ask=S.hbAdd===id;
  return `<div style="border-top:1px solid rgba(0,0,0,.12);padding-top:8px;margin-top:2px">
-  <button data-hb-toggle="${id}" style="all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;width:100%"><div class="kicker" style="font-size:10px;opacity:.8">${L.host_bring_h}</div><div style="font-size:11px;opacity:.75">${claimed}/${real.length} ${L.host_bring_claimed} ${S.hbOpen&&S.hbOpen[id]?'⌃':'⌄'}</div></button>
+  <button data-hb-toggle="${id}" style="all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;width:100%"><div class="kicker" style="font-size:10px;opacity:.8">${L.host_bring_h}</div><div style="font-size:11px;opacity:.75">${claimed}/${real.length} ${L.host_bring_claimed} ${hbIsOpen(id)?'⌃':'⌄'}</div></button>
   <div style="font-size:11px;opacity:.7;margin:2px 0 4px">${L.host_bring_sub}</div>
-  ${real.length?(S.hbOpen&&S.hbOpen[id]?`<div>${bringRows(id,items,th,true)}</div>`:`<button data-hb-toggle="${id}" class="btn o" style="font-size:12px;padding:8px 12px;margin:4px 0">${L.bring_tap.replace(/^Tap to pick.*$/,'Open the list').replace(/^Toca para elegir.*$/,'Abrir la lista')} ⌄</button>`):`<button data-hbstart="${id}" class="btn o" style="font-size:12px;padding:8px 12px;margin:4px 0">${id==='thanksgiving'?L.host_bring_start:L.host_bring_start2}</button>`}
-  ${!(S.hbOpen&&S.hbOpen[id])&&real.length?'':ask?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"><input id="hb-l-${id}" placeholder="${L.host_bring_item}" style="flex:1;min-width:120px;font-family:inherit;font-size:13px;padding:8px 10px;border:1px solid rgba(0,0,0,.2);border-radius:8px"><input id="hb-q-${id}" type="number" min="1" value="1" style="width:56px;font-family:inherit;font-size:13px;padding:8px;border:1px solid rgba(0,0,0,.2);border-radius:8px"><select id="hb-c-${id}" style="font-family:inherit;font-size:12px;padding:0 6px;border:1px solid rgba(0,0,0,.2);border-radius:8px;background:#fff">${BRING_CATS.map(c=>`<option value="${c}" ${c==='sides'?'selected':''}>${L['bring_c_'+c]}</option>`).join('')}</select><button data-hbsave="${id}" class="btn" style="font-size:12px;padding:8px 12px">${L.bring_save}</button></div>`
+  ${real.length?(hbIsOpen(id)?`<div>${bringRows(id,items,th,true)}</div>`:`<button data-hb-toggle="${id}" class="btn o" style="font-size:12px;padding:8px 12px;margin:4px 0">${L.bring_tap.replace(/^Tap to pick.*$/,'Open the list').replace(/^Toca para elegir.*$/,'Abrir la lista')} ⌄</button>`):`<button data-hbstart="${id}" class="btn o" style="font-size:12px;padding:8px 12px;margin:4px 0">${id==='thanksgiving'?L.host_bring_start:L.host_bring_start2}</button>`}
+  ${!(hbIsOpen(id))&&real.length?'':ask?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"><input id="hb-l-${id}" placeholder="${L.host_bring_item}" style="flex:1;min-width:120px;font-family:inherit;font-size:13px;padding:8px 10px;border:1px solid rgba(0,0,0,.2);border-radius:8px"><input id="hb-q-${id}" type="number" min="1" value="1" style="width:56px;font-family:inherit;font-size:13px;padding:8px;border:1px solid rgba(0,0,0,.2);border-radius:8px"><select id="hb-c-${id}" style="font-family:inherit;font-size:12px;padding:0 6px;border:1px solid rgba(0,0,0,.2);border-radius:8px;background:#fff">${BRING_CATS.map(c=>`<option value="${c}" ${c==='sides'?'selected':''}>${L['bring_c_'+c]}</option>`).join('')}</select><button data-hbsave="${id}" class="btn" style="font-size:12px;padding:8px 12px">${L.bring_save}</button></div>`
       :`<button data-hbadd="${id}" style="font-size:11px;border:1px dashed currentColor;border-radius:999px;padding:5px 10px;background:transparent;color:inherit;font-family:inherit;cursor:pointer;margin-top:6px">${L.host_bring_add}</button>`}
  </div>`;
 }
@@ -1086,7 +1087,7 @@ function bindEvents(){
  async function bringRefresh(id,data){ if(!data){const r=await sb.rpc('bring_get',{p_token:S.token,p_event:id});data=r.data} S.bring[id]=data||[]; rerenderEvent(id); }
  document.querySelectorAll('[data-bq]').forEach(b=>b.onclick=async()=>{const [id,item,q]=b.dataset.bq.split('|');b.disabled=true;const {data,error}=await sb.rpc('bring_claim',{p_token:S.token,p_item:item,p_qty:parseInt(q)});if(error){toast((error.message||'').includes('full')?t().bring_full:'Hmm');return bringRefresh(id)}bringRefresh(id,data)});
  document.querySelectorAll('[data-bring-toggle]').forEach(b=>b.onclick=()=>{S.bringOpen=S.bringOpen||{};const id=b.dataset.bringToggle;S.bringOpen[id]=!S.bringOpen[id];if(!S.bringOpen[id])S.bringAdd=null;rerenderEvent(id)});
- document.querySelectorAll('[data-hb-toggle]').forEach(b=>b.onclick=()=>{S.hbOpen=S.hbOpen||{};const id=b.dataset.hbToggle;S.hbOpen[id]=!S.hbOpen[id];rerenderEvent(id)});
+ document.querySelectorAll('[data-hb-toggle]').forEach(b=>b.onclick=()=>{const id=b.dataset.hbToggle;S.hbOpen[id]=!hbIsOpen(id);rerenderEvent(id)});
  document.querySelectorAll('[data-bring-more]').forEach(b=>b.onclick=()=>{S.bringAdd=b.dataset.bringMore;S.bringOpen=S.bringOpen||{};S.bringOpen[S.bringAdd]=true;rerenderEvent(S.bringAdd);setTimeout(()=>document.getElementById('bring-'+S.bringAdd)?.focus(),50)});
  document.querySelectorAll('[data-bring-save]').forEach(b=>b.onclick=async()=>{const id=b.dataset.bringSave;const inp=document.getElementById('bring-'+id);const v=(inp.value||'').trim();if(!v){S.bringAdd=null;rerenderEvent(id);return}b.disabled=true;const cat=document.getElementById('bringc-'+id)?.value||'other';const {data,error}=await sb.rpc('bring_add',{p_token:S.token,p_event:id,p_label:v,p_category:cat,p_qty:1});if(error){toast('Hmm');b.disabled=false;return}S.bringAdd=null;bringRefresh(id,data)});
  document.querySelectorAll('[data-hrs]').forEach(b=>b.onclick=async()=>{const [id,fid,st,hc]=b.dataset.hrs.split('|');let n=+hc||1;if(st==='in'){const v=prompt(t().howmany,String(n));if(v===null)return;n=Math.max(0,parseInt(v)||0)}await sb.rpc('host_set_rsvp',{p_token:S.token,p_event:id,p_family:fid,p_status:st,p_headcount:n});await loadHost(id);rerenderEvent(id)});
@@ -1172,7 +1173,7 @@ async function loadFamily(){
 }
 async function loadBring(){
  if(S.token&&(S.canHost||S.isAdmin||(S.hostsReal||[]).length)){ try{const r=await sb.rpc('host_drafts_get',{p_token:S.token}); S.drafts=r.data||[]}catch(x){} }
- for(const e of visibleEvents()){ try{const r=await sb.rpc('inspo_get',{p_event:e.id}); S.inspo[e.id]=r.data||[]}catch(x){} if(e.status==='poll'){ try{const r=await sb.rpc('poll_get',{p_token:S.token,p_event:e.id}); S.poll[e.id]=r.data||{options:[],questions:[]}}catch(x){} } if(!e.bring_enabled)continue; const {data}=await sb.rpc('bring_get',{p_token:S.token,p_event:e.id}); S.bring[e.id]=data||[]; }
+ for(const e of visibleEvents()){ try{const r=await sb.rpc('inspo_get',{p_event:e.id}); S.inspo[e.id]=r.data||[]}catch(x){} if(e.status==='poll'){ try{const r=await sb.rpc('poll_get',{p_token:S.token,p_event:e.id}); S.poll[e.id]=r.data||{options:[],questions:[]}}catch(x){} } if(!e.bring_enabled&&!isHost(e.id))continue; const {data}=await sb.rpc('bring_get',{p_token:S.token,p_event:e.id}); S.bring[e.id]=data||[]; }
 }
 
 
