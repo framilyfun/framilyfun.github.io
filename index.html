@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover, shrink-to-fit=no">
 <title>FRamily</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Our gatherings, RSVPs and wish lists — one place.">
@@ -25,11 +25,11 @@ html[data-season=spring]{--cream:#FBF6EC;--ink:#2E5A49;--gold:#F2B7C6;--bg:#3C6E
 html[data-season=summer]{--cream:#FFF6E5;--ink:#0B4F68;--gold:#FFB703;--bg:#0F6B8C;--bg2:#0B5570}
 html[data-season=fall]{--cream:#F6E7D3;--ink:#4A2412;--gold:#E08E3A;--bg:#5A2E1A;--bg2:#46200F}
 *{box-sizing:border-box}
-html,body{height:100%;overflow:hidden}
+html,body{height:100%;width:100%;overflow:hidden;overflow-x:clip;position:relative}
 body{margin:0;background:#0E0E10;color:var(--cream);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
-#app{max-width:480px;margin:0 auto;height:100vh;height:100svh;overflow:hidden;background:#0E0E10;position:relative;box-shadow:0 0 60px rgba(0,0,0,.6);-webkit-overflow-scrolling:touch}
+#app{width:100%;max-width:480px;margin:0 auto;height:100vh;height:100svh;overflow:hidden;overflow-x:clip;contain:paint;background:#0E0E10;position:relative;box-shadow:0 0 60px rgba(0,0,0,.6);-webkit-overflow-scrolling:touch}
 #app>section{height:100vh;height:100svh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-section.ev{padding:calc(56px + var(--sat)) 24px 0;display:flex;flex-direction:column;gap:14px;position:relative}
+section.ev{padding:calc(56px + var(--sat)) 24px 0;display:flex;flex-direction:column;gap:14px;position:relative;overflow-x:clip;max-width:100%;box-sizing:border-box}
 .sp{flex:0 0 auto;height:calc(18px + var(--navh,0px) + var(--barh,0px) + var(--tabh,0px) + var(--sab))}
 #tabs{position:fixed;left:0;right:0;bottom:0;z-index:52;display:flex;justify-content:center;pointer-events:none}
 #tabs>div{pointer-events:auto;width:100%;max-width:480px;height:calc(64px + var(--sab));background:var(--bg2);border-top:1px solid var(--gold);display:flex;justify-content:space-around;align-items:flex-start;padding:9px 6px calc(0px + var(--sab))}
@@ -135,7 +135,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1117.1000';
+const BUILD='1117.1010';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -635,7 +635,7 @@ function render(){
  const evs=visibleEvents();
  const chips=evs.map(e=>`<button class="pill" data-jump="${e.id}" style="color:var(--gold);background:transparent;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 8px;font-size:9.5px;letter-spacing:1.2px;white-space:nowrap;justify-content:flex-start;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis">${CHIP_ICON[e.id]||CHIP_ICON._}${esc(chipLabel(e.id))}</button>`).join('');
  let h=`
- <section id="ev-hero" style="background:var(--bg);padding:calc(clamp(24px,4vh,56px) + var(--sat)) 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(10px,2.4vh,30px);position:relative">
+ <section id="ev-hero" style="background:var(--bg);padding:calc(clamp(44px,6vh,64px) + var(--sat)) 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(10px,2.4vh,30px);position:relative">
   ${seasonGarland()}
   <div style="font-family:'Pinyon Script',cursive;font-size:clamp(36px,5.2vh,54px);line-height:.9;color:var(--gold);margin-top:4px;margin-bottom:-6px;position:relative">FRamily</div>
   <div style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(42px,6vh,56px);line-height:.95;position:relative">${esc(SEASONS[SEASON].word[S.lang]||SEASONS[SEASON].word.en)}</div>
