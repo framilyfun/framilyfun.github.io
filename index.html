@@ -28,7 +28,7 @@ html[data-season=fall]{--cream:#F6E7D3;--ink:#4A2412;--gold:#E08E3A;--bg:#5A2E1A
 html,body{height:100%;width:100%;overflow:hidden;overflow-x:clip;position:relative}
 body{margin:0;background:#0E0E10;color:var(--cream);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
 #app{width:100%;max-width:480px;margin:0 auto;height:100vh;height:100svh;overflow:hidden;overflow-x:clip;contain:paint;background:#0E0E10;position:relative;box-shadow:0 0 60px rgba(0,0,0,.6);-webkit-overflow-scrolling:touch}
-#app>section{height:100vh;height:100svh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#app>section{height:100vh;height:100svh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scroll-padding-bottom:calc(var(--navh,44px) + var(--barh,0px) + var(--tabh,0px))}#app>section::after{content:'';display:block;flex:0 0 auto;height:calc(var(--navh,44px) + var(--barh,0px) + var(--tabh,0px) + 16px)}
 section.ev{padding:calc(56px + var(--sat)) 24px 0;display:flex;flex-direction:column;gap:14px;position:relative;overflow-x:clip;max-width:100%;box-sizing:border-box}
 .sp{flex:0 0 auto;height:calc(18px + var(--navh,0px) + var(--barh,0px) + var(--tabh,0px) + var(--sab))}
 #tabs{position:fixed;left:0;right:0;bottom:0;z-index:52;display:flex;justify-content:center;pointer-events:none}
@@ -140,7 +140,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1118.1110';
+const BUILD='1118.1140';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -160,7 +160,7 @@ en:{
  q:"Have a question?",ask:"Ask →",ask_h:"Have a question?",ask_sub:"Text or call whoever's hosting. They'll see it's about {ev}.",ask_text:"Text",ask_call:"Call",ask_none:"No host contact listed yet — try again closer to the date.",ask_body:"Hi {name}! Quick question about {ev} (from the FRamily hub): ",friend:"Show some love · bring a friend",friend_sub:"Know someone who could use a gathering out? Bring them.",
  share_t:"Show some love",shc_h:"Your invite text",shc_sub:"Edit anything — your name, a personal line, whatever. The link stays.",shc_share:"Share it →",shc_copy:"Copy text",shc_cta:"Say you're in 👉",shc_from:"from {who}",share_sub:"Know someone who could use a gathering out this season? Pick the gatherings to share.",share_x:"Welcome someone to the FRamily fun.",
  write:"Write the text",copy_msg:"Copy message",lillie_lock:"Lillie's · invite only",
- bar_fin:"Pay ↓",bar_n:"events",event_1:"event",total_cost:"Total Cost",need_name:"Add your family name and cell first.",bad_phone:"That cell number doesn't look right.",
+ bar_fin:"Pay ↓",bar_n:"gatherings",event_1:"gathering",total_cost:"Total Cost",need_name:"Add your family name and cell first.",bad_phone:"That cell number doesn't look right.",
  full:"This one's full. Ask the host.",tick_cap:"<b>{n} of {cap}</b> confirmed",tick_n:"<b>{n}</b> confirmed so far",tick_low:"Only {n} spots left — say I'm in soon.",share_grant:"Let them invite",share_grant_q:"How many guests can {name}'s link bring to this gathering? (0 = turn off)",share_granted:"can bring {n}",bf_granted:"the host gave you {n} invites",bf_used:"{u} of {n} used",cap_full:"Full — {cap} spots. Tap Maybe and the host will tell you if one opens.",rsvp_by:"RSVP by {date}",rsvp_closed:"RSVPs closed {date} — text the host if plans change.",host_cap:"Cap",host_assist:"FRamily admin can help",host_assist_sub:"Invisible co-host: sees your list, can add or approve guests and fix things. Guests never see them.",host_cap_q:"Guest cap? (number, blank = no cap)",host_rsvp:"RSVP deadline",host_rsvp_q:"How many days before the gathering do RSVPs close? (blank = no deadline)",host_days:"{n}d before",bf_all_k:"ALL SET 🎉",bf_all_t:"Know someone who'd love one of these?",bf_all_sub:"Pick a gathering and send them your own link. They'll see that one only, and we'll note they came through you.",nothing:"Tap I'm in on at least one gathering.",
  msg_hi:"Hey! The FRamily is gathering again this season and you're invited 🎄",msg_link:"Details + RSVP:",
  paid:"paid",unpaid:"unpaid",pay_now:"Still need to pay",none_owed:"Nothing owed. You're set.",
@@ -199,7 +199,7 @@ es:{
  q:"¿Tienes una pregunta?",ask:"Pregunta →",ask_h:"¿Tienes una pregunta?",ask_sub:"Escribe o llama a quien organiza. Verán que es sobre {ev}.",ask_text:"Texto",ask_call:"Llamar",ask_none:"Aún no hay contacto del anfitrión — intenta más cerca de la fecha.",ask_body:"¡Hola {name}! Una pregunta rápida sobre {ev} (del hub FRamily): ",friend:"Comparte el amor · trae a un amigo",friend_sub:"¿Conoces a alguien que necesita una reunión fuera? Tráelo.",
  share_t:"Comparte el amor",shc_h:"Tu texto de invitación",shc_sub:"Edita lo que quieras — tu nombre, una línea personal. El enlace se queda.",shc_share:"Compartir →",shc_copy:"Copiar texto",shc_cta:"Di que vienes 👉",shc_from:"de parte de {who}",share_sub:"¿Conoces a alguien que necesita una salida esta temporada? Elige las reuniones para compartir.",share_x:"Dale la bienvenida a alguien a la diversión FRamily.",
  write:"Escribir el mensaje",copy_msg:"Copiar mensaje",lillie_lock:"Lillie · solo con invitación",
- bar_fin:"Pagar ↓",bar_n:"eventos",event_1:"evento",total_cost:"Costo total",need_name:"Primero pon el nombre de tu familia y tu celular.",bad_phone:"Ese número de celular no parece correcto.",
+ bar_fin:"Pagar ↓",bar_n:"reuniones",event_1:"reunión",total_cost:"Costo total",need_name:"Primero pon el nombre de tu familia y tu celular.",bad_phone:"Ese número de celular no parece correcto.",
  full:"Ya está lleno. Pregúntale al anfitrión.",tick_cap:"<b>{n} de {cap}</b> confirmados",tick_n:"<b>{n}</b> confirmados hasta ahora",tick_low:"Solo quedan {n} lugares — di Me apunto pronto.",share_grant:"Dejar que inviten",share_grant_q:"¿Cuántos invitados puede traer el enlace de {name} a esta reunión? (0 = apagar)",share_granted:"puede traer {n}",bf_granted:"el anfitrión te dio {n} invitaciones",bf_used:"{u} de {n} usadas",cap_full:"Lleno — {cap} lugares. Toca Quizás y el anfitrión te avisa si se abre uno.",rsvp_by:"RSVP hasta el {date}",rsvp_closed:"RSVPs cerrados el {date} — escríbele al anfitrión si cambian tus planes.",host_cap:"Cupo",host_assist:"El admin FRamily puede ayudar",host_assist_sub:"Co-anfitrión invisible: ve tu lista, puede agregar o aprobar invitados y arreglar cosas. Los invitados nunca lo ven.",host_cap_q:"¿Cupo de invitados? (número, vacío = sin cupo)",host_rsvp:"Cierre de RSVP",host_rsvp_q:"¿Cuántos días antes de la reunión se cierran los RSVPs? (vacío = sin cierre)",host_days:"{n}d antes",bf_all_k:"¡LISTO! 🎉",bf_all_sub:"Elige una reunión y envíales tu propio enlace. Verán solo esa, y anotaremos que llegaron por ti.",bf_all_t:"¿Conoces a alguien que le encantaría una de estas?",nothing:"Toca Me apunto en al menos una reunión.",
  msg_hi:"¡Hola! La FRamily se reúne otra vez esta temporada y estás invitado 🎄",msg_link:"Detalles + RSVP:",
  paid:"pagado",unpaid:"pendiente",pay_now:"Falta pagar",none_owed:"No debes nada. Todo listo.",
@@ -552,7 +552,7 @@ function openJump(){
 }
 
 /* ---------- tabs ---------- */
-function updateTabs(){ const T=$('#tabs'); const on=!!S.invites&&!S.admin; T.classList.toggle('hidden',!on); document.documentElement.style.setProperty('--tabh',on?'64px':'0px'); const L=t(); const lbl={home:L.tab_home,memories:L.tab_mem,framily:L.tab_fr,me:L.tab_me}; T.querySelectorAll('button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===S.tab); b.querySelector('span').textContent=lbl[b.dataset.tab]}); }
+function updateTabs(){ const T=$('#tabs'); const on=!!S.invites&&!S.admin; T.classList.toggle('hidden',!on); document.documentElement.style.setProperty('--tabh',on?'calc(64px + var(--sab))':'0px'); const L=t(); const lbl={home:L.tab_home,memories:L.tab_mem,framily:L.tab_fr,me:L.tab_me}; T.querySelectorAll('button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===S.tab); b.querySelector('span').textContent=lbl[b.dataset.tab]}); }
 function setTab(tb){ if(S.tab===tb&&tb==='home'){P.i=0;$('#app').scrollTop=0;updateBar();return} if(S.tab==='home'){P.homeI=P.i} S.tab=tb; render(); if(tb==='home'){P.i=P.homeI||0; const ps=pages(); if(ps[P.i])$('#app').scrollTop=ps[P.i].offsetTop; updateBar()} if(tb==='framily'&&!S.framily) loadFramily(); }
 async function loadFramily(){ if(!S.token)return; loadGuestLinks(); loadWishPeople(); loadSanta(); const {data}=await sb.rpc('framily_get',{p_token:S.token}); if(data){S.framily=data; if(S.tab==='framily')render()} }
 function renderFramily(){
@@ -1132,7 +1132,7 @@ function updateBar(){
  const L=t(); const n=owedCount(); const bar=$('#bar');
  if(S.admin||owed()===0){bar.classList.add('hidden');document.documentElement.style.setProperty('--barh','0px');return}
  const lockVisible=!!$('#lock')&&pages()[curPage()]?.id==='lock';
- bar.classList.toggle('hidden',lockVisible); document.documentElement.style.setProperty('--barh',lockVisible?'0px':'50px');
+ bar.classList.toggle('hidden',lockVisible); requestAnimationFrame(()=>{const h=lockVisible?0:(bar.firstElementChild?bar.firstElementChild.getBoundingClientRect().height:58); document.documentElement.style.setProperty('--barh',Math.round(h)+'px');});
  $('#barTxt').textContent=`${L.total_cost} · ${money(owed())}`;
  $('#barSub').textContent=`${n} ${n===1?L.event_1:L.bar_n}${S.name?' · '+famLabel(S.name):''}`;
  $('#barBtn').textContent=L.bar_fin;
