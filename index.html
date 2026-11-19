@@ -97,7 +97,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;background:#fff;color:#111;padding:10px 16px;border-radius:999px;font-size:13px;font-weight:600;z-index:70;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.show{opacity:1}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:80;display:flex;align-items:flex-end;justify-content:center}
-.modal>div{width:100%;max-width:480px;background:var(--cream);color:var(--ink);border-radius:20px 20px 0 0;padding:18px 18px calc(18px + var(--sab));display:flex;flex-direction:column;gap:10px;max-height:92vh;overflow:auto}
+.modal>div{width:100%;max-width:480px;background:var(--cream);color:var(--ink);border-radius:20px 20px 0 0;padding:18px 18px calc(18px + var(--sab));display:flex;flex-direction:column;gap:10px;max-height:calc(100dvh - var(--sat,0px) - 28px);overflow:auto}
 .modal h3{font-family:'Fraunces',serif;font-weight:900;font-size:20px;margin:0}
 .modal label.c{display:flex;align-items:flex-start;gap:10px;background:#fff;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.4}
 .modal label.c input{width:18px;height:18px;margin-top:1px}
@@ -140,7 +140,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1119.0835';
+const BUILD='1119.0845';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -862,13 +862,13 @@ function openHostSheet(id){
   const segs=[['guests',L.hs_guests],['settings',L.hs_settings],['share',L.hs_share]].concat(e.bring_enabled?[['bring',L.hs_bring]]:[]).concat([['inspo',L.hs_inspo]]);
   const adminOnly=S.isAdmin&&!(S.hostsReal||[]).includes(id);
   const body=!h?`<div style="font-size:13px;opacity:.7;padding:20px 0;text-align:center">…</div>`:hostSection(id,th,h,S.hsTab);
-  m.innerHTML=`<div style="max-height:94vh;padding:0 0 calc(12px + var(--sab));display:flex;flex-direction:column;gap:0;overflow:hidden">
+  m.innerHTML=`<div style="max-height:calc(100dvh - var(--sat,0px) - 28px);padding:0 0 calc(12px + var(--sab));display:flex;flex-direction:column;gap:0;overflow:hidden">
    <div style="position:sticky;top:0;background:var(--cream);z-index:3;padding:14px 18px 10px;border-bottom:1px solid rgba(22,48,31,.12)">
     <div class="handle"></div>
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding-right:40px"><div><div class="kicker" style="font-size:10px;color:${th.ac}">${adminOnly?L.admin_view.replace('{host}',esc(e.host_label||'FRamily')):L.host_h}</div><div style="font-family:'Fraunces',serif;font-size:20px;line-height:1.1;margin-top:2px">${esc(S.lang==='es'?e.name_es:e.name_en)}</div><div style="font-size:12px;opacity:.75;margin-top:4px">${L.hs_sum.replace('{inF}',inF).replace('{heads}',heads).replace('{mb}',mb).replace('{none}',none)}</div></div></div>
     <div class="seg" style="margin-top:10px">${segs.map(([k,lab])=>`<button type="button" data-hstab="${k}" class="${S.hsTab===k?'on':''}">${lab}</button>`).join('')}</div>
    </div>
-   <div style="overflow:auto;padding:12px 18px 6px;flex:1">${body}</div>
+   <div style="overflow:auto;-webkit-overflow-scrolling:touch;padding:12px 18px 18px;flex:1;min-height:0">${body}</div>
    <div style="padding:10px 18px 0"><button class="mbtn alt" id="hostSheetClose" style="width:100%">${L.host_close}</button></div></div>`;
   bindEvents(); m.querySelectorAll('[data-hstab]').forEach(b=>b.onclick=()=>{S.hsTab=b.dataset.hstab;paint()}); $('#hostSheetClose',m).onclick=()=>{m.remove();S.hostSheet=null}; };
  m.paint=paint; paint();
