@@ -140,7 +140,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:70
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1119.1105';
+const BUILD='1119.1115';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -394,10 +394,11 @@ function bindGate(){
 function resolveWho(r,typed){
  return new Promise(res=>{
   const f=r.family||{}; const people=f.people||[]; const L=t();
-  if(r.match){ const p=people.find(x=>x.id===r.match); if(p){ls('person_id',p.id); return res({id:p.id,name:p.name,primary:!!p.primary});} }
-  if(people.length===1&&!typed){ ls('person_id',people[0].id); return res({id:people[0].id,name:people[0].name,primary:!!people[0].primary}); }
+  if(r.match){ const p=people.find(x=>x.id===r.match)||(r.person&&r.person.id===r.match?r.person:null); if(p){ls('person_id',p.id); return res({id:p.id,name:p.name,primary:!!p.primary});} }
+  if(people.length===1&&(!typed||firstName(typed).toLowerCase()===firstName(people[0].name||'').toLowerCase())){ ls('person_id',people[0].id); return res({id:people[0].id,name:people[0].name,primary:!!people[0].primary}); }
+  if(r.person&&r.person.id&&!people.length){ ls('person_id',r.person.id); return res({id:r.person.id,name:r.person.name,primary:!!r.person.primary}); }
   const first=firstName(typed||''); const hh=f.household||famLabel(f.name)||'';
-  const m=document.createElement('div'); m.className='modal'; m.style.zIndex='60';
+  const m=document.createElement('div'); m.className='modal'; m.style.zIndex='95';
   m.innerHTML=`<div><div class="handle"></div><h3 style="margin:0">${L.who_this_h}</h3><div style="font-size:13px;opacity:.8;line-height:1.45">${L.who_this_sub.replace('{hh}',esc(hh))}</div>
    <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">${people.map(p=>`<button data-wp="${p.id}" class="mbtn alt" style="text-align:left;display:flex;justify-content:space-between;align-items:center"><span>${L.who_this_me.replace('{name}',esc(p.name||'?'))}${p.kind==='kid'?` <span style="font-size:11px;opacity:.6">(${L.me_kid}${(ageFrom(p.birthday)??p.age)?' '+(ageFrom(p.birthday)??p.age):''})</span>`:''}</span><span>→</span></button>`).join('')}
    ${first?`<button id="wpAdd" class="mbtn" style="background:var(--gold);color:#16301F">${L.who_this_add.replace('{name}',esc(first))}</button>`:''}</div>
@@ -432,7 +433,7 @@ function openClaim(id){
   $('#cGo').disabled=true;
   try{
    let {data:r,error}=await sb.rpc('person_start',{p_name:name,p_phone:digits,p_lang:S.lang,p_sms:sms,p_via:S.via||null}); if(error)throw error;
-   if(r.status==='new'){ const j=await sb.rpc('person_join',{p_name:name,p_phone:digits,p_lang:S.lang,p_sms:sms,p_family:null,p_household:null,p_members:[],p_via:S.via||null}); if(j.error)throw j.error; r=j.data; }
+   if(r.status==='new'){ const j=await sb.rpc('person_join',{p_name:name,p_phone:digits,p_lang:S.lang,p_sms:sms,p_family:null,p_household:null,p_members:[],p_via:S.via||null}); if(j.error)throw j.error; r=j.data; if(r&&r.person&&!r.match) r.match=r.person.id; }
    S.wantCal=!!($('#gCal')&&$('#gCal').checked); const keep=S.rs; const who=r.status==='known'?await resolveWho(r,name):r.person; applyFamily(r.family); S.person=who; if(r.status==='known'&&who&&!who.primary) name=r.family.name||name; S.rs=Object.assign({},S.rs,keep); ls('token',S.token); S.name=name; S.phone=digits; S.sms=sms; persistLocal();
    ls('via',''); S.via=null; S.viaInfo=null; m.remove(); loadFramily(); if(r.merge_offer){S.mergeOffer=r.merge_offer; setTimeout(()=>offerMerge(r.merge_offer),600);}
    render(); const el=$('#ev-'+id); if(el){P.i=pages().indexOf(el); $('#app').scrollTop=el.offsetTop}
@@ -680,6 +681,7 @@ function render(){
   <div class="kicker" style="font-size:10px;opacity:.7;position:relative">${L.your_invites}</div>
   <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;margin-top:2px;position:relative;width:100%;max-width:360px">${chips}</div>
   <div style="font-size:10.5px;opacity:.55;position:relative;margin-top:-4px">${L.hero_hint}</div>
+  <div class="nxcue" style="position:relative;width:100%;margin-top:6px"><button type="button" data-nextcue><span class="k"></span><span class="n"></span><span class="c"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button></div>
   <div class="sp" style="width:100%"></div>
    </section>`;
  for(const e of evs) h+=renderEvent(e);
