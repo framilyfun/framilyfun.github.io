@@ -142,7 +142,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1119.1845';
+const BUILD='1119.1850';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -494,7 +494,7 @@ function openPersonSheet(pid){ const L=t(); const p=(S.people||[]).find(x=>x.id=
  m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m);
  m.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>m.remove());
  m.querySelectorAll('[data-psex]').forEach(b=>b.onclick=async()=>{ const {data,error}=await sb.rpc('person_sex_set',{p_token:S.token,p_person:pid,p_sex:b.dataset.psex}); if(error){toast('Hmm');return} applyFamily(data); persistLocal(); render(); m.remove(); openPersonSheet(pid); });
- $('#psBday',m).onclick=async()=>{ const v=await pickWheels(L.me_bday_q.replace('{name}',(p.name||'').split(' ')[0]),L.me_bday_sub,p.birthday||'',{}); if(v===undefined)return; const {data,error}=await sb.rpc('profile_set',{p_token:S.token,p_person:pid,p_birthday:v||null,p_clear_birthday:v===null}); if(error){toast('Hmm');return} applyFamily(data); persistLocal(); render(); m.remove(); };
+ $('#psBday',m).onclick=async()=>{ m.style.visibility='hidden'; const v=await pickWheels(L.me_bday_q.replace('{name}',(p.name||'').split(' ')[0]),L.me_bday_sub,p.birthday||'',{}); m.style.visibility=''; if(v===undefined)return; const {data,error}=await sb.rpc('profile_set',{p_token:S.token,p_person:pid,p_birthday:v||null,p_clear_birthday:v===null}); if(error){toast(L.ap_err||'Hmm');return} applyFamily(data); persistLocal(); render(); m.remove(); toast(L.saved_live); };
  const rm=$('#psRemove',m); if(rm) rm.onclick=async()=>{ if(!confirm(L.ps_remove_q.replace('{name}',p.name||'')))return; const {data,error}=await sb.rpc('person_remove',{p_token:S.token,p_person:pid}); if(error){toast('Hmm');return} applyFamily(data); persistLocal(); m.remove(); render(); toast(L.ps_removed); };
 }
 function openAddPerson(){ const L=t(); const m=document.createElement('div'); m.className='modal';
@@ -544,6 +544,7 @@ function pickWheels(title,sub,val,opts){ opts=opts||{}; return new Promise(res=>
   <div style="display:flex;gap:6px;font-size:10px;letter-spacing:2px;font-weight:700;opacity:.6;text-align:center"><span style="flex:1">${L.wh_month}</span><span style="flex:1">${L.wh_day}</span>${opts.noYear?'':`<span style="flex:1">${L.wh_year}</span>`}</div>
   <div class="wheels">${col('whM',months)}${col('whD',[])}${opts.noYear?'':col('whY',yearOpts)}</div>
   <button class="mbtn" id="whOk" style="background:var(--ink);color:var(--cream)">${L.save}</button>${val?`<button class="mbtn alt" id="whClr">${L.pd_clear}</button>`:''}<button class="mbtn alt" id="whX">${L.cancel}</button></div>`;
+ m.style.zIndex='120';
  const done=v=>{m.remove();res(v)}; m.onclick=ev=>{if(ev.target===m)done(undefined)}; document.body.appendChild(m);
  const W=36; const wM=$('#whM',m), wD=$('#whD',m), wY=$('#whY',m);
  const sel=w=>Math.round(w.scrollTop/W); const set=(w,i)=>{w.scrollTop=i*W};
