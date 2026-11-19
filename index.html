@@ -142,7 +142,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1119.1835';
+const BUILD='1119.1840';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -483,6 +483,7 @@ function offerFriendAll(){ if(ls('bf_all')||document.querySelector('.modal'))ret
  m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m);
  $('#bfLater').onclick=()=>m.remove(); m.querySelectorAll('[data-bfall]').forEach(b=>b.onclick=()=>{m.remove(); bringFriend(b.dataset.bfall)});
 }
+function hhSurname(){ const ps=S.people||[]; const prim=ps.find(p=>p.primary)||ps[0]; const ln=n=>{const w=(n||'').trim().split(/\s+/); return w.length>1?w[w.length-1]:''}; return ln(prim&&prim.name)||ln(S.name)||''; }
 function openPersonSheet(pid){ const L=t(); const p=(S.people||[]).find(x=>x.id===pid); if(!p)return; const m=document.createElement('div'); m.className='modal'; m.style.zIndex='90';
  const seg=(v,lbl)=>`<button type="button" data-psex="${v}" class="pill" style="font-family:inherit;cursor:pointer;padding:8px 14px;font-size:13px;color:${p.sex===v?'#16301F':'var(--ink)'};background:${p.sex===v?'var(--gold)':'transparent'};border-color:var(--ink)">${lbl}</button>`;
  m.innerHTML=`<div><div class="handle"></div><h3 style="margin:0">${esc(p.name||'?')}${p.primary?' ★':''}</h3><div style="font-size:12px;opacity:.75">${p.kind==='kid'?L.me_kid:L.me_adult}${p.phone?` · ${fmtPhone(p.phone)}`:''}${p.birthday?` · 🎂 ${fmtMD(p.birthday)}`:''}</div>
@@ -499,7 +500,7 @@ function openPersonSheet(pid){ const L=t(); const p=(S.people||[]).find(x=>x.id=
 function openAddPerson(){ const L=t(); const m=document.createElement('div'); m.className='modal';
  const f=(lbl,inner)=>`<label class="f" style="min-width:0">${lbl}${inner}</label>`;
  m.innerHTML=`<div><div class="handle"></div><h3>${L.ap_h}</h3><div style="font-size:12px;opacity:.75;line-height:1.4">${L.ap_sub}</div>
-  ${f(L.ap_name,`<input class="t" id="apName" placeholder="${L.first_ph}" style="border-color:var(--ink);background:#fff">`)}
+  <div style="display:flex;gap:8px">${f(L.fam,`<input class="t" id="apName" placeholder="${L.first_ph}" style="border-color:var(--ink);background:#fff" autocomplete="given-name">`)}${f(L.last,`<input class="t" id="apLast" placeholder="${L.last_ph}" value="${esc(hhSurname())}" style="border-color:var(--ink);background:#fff" autocomplete="family-name">`)}</div>
   <label class="c" style="margin-top:2px"><input type="checkbox" id="apKid"><span><b>${L.me_kid_q}</b></span></label>
   ${f(L.ap_cell,`<input class="t" id="apCell" type="tel" inputmode="numeric" placeholder="(954) 555-0100" style="border-color:var(--ink);background:#fff">`)}
   ${f(L.ap_bday,`<button type="button" class="t" id="apBday" data-md="" style="opacity:.7">${L.ap_bday_pick}</button><div id="apBdayHint" style="font-size:11px;opacity:.65;margin-top:4px">${L.ap_bday_hint}</div>`)}
@@ -511,7 +512,7 @@ function openAddPerson(){ const L=t(); const m=document.createElement('div'); m.
  nm.oninput=sync; cell.oninput=sync; sync(); setTimeout(()=>nm.focus(),60);
  const bb=$('#apBday',m); bb.onclick=async()=>{ const v=await pickWheels(L.ap_bday,L.ap_bday_hint,bb.dataset.md||'',{}); if(v===undefined)return; bb.dataset.md=v||''; bb.style.opacity=v?'1':'.7'; const a=ageFrom(v); bb.textContent=v?(fmtMD(v)+(a!==null?` · ${L.ap_age_is.replace('{n}',a)}`:'')):L.ap_bday_pick; if(a!==null&&a<18) kid.checked=true; };
  $('#apX',m).onclick=()=>m.remove();
- $('#apSave',m).onclick=async()=>{ const n=(nm.value||'').trim(); if(!n){toast(L.need_name);return} let ph=(cell.value||'').replace(/\D/g,''); if(ph.length===11&&ph[0]==='1') ph=ph.slice(1); if(ph&&ph.length!==10){toast(L.need_phone||'A 10-digit cell, please');return}
+ $('#apSave',m).onclick=async()=>{ const n=((nm.value||'').trim()+' '+($('#apLast',m).value||'').trim()).trim(); if(!(nm.value||'').trim()){toast(L.need_name);return} let ph=(cell.value||'').replace(/\D/g,''); if(ph.length===11&&ph[0]==='1') ph=ph.slice(1); if(ph&&ph.length!==10){toast(L.need_phone||'A 10-digit cell, please');return}
   const bd=$('#apBday',m).dataset.md||null; const a=ageFrom(bd); const isKid=kid.checked||(a!==null&&a<18); const age=a!==null?String(a):null;
   let {data,error}=await sb.rpc('household_set',{p_token:S.token,p_household:null,p_members:[{name:n,phone:ph||null,kind:isKid?'kid':'adult',age}]}); if(error||!data){toast(L.ap_err);return}
   if(ph&&!(data.people||[]).some(p=>p.phone===ph)){ // that cell already has its own login — fold it in
