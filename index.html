@@ -30,7 +30,7 @@ body{margin:0;background:#0E0E10;color:var(--cream);font-family:'DM Sans',sans-s
 #app{width:100%;max-width:480px;margin:0 auto;height:100vh;height:100svh;overflow:hidden;overflow-x:clip;contain:paint;background:#0E0E10;position:relative;box-shadow:0 0 60px rgba(0,0,0,.6);-webkit-overflow-scrolling:touch}
 #app>section{height:100vh;height:100svh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scroll-padding-bottom:calc(var(--navh,44px) + var(--barh,0px) + var(--tabh,0px))}#app>section::after{content:'';display:block;flex:0 0 auto;height:calc(var(--navh,44px) + var(--barh,0px) + var(--tabh,0px) + 28px)}
 section.ev{padding:calc(56px + var(--sat)) 24px 0;display:flex;flex-direction:column;gap:14px;position:relative;overflow-x:clip;max-width:100%;box-sizing:border-box}
-.sp{flex:0 0 auto;height:8px}.nxcue{flex:0 0 auto;min-height:96px;display:flex;align-items:center;justify-content:center;padding:14px 24px 14px;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}.nxcue.show{opacity:1;transform:none}.nxcue button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;color:inherit;max-width:100%}.nxcue .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.65}.nxcue .n{font-family:'Fraunces',serif;font-size:19px;line-height:1.3;max-width:320px;padding:0 2px 3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.nxcue .c{margin-top:2px;line-height:0;animation:bob 1.5s ease-in-out infinite}
+.sp{flex:0 0 auto;height:8px}.nxcue{position:relative;z-index:1;flex:0 0 auto;min-height:96px;display:flex;align-items:center;justify-content:center;padding:14px 24px 14px;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}.nxcue.show{opacity:1;transform:none}.nxcue button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;color:inherit;max-width:100%}.nxcue .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.65}.nxcue .n{font-family:'Fraunces',serif;font-size:19px;line-height:1.3;max-width:320px;padding:0 2px 3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.nxcue .c{margin-top:2px;line-height:0;animation:bob 1.5s ease-in-out infinite}
 #tabs{position:fixed;left:0;right:0;bottom:0;z-index:52;display:flex;justify-content:center;pointer-events:none}
 #tabs>div{pointer-events:auto;width:100%;max-width:480px;height:calc(64px + var(--sab));background:var(--bg2);border-top:1px solid var(--gold);display:flex;justify-content:space-around;align-items:flex-start;padding:9px 6px calc(0px + var(--sab))}
 #tabs button{background:none;border:0;color:var(--cream);opacity:.55;font-family:inherit;font-size:9.5px;letter-spacing:1.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;width:76px;cursor:pointer;padding:0}
@@ -144,7 +144,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1120.1140';
+const BUILD='1120.1150';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -918,7 +918,7 @@ function hostPanel(id,th){
  if(!isHost(id))return ''; const L=t(); const h=S.host[id]; const e=S.events.find(x=>x.id===id)||{};
  const label=(S.isAdmin&&!(S.hostsReal||[]).includes(id))?L.admin_view.replace('{host}',esc(e.host_label||'FRamily')):L.host_h;
  const g=(h&&h.guests)||[]; const inF=g.filter(x=>x.status==='in').length, heads=g.filter(x=>x.status==='in').reduce((a,x)=>a+gHeads(id,x),0), mb=g.filter(x=>x.status==='maybe').length, none=g.filter(x=>!x.status).length;
- return `<button data-hopen="${id}" style="all:unset;box-sizing:border-box;width:100%;cursor:pointer;background:${th.card};border:2px dashed ${th.ac};border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px"><span><span class="kicker" style="font-size:10px;color:${th.ac};display:block">${label}</span><span style="font-size:12px;opacity:.85;display:block;margin-top:3px">${h?L.host_sum.replace('{inF}',inF).replace('{heads}',heads).replace('{mb}',mb).replace('{none}',none):'…'}</span></span><span style="font-size:12px;font-weight:700;white-space:nowrap;color:${th.ac}">${L.host_manage}</span></button>`;
+ return `<button data-hopen="${id}" style="all:unset;box-sizing:border-box;position:relative;z-index:1;width:100%;cursor:pointer;background:${th.card};border:2px dashed ${th.ac};border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px"><span><span class="kicker" style="font-size:10px;color:${th.ac};display:block">${label}</span><span style="font-size:12px;opacity:.85;display:block;margin-top:3px">${h?L.host_sum.replace('{inF}',inF).replace('{heads}',heads).replace('{mb}',mb).replace('{none}',none):'…'}</span></span><span style="font-size:12px;font-weight:700;white-space:nowrap;color:${th.ac}">${L.host_manage}</span></button>`;
 }
 function openHostSheet(id){
  const e=S.events.find(x=>x.id===id); if(!e)return; const th0=themeFor(e); const th=Object.assign({},th0,{card:'#FFFDF8',fg:'#16301F',bg:'#F3EBDD',ac:(th0.ac&&/^#(F|E|D)/i.test(th0.ac)?'#8A6A1F':th0.ac)}); S.hostSheet=id; S.hsTab=S.hsTab||'guests';
@@ -1038,7 +1038,7 @@ function renderEvent(e){
  let inner='';
 
  if(id==='thanksgiving'){
-  inner=`<img src="img/tg_leaves.png" alt="" style="position:absolute;right:-10px;top:-8px;width:150px;height:auto;pointer-events:none"><img src="img/tg_pumpkins.png" alt="" style="position:absolute;left:-20px;bottom:0;width:330px;height:auto;opacity:.95;pointer-events:none">
+  inner=`<img src="img/tg_leaves.png" alt="" style="position:absolute;right:-10px;top:-8px;width:150px;height:auto;pointer-events:none">
   <div style="position:absolute;inset:12px;border:1px solid #7A5A3A;opacity:.6;pointer-events:none"></div>
   <div style="text-align:center;margin-top:4px;font-family:'Cormorant Garamond',serif">
    <div style="font-size:12px;letter-spacing:5px;font-weight:600">${d.sup}</div>
@@ -1050,6 +1050,7 @@ function renderEvent(e){
    <svg width="18" height="22" viewBox="0 0 24 30" style="margin-top:12px" fill="#5A3A1E"><path d="M12 0C5.4 0 0 5.3 0 11.8 0 20.6 12 30 12 30s12-9.4 12-18.2C24 5.3 18.6 0 12 0zm0 16.5a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4z"/></svg>
    <a href="${esc(e.map_url||'#')}" target="_blank" rel="noopener" style="display:block;font-size:15px;letter-spacing:3px;font-weight:600;line-height:1.45;margin-top:4px;color:inherit;text-decoration:underline;text-decoration-color:#7A5A3A;text-underline-offset:4px">311 SW 96TH TERRACE<br>PEMBROKE PINES, FL 33025</a>
    <div style="font-size:11px;font-family:'DM Sans',sans-serif;opacity:.7;margin-top:4px">${L.tap_dir}</div>
+   <div style="position:relative;max-width:360px;margin:0 auto;text-align:left;font-family:'Hanken Grotesk',sans-serif">${weatherLine(id,th)}</div>
    <div style="font-family:${th.font};font-size:30px;line-height:1.05;margin-top:14px">${d.close}</div>
    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;color:#7A5A3A"><div style="width:50px;height:1px;background:#7A5A3A"></div><div style="font-size:12px">♥</div><div style="width:50px;height:1px;background:#7A5A3A"></div></div>
    <div style="font-size:11px;letter-spacing:3px;font-weight:600;margin-top:10px;color:${th.ac}">${d.hosted}</div>
@@ -1170,7 +1171,7 @@ function renderEvent(e){
   <div class="${hidden}" data-when="${id}">${stepper(id,'headcount',L.howmany,th)}${totalLine(id,th)}</div>`;
  }
  const bgx=id==='bowling'?`background:url("${LANE}") center/100% 100% no-repeat ${th.bg};background-attachment:local;`:`background:${th.bg};`;
- return `<section class="ev" id="ev-${id}" style="${bgx}color:${th.fg}">${inner}${shareRow(id,th)}${askRow(id,th)}${hostPanel(id,th)}${legalFoot(id)}<div class="nxcue"><button type="button" data-nextcue><span class="k"></span><span class="n"></span><span class="c"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button></div></section>`;
+ return `<section class="ev" id="ev-${id}" style="${bgx}color:${th.fg}">${inner}${shareRow(id,th)}${askRow(id,th)}${hostPanel(id,th)}${id==='thanksgiving'?'<img src="img/tg_pumpkins.png" alt="" style="display:block;width:330px;max-width:100%;height:auto;margin:-6px 0 -28px -20px;opacity:.95;pointer-events:none">':''}${legalFoot(id)}<div class="nxcue"><button type="button" data-nextcue><span class="k"></span><span class="n"></span><span class="c"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button></div></section>`;
 }
 
 function renderLock(){
