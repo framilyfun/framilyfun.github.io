@@ -62,7 +62,7 @@ section.ev>*{position:relative}
 .tile{border-radius:10px;padding:12px;text-align:center}
 .tile .big{font-size:22px;line-height:1}
 .tile .sm{font-size:11px;line-height:1.3;margin-top:4px}
-.btns{display:flex;gap:8px;margin-top:4px}.btns .btn:first-child{flex:1.35}.ticker{font-size:12px;line-height:1.45;text-align:center;padding:4px 6px 2px;opacity:.9}.ticker b{font-weight:700}.ticker .low{display:block;font-size:11.5px;opacity:.85;margin-top:1px}
+.btns{display:flex;gap:8px;margin-top:4px}.btns .btn:first-child{flex:1.35}.ticker{font-size:13px;line-height:1.45;text-align:center;padding:12px 6px 6px;opacity:.9}.ticker b{font-weight:700}.ticker .low{display:block;font-size:11.5px;opacity:.85;margin-top:1px}
 .btn{border:0;border-radius:999px;padding:14px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;flex:1;transition:transform .1s}
 .btn:active{transform:scale(.97)}
 .btn.o{background:transparent;border:2px solid currentColor;color:inherit;flex:1;padding:12px 8px;font-size:13px;white-space:nowrap}
@@ -142,7 +142,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1119.2235';
+const BUILD='1119.2245';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -815,7 +815,7 @@ function stepper(id,field,label,th,small){
 }
 function totalLine(id,th,label){
  const r=rs(id); if(r.status!=='in')return ''; const L=t(); const n=id==='topgolf'?r.players:r.headcount; const tot=evTotal(id);
- return `<div class="tot" style="border-color:${th.ac}"><div>${label?label+' · ':''}${L.total}</div><div><b style="color:${th.ac}">${money(tot)}</b> <span style="font-size:11px;opacity:.8">· ${r.paid_confirmed?L.paid:L.payend}</span></div></div>`;
+ return `<div class="tot" style="border-color:${th.ac};justify-content:center;gap:8px"><b style="color:${th.ac};font-size:22px;font-family:'Fraunces',serif">${money(tot)}</b>${r.paid_confirmed?`<span style="font-size:12px;opacity:.85">✓ ${L.paid}</span>`:''}</div>`;
 }
 function detailsBlock(ev,th,title,extra){
  const L=t(); const d=L.ev[ev]||{det:[]};
@@ -1255,7 +1255,7 @@ function bindEvents(){
  document.querySelectorAll('[data-pqo]').forEach(b=>b.onclick=async()=>{const [id,qid,label,kind]=b.dataset.pqo.split('|'); const q=((S.poll[id]||{}).questions||[]).find(x=>x.id===qid); if(!q)return; let cur=(q.options||[]).filter(o=>o.mine).map(o=>o.label); if(kind==='multi'){cur=cur.includes(label)?cur.filter(x=>x!==label):[...cur,label]} else {cur=cur.includes(label)?[]:[label]} const {data,error}=await sb.rpc('poll_answer',{p_token:S.token,p_question:qid,p_answer:cur}); if(error){toast('Hmm');return} S.poll[id]=data; rerenderEvent(id)});
  document.querySelectorAll('[data-pqsend]').forEach(b=>b.onclick=async()=>{const [id,qid]=b.dataset.pqsend.split('|'); const v=(document.querySelector(`[data-pqt="${qid}"]`).value||'').trim(); const {data,error}=await sb.rpc('poll_answer',{p_token:S.token,p_question:qid,p_answer:v?[v]:[]}); if(error){toast('Hmm');return} S.poll[id]=data; rerenderEvent(id); toast('✓')});
  document.querySelectorAll('[data-ppick]').forEach(b=>b.onclick=async()=>{const [id,opt]=b.dataset.ppick.split('|'); const o=((S.poll[id]||{}).options||[]).find(x=>x.id===opt); const d=o?new Date(o.starts_at).toLocaleString(S.lang==='es'?'es-US':'en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):''; if(!confirm(t().poll_pick_q.replace('{d}',d)))return; const {data,error}=await sb.rpc('event_poll_pick',{p_token:S.token,p_event:id,p_option:opt,p_notify:true}); if(error){toast('Hmm');return} const i=S.events.findIndex(x=>x.id===id); if(i>=0)S.events[i]=data; await loadHost(id); rerenderEvent(id)});
- document.querySelectorAll('section.ev').forEach(sec=>{ const c=sec.querySelector('[data-chips]'); if(!c) return; const tot=sec.querySelector('.tot'); const rows=[...sec.querySelectorAll('.row')]; const anchor=tot||rows[rows.length-1]; if(anchor&&anchor.nextElementSibling!==c) anchor.after(c); });
+ document.querySelectorAll('section.ev').forEach(sec=>{ const tk=sec.querySelector('.ticker'), tot=sec.querySelector('.tot'), c=sec.querySelector('[data-chips]'); const rows=[...sec.querySelectorAll('.row')]; const last=rows[rows.length-1]; if(tk&&last&&(tot||true)){ if(last.nextElementSibling!==tk) last.after(tk); } if(tot&&tk&&tk.nextElementSibling!==tot) tk.after(tot); if(c){ const anchor=tot||tk||last; if(anchor&&anchor.nextElementSibling!==c) anchor.after(c); } });
  document.querySelectorAll('[data-ask]').forEach(b=>b.onclick=()=>openAsk(b.dataset.ask));
  document.querySelectorAll('[data-hopen]').forEach(b=>b.onclick=()=>openHostSheet(b.dataset.hopen));
  document.querySelectorAll('[data-goev]').forEach(b=>b.onclick=()=>{const id=b.dataset.goev; S.deep=id; setTab('home'); setTimeout(()=>{jumpDeep(); if(isHost(id)) setTimeout(()=>openHostSheet(id),350);},80);});
