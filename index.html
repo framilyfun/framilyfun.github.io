@@ -144,7 +144,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1124.0945';
+const BUILD='1124.0955';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -593,13 +593,16 @@ async function loadFramily(){ if(!S.token)return; loadGuestLinks(); loadWishPeop
 function renderFramily(){
  if(!S.token) return signInCard();
  const L=t(); const d=S.framily; const es=S.lang==='es';
- const hosting=(d?.hosting||[]).filter(h=>h.host&&h.host!=='FRamily');
- const hostRows=hosting.map(h=>`<div class="r"><span><b>${esc(h.host)}</b><div class="h2">${esc(es?h.name_es:h.name_en)} · ${esc(chipLabel(h.event_id).split(' ')[0])}</div></span><button class="pill" data-jump-tab="${h.event_id}" style="font-family:inherit;cursor:pointer;color:var(--gold);background:transparent;padding:6px 12px">${L.fr_open}</button></div>`).join('');
  const circle0=(d?.circle||[]); const byTag={}; const circle=[]; circle0.forEach(c=>{ if(c.tag){ if(!byTag[c.tag]){byTag[c.tag]={name:(S.lang==='es'?'Los ':'The ')+c.tag+(S.lang==='es'?'':'s'),members:[],nights:0,hosting:[],circle:c.circle,grouped:true}; circle.push(byTag[c.tag]);} const g=byTag[c.tag]; g.members.push(c.first||c.name); g.nights=Math.max(g.nights,c.nights||0); g.hosting=[...new Set(g.hosting.concat(c.hosting||[]))]; g.people=(g.people||[]).concat(c.people||[]); g.together=[...new Set((g.together||[]).concat(c.together||[]))]; g.parts=(g.parts||[]).concat([c]); } else circle.push(c); });
  circle.sort((a,b)=>((b.hosting||[]).length?1:0)-((a.hosting||[]).length?1:0)||(b.nights||0)-(a.nights||0));
  const firstNames=c=>(c.people||[]).map(p=>(p.name||'').split(' ')[0]).filter(Boolean);
- const circRows=circle.map((c,i)=>{ const names=c.grouped?c.members:firstNames(c); const hosting=(c.hosting||[]).length; const hostTxt=hosting?(S.lang==='es'?'organiza ':'hosting ')+(c.hosting||[]).map(id=>chipLabel(id).split(' ').slice(1).join(' ').toLowerCase()).slice(0,2).join(', '):'';
-  return `<div class="r" data-hh="${i}" style="cursor:pointer"><span style="min-width:0"><b>${hosting?'<span style="color:var(--gold)">★</span> ':''}${esc(c.grouped?c.name:famLabel(c.name))}</b><div class="h2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${[names.length?esc(names.join(', ')):'',hostTxt?`<span style="color:var(--gold)">${esc(hostTxt)}</span>`:'',c.nights?`${c.nights} ${L.fr_nights}`:''].filter(Boolean).join(' · ')||L.fr_same}</div></span><span style="opacity:.5">›</span></div>`}).join('');
+ const evTitle=id=>{const e=S.events.find(x=>x.id===id); const nm=e?(es?e.name_es||e.name_en:e.name_en):id; return `${nm} · ${chipLabel(id).split(' ')[0]}`};
+ const row=(c,i)=>{ const names=c.grouped?c.members:firstNames(c); const hosts=(c.hosting||[]);
+  const sub=hosts.length?`<span style="color:var(--gold)">${esc(hosts.map(evTitle).join(' · '))}</span>${names.length?` · ${esc(names.join(', '))}`:''}`:([names.length?esc(names.join(', ')):'',c.nights?`${c.nights} ${L.fr_nights}`:''].filter(Boolean).join(' · ')||L.fr_same);
+  return `<div class="r" data-hh="${i}" style="cursor:pointer"><span style="min-width:0"><b>${esc(c.grouped?c.name:famLabel(c.name))}</b><div class="h2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${sub}</div></span><span style="opacity:.5">›</span></div>`};
+ const hostRows=circle.map((c,i)=>(c.hosting||[]).length?row(c,i):'').join('');
+ const circRows=circle.map((c,i)=>(c.hosting||[]).length?'':row(c,i)).join('');
+ const nRest=circle.filter(c=>!(c.hosting||[]).length).length;
  S._circle=circle;
  return `<section id="tab-framily" class="tabpage">
   <div class="kicker" style="color:var(--gold)">${L.tab_fr}</div>
@@ -607,7 +610,7 @@ function renderFramily(){
   <div style="font-size:13px;opacity:.75;line-height:1.45">${L.fr_sub}</div>
   ${hostRows?`<div class="kicker" style="font-size:10px;opacity:.7;margin-top:12px">${L.fr_hosts}</div>${hostRows}`:''}
   <button id="frCircle" style="all:unset;box-sizing:border-box;display:flex;width:100%;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(217,181,108,.12);border:1px solid rgba(217,181,108,.35);cursor:pointer"><span style="font-size:22px">⭕</span><span style="flex:1;min-width:0"><b style="font-size:14px">${L.circ_h}</b><div style="font-size:12px;opacity:.75;line-height:1.35">${L.circ_card_sub}</div></span><span style="color:var(--gold);font-weight:700">→</span></button>
-  <div class="kicker" style="font-size:10px;opacity:.7;margin-top:12px">${L.fr_circle} · ${circle.length}</div>
+  <div class="kicker" style="font-size:10px;opacity:.7;margin-top:12px">${L.fr_circle} · ${nRest}</div>
   ${d?(circRows||`<div style="font-size:13px;opacity:.7;padding:8px 0">${L.fr_empty}</div>`):`<div style="font-size:13px;opacity:.7;padding:8px 0">…</div>`}
   ${santaBlock()?`<div class="kicker" style="font-size:10px;opacity:.7;margin-top:14px">${L.ss_h}</div>${santaBlock()}`:''}
   ${wishChips(false)?`<div class="kicker" style="font-size:10px;opacity:.7;margin-top:14px">🎁 ${L.wl_h}</div><div style="font-size:11px;opacity:.65;line-height:1.4;margin-bottom:4px">${L.wl_sub_fr}</div>${wishChips(false)}`:''}
