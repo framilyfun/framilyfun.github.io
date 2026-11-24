@@ -174,7 +174,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1124.1330';
+const BUILD='1124.1715';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -272,7 +272,25 @@ const THEMES={
  brunch:{bg:'#FBF1EC',fg:'#5A3340',ac:'#D98BA0',ac2:'#8FB8A8',card:'rgba(255,255,255,.8)',font:"'Playfair Display',serif",sw:['#FBF1EC','#D98BA0']},
  confetti:{bg:'#1D1B3A',fg:'#FFF7E6',ac:'#FF6B6B',ac2:'#4ECDC4',card:'rgba(255,255,255,.1)',font:"'Bungee',sans-serif",sw:['#1D1B3A','#FF6B6B']}
 };
-const themeFor=e=>EV_THEME[e.id]||THEMES[e.theme]||THEMES.moody;
+const themeFor=e=>{ const base=EV_THEME[e.id]||THEMES[e.theme]||THEMES.moody; const c=e&&e.custom&&e.cover_url&&coverTheme(e); return c?Object.assign({},base,c):base; };
+// ---- cover-derived palette: the invite takes its colors from the host's uploaded art ----
+S.covTheme=S.covTheme||{};
+function coverTheme(e){ const url=e.cover_url; if(!url) return null; if(S.covTheme[url]!==undefined) return S.covTheme[url]||null; try{ const c=ls('cov:'+url); if(c){ S.covTheme[url]=JSON.parse(c); return S.covTheme[url]; } }catch(x){}
+ S.covTheme[url]=null; deriveCoverTheme(url).then(t=>{ S.covTheme[url]=t||false; try{ if(t) ls('cov:'+url,JSON.stringify(t)); }catch(x){} if(t&&typeof rerenderEvent==='function') rerenderEvent(e.id); }).catch(()=>{S.covTheme[url]=false}); return null; }
+function deriveCoverTheme(url){ return new Promise((res,rej)=>{ const img=new Image(); img.crossOrigin='anonymous'; img.onload=()=>{ try{ const W=48,H=Math.max(1,Math.round(48*img.naturalHeight/img.naturalWidth)); const cv=document.createElement('canvas'); cv.width=W; cv.height=H; const cx=cv.getContext('2d'); cx.drawImage(img,0,0,W,H); const d=cx.getImageData(0,0,W,H).data; const buckets={}; let n=0;
+   for(let i=0;i<d.length;i+=4){ const r=d[i],g=d[i+1],b=d[i+2],a=d[i+3]; if(a<200) continue; n++; const [h,sa,l]=rgb2hsl(r,g,b); const key=`${Math.round(h/20)}|${sa>.35?1:0}|${l<.25?0:l<.6?1:2}`; const o=buckets[key]||(buckets[key]={c:0,r:0,g:0,b:0,s:0,l:0}); o.c++; o.r+=r; o.g+=g; o.b+=b; o.s+=sa; o.l+=l; }
+   const list=Object.values(buckets).map(o=>({c:o.c,r:o.r/o.c,g:o.g/o.c,b:o.b/o.c,s:o.s/o.c,l:o.l/o.c})).sort((a,b)=>b.c-a.c); if(!list.length||n<100) return res(null);
+   // background: the most common dark-or-mid tone (prefer dark so cream text reads)
+   let bg=list.find(x=>x.l<.3)||list.find(x=>x.l<.5)||list[0];
+   // accent: most saturated bucket with real presence that isn't the bg hue
+   const acc=list.filter(x=>x.c>n*.012&&x.s>.3&&x.l>.3&&x.l<.85).sort((a,b)=>(b.s*Math.sqrt(b.c))-(a.s*Math.sqrt(a.c)))[0];
+   const dark=x=>{ const k=Math.min(1,.22/Math.max(.05,x.l)); return [x.r*k,x.g*k,x.b*k]; };
+   const [br,bgc,bb]=bg.l>.28?dark(bg):[bg.r,bg.g,bg.b]; const hex=(r,g,b)=>'#'+[r,g,b].map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+   const bgHex=hex(br,bgc,bb); const bgL=(0.2126*br+0.7152*bgc+0.0722*bb)/255; const light=bgL>.55;
+   let ac=acc?[acc.r,acc.g,acc.b]:[217,181,108]; { const al=(0.2126*ac[0]+0.7152*ac[1]+0.0722*ac[2])/255; if(!light&&al<.45){ const k=.6/Math.max(.05,al); ac=ac.map(v=>v*k); } if(light&&al>.55){ const k=.35/al; ac=ac.map(v=>v*k); } }
+   const fg=light?'#16301F':'#F3E7D0'; const acHex=hex(...ac);
+   res({bg:bgHex,fg,ac:acHex,ac2:acHex,card:light?'rgba(22,48,31,.08)':'rgba(243,231,208,.1)',sw:[bgHex,acHex]}); }catch(err){ res(null); } }; img.onerror=()=>res(null); img.src=url+(url.includes('?')?'&':'?')+'cors=1'; }); }
+function rgb2hsl(r,g,b){ r/=255;g/=255;b/=255; const max=Math.max(r,g,b),min=Math.min(r,g,b); let h=0,s=0; const l=(max+min)/2; if(max!==min){ const d=max-min; s=l>.5?d/(2-max-min):d/(max+min); switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;} h*=60; } return [h,s,l]; }
 const SEASONS={
  holiday:{word:{en:'HOLIDAY FUN',es:'DIVERSIÓN NAVIDEÑA'},garland:true},
  winter:{word:{en:'A FRESH YEAR',es:'UN AÑO NUEVO'},garland:false},
@@ -811,8 +829,8 @@ function renderGenericEvent(e){
  const mapA=e.address?`<a class="link" href="${esc(e.map_url||'#')}" target="_blank" rel="noopener" style="color:${th.ac2}">${esc(e.address.replace(/, FL \d+$/,''))} · ${L.map}</a>`:'';
  const endT=e.ends_at?new Date(e.ends_at).toLocaleTimeString(es?'es-US':'en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):null; const det=[`${w.day}, ${w.date} · ${w.time}${endT?' – '+endT:''}`, w.arrive?`${es?'Llegar antes de':'Arrive by'} ${w.arrive}`:null, e.price_cents?`${money(e.price_cents)} ${L.gen_pp}${e.zelle?` · Zelle ${esc(e.zelle)}`:''}`:L.gen_free,  e.cap?`${es?'Cupo':'Cap'} ${e.cap}`:null].filter(Boolean);
  const inner=`<div class="kicker" style="color:${th.ac};margin-top:10px;position:relative">${L.gen_invites.replace('{host}',esc(e.host_label||'FRamily'))}</div>
-  ${e.cover_url?`<div data-zoom="${esc(e.cover_url)}" style="background:#fff;padding:8px 8px 12px;border-radius:4px;transform:rotate(-1.2deg);box-shadow:0 8px 20px rgba(0,0,0,.3);position:relative;cursor:zoom-in"><img src="${esc(e.cover_url)}" alt="" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block"></div>`:''}
-  <div style="font-family:${th.font};font-size:${th.font.includes('Great Vibes')?'clamp(44px,13vw,64px)':'clamp(32px,9vw,44px)'};line-height:1;position:relative;color:${th.fg}">${esc(nm)}</div>
+  ${e.cover_url?`<div data-zoom="${esc(e.cover_url)}" style="background:#fff;padding:8px 8px 12px;border-radius:4px;transform:rotate(-1.2deg);box-shadow:0 8px 20px rgba(0,0,0,.3);position:relative;cursor:zoom-in"><img src="${esc(e.cover_url)}" alt="" style="width:100%;height:auto;max-height:70vh;object-fit:contain;display:block;background:#fff"></div>`:''}
+  <div style="font-family:${th.font};font-size:${th.font.includes('Great Vibes')?'clamp(44px,13vw,64px)':'clamp(28px,8vw,40px)'};line-height:1.05;position:relative;color:${th.fg};${th.font.includes('Great Vibes')?'':'text-transform:uppercase;letter-spacing:.01em'}">${esc(nm)}</div>
   ${e.status==='poll'?`<div style="position:relative;color:${th.ac2};font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase">🗳️ ${L.poll_tbd}</div>`:`<div style="display:flex;align-items:center;gap:12px;position:relative;color:${th.ac2};font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase"><span>${esc(w.day)}</span><span style="width:1px;height:22px;background:${th.ac2};opacity:.6"></span><span>${esc(w.date)}</span><span style="width:1px;height:22px;background:${th.ac2};opacity:.6"></span><span>${esc(w.time)}</span></div>`}
   ${lead?`<div class="lead" style="position:relative;font-size:15px;line-height:1.45">${esc(lead)}</div>`:''}
   <div style="font-size:15px;font-weight:600;position:relative">${esc(e.venue)}</div>${mapA}
@@ -892,7 +910,7 @@ function bringRows(id,items,th,hostMode){
 }
 function bringBoard(id,th){
  const L=t(); const e=S.events.find(x=>x.id===id); if(!e||!e.bring_enabled)return '';
- const items=S.bring[id]||[]; const mine=items.filter(b=>b.mine>0); const real=items.filter(i=>!i.custom); const cov=real.filter(i=>i.claimed>=i.needed).length;
+ const items=S.bring[id]||[]; if(e.custom&&!items.length&&!(S.hostsReal||[]).includes(id)) return ''; // host listed no dishes → no box for guests const mine=items.filter(b=>b.mine>0); const real=items.filter(i=>!i.custom); const cov=real.filter(i=>i.claimed>=i.needed).length;
  const open=!!(S.bringOpen&&S.bringOpen[id]); const ask=S.bringAdd===id;
  const head=`<button data-bring-toggle="${id}" style="all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%"><div><div class="kicker" style="font-size:10px;color:${th.ac}">${L.bring_h}</div><div style="font-size:12px;opacity:.9;margin-top:2px">${mine.length?`${L.bring_mine}: <b>${mine.map(b=>esc(b.label)+(b.mine>1?' ×'+b.mine:'')).join(', ')}</b>`:(real.length?L.bring_sum.replace('{c}',cov).replace('{n}',real.length)+' · '+L.bring_tap:L.bring_tap)}</div></div><span style="font-size:18px;opacity:.85;transition:transform .2s;transform:rotate(${open?180:0}deg)">⌄</span></button>`;
  if(!open) return `<div style="background:${th.card};color:${th.fg};border:1.5px solid ${th.ac};border-radius:10px;padding:12px 14px">${head}</div>`;
