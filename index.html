@@ -174,7 +174,7 @@ input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{f
 const SUPA_URL='https://uclejspwudkdhlsllujr.supabase.co';
 const SUPA_KEY='sb_publishable_SnyfOMP5ghnpQ7-R2j9Jzg_DXjFu_BG';
 const SITE='https://framilyfun.github.io/';
-const BUILD='1125.1320';
+const BUILD='1125.1350';
 const ZELLE='954-376-0188', JARED='954-376-0188';
 const LANE='data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20430%201000%22%20preserveAspectRatio=%22none%22%3E%3Crect%20width=%22430%22%20height=%221000%22%20fill=%22%2315122B%22/%3E%3Cpath%20d=%22M0%201000%20L168%200%20L262%200%20L430%201000%20Z%22%20fill=%22%231F1A3D%22/%3E%3Cpath%20d=%22M55%201000%20L183%200%20M127%201000%20L199%200%20M215%201000%20L215%200%20M303%201000%20L231%200%20M375%201000%20L247%200%22%20stroke=%22%232A2350%22%20stroke-width=%221.2%22/%3E%3Cpath%20d=%22M168%200%20L0%201000%20M262%200%20L430%201000%22%20stroke=%22%23FF5A5F%22%20stroke-width=%221.4%22/%3E%3Cg%20fill=%22%23F6EBD9%22%3E%3Ccircle%20cx=%22193%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22237%22%20cy=%2214%22%20r=%225%22/%3E%3Ccircle%20cx=%22204%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22226%22%20cy=%2230%22%20r=%225%22/%3E%3Ccircle%20cx=%22215%22%20cy=%2246%22%20r=%225%22/%3E%3C/g%3E%3C/svg%3E';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
@@ -1085,18 +1085,17 @@ function copyLink(id,code,evs){ const L=t(); const ids=(evs&&evs.length)?evs:[id
  const m=document.createElement('div'); m.className='modal';
  m.innerHTML=`<div><div class="handle"></div><h3>${L.shc_h}</h3><div style="font-size:13px;line-height:1.45;opacity:.85">${L.shc_sub}</div>
   <textarea id="shcT" class="t" rows="9" style="font-family:'Hanken Grotesk',system-ui,sans-serif;min-height:0;height:auto;font-size:14px;line-height:1.5;white-space:pre-wrap">${esc(msg)}</textarea>
-  <button class="mbtn" id="shcSms">💬 ${L.shc_text}</button>${navigator.share?`<button class="mbtn alt" id="shcGo">${L.shc_share} →</button>`:''}<button class="mbtn alt" id="shcCopy">${L.shc_copy}</button></div>`;
+  <a class="mbtn" id="shcSms" href="#" style="text-decoration:none;display:block;text-align:center;box-sizing:border-box">💬 ${L.shc_text}</a>${navigator.share?`<button class="mbtn alt" id="shcGo">${L.shc_share} →</button>`:''}<button class="mbtn alt" id="shcCopy">${L.shc_copy}</button></div>`;
  m.onclick=ev=>{if(ev.target===m)m.remove()}; document.body.appendChild(m);
  { const ta=$('#shcT'); const fit=()=>{ta.style.height='auto';ta.style.height=Math.min(ta.scrollHeight+4,window.innerHeight*0.5)+'px'}; ta.oninput=fit; setTimeout(fit,30); }
  const get=()=>{ let v=$('#shcT').value; if(!v.includes(url)) v=v.trim()+'\n'+url; return v; };
  const copy=v=>navigator.clipboard?.writeText(v).then(()=>toast(L.link_copied)).catch(()=>prompt('',v));
  $('#shcCopy').onclick=()=>{copy(get())};
  const smsHref=v=>{ const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1); return (ios?'sms:&body=':'sms:?body=')+encodeURIComponent(v); };
- $('#shcSms').onclick=()=>{ const v=get(); try{ navigator.clipboard&&navigator.clipboard.writeText(v); }catch(x){}
-   m.remove(); // close first so a blocked hand-off can never leave the sheet stuck
+ const smsA=$('#shcSms'); const syncSms=()=>{ smsA.href=smsHref(get()); }; syncSms(); $('#shcT').addEventListener('input',syncSms);
+ smsA.onclick=()=>{ const v=get(); smsA.href=smsHref(v); try{ navigator.clipboard&&navigator.clipboard.writeText(v); }catch(x){}
    let left=false; const onHide=()=>{left=true}; document.addEventListener('visibilitychange',onHide,{once:true}); window.addEventListener('pagehide',onHide,{once:true});
-   setTimeout(()=>{ if(!left&&document.visibilityState==='visible') toast(L.shc_sms_copied); },1500);
-   location.href=smsHref(v); };
+   setTimeout(()=>{ m.remove(); if(!left&&document.visibilityState==='visible') toast(L.shc_sms_copied); },1200); /* real anchor: let the browser follow the sms: link itself */ };
  const go=$('#shcGo'); if(go) go.onclick=()=>{ const v=get(); navigator.share({text:v}).then(()=>m.remove()).catch(err=>{ if(err&&err.name==='AbortError') return; toast(L.shc_sms_fallback); m.remove(); setTimeout(()=>location.href=smsHref(v),300); }); }; }
 
 function renderEvent(e){
